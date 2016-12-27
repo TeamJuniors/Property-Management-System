@@ -10,7 +10,27 @@
     <meta name="author" content="">
 
     <title>Домова книга</title>
-
+    <style>
+        #radioBtn .notActive {
+            color: #3276b1;
+            background-color: #fff;
+        }
+        
+        input[type=radio]:not(old):checked+label>span>span {
+            display: block;
+            width: 0.5em;
+            height: 0.5em;
+            margin: 0.125em;
+            border: 0.0625em solid rgb(115, 153, 77);
+            border-radius: 0.125em;
+            background: rgb(153, 204, 102);
+            background-image: -moz-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+            background-image: -ms-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+            background-image: -o-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+            background-image: -webkit-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+            background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+        }
+    </style>
     <!-- Bootstrap Core CSS -->
     <link href="./app/home/dependencies/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -52,6 +72,17 @@
     <!-- jQuery -->
     <script src="./app/home/dependencies/vendor/jquery/jquery.min.js"></script>
 
+    <script>
+        console.log("Click")
+        $('#radioBtn a').on('click', function() {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        })
+    </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="./app/home/dependencies/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -64,7 +95,6 @@
 
     <!-- Theme JavaScript -->
     <script src="./app/home/dependencies/js/freelancer.min.js"></script>
-
 </body>
 
 </html>

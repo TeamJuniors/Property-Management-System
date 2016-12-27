@@ -4,4 +4,5 @@
     password: string;
     firstName: string;
     lastName: string;
+    manager: boolean;
 }
