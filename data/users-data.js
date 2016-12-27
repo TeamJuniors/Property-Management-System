@@ -18,7 +18,10 @@ module.exports = (models) => {
             //console.log(`Username: ${username}, Password: ${password}`);
             const user = new User({
                 username: obj.username,
-                password: obj.password
+                password: obj.password,
+                firstName: obj.firstName,
+                lastName: obj.lastName,
+                isManager: obj.manager
             });
 
             return Promise.resolve(user.save());
