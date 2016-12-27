@@ -18,6 +18,7 @@ export class RegisterComponent {
         private alertService: AlertService) { }
 
     register() {
+        console.log("Register clicked");
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(
