@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
+
 @Component({
-  selector: 'content-app',
-  templateUrl: 'app/app.component.html'
+    moduleId: module.id,
+    selector: 'app',
+    templateUrl: 'app.component.html'
 })
-export class AppComponent  { name = 'Angular'; }
+
+export class AppComponent { }
