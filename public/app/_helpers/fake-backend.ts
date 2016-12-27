@@ -33,6 +33,7 @@ export let fakeBackendProvider = {
                                 username: user.username,
                                 firstName: user.firstName,
                                 lastName: user.lastName,
+                                manager: user.manager,
                                 token: 'fake-jwt-token'
                             }
                         })));

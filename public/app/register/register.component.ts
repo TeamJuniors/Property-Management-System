@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+declare var $:JQueryStatic;
 import { AlertService, UserService } from '../_services/index';
 
 @Component({
@@ -9,7 +9,9 @@ import { AlertService, UserService } from '../_services/index';
 })
 
 export class RegisterComponent {
-    model: any = {};
+    model: any = {
+        
+    };
     loading = false;
 
     constructor(
@@ -17,9 +19,7 @@ export class RegisterComponent {
         private userService: UserService,
         private alertService: AlertService) { }
 
-    register() {
-        console.log("Register clicked");
-        this.loading = true;
+    register() {        console.log(this.model);        this.loading = true;
         this.userService.create(this.model)
             .subscribe(
                 data => {
@@ -30,5 +30,24 @@ export class RegisterComponent {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    ngAfterViewInit(){
+        console.log("Click")
+        $('#radioBtn a').on('click', function() {
+        var sel = $(this).data('title');
+        var tog = $(this).data('toggle');
+        $('#' + tog).prop('value', sel);
+        //console.log(this.model);
+        if(sel == "Y"){
+            this.model.manager = true;
+        }
+        if(sel == "N"){
+            //this.model.manager = false;
+        }
+        //console.log(this.model.password);
+        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+    })
     }
 }
