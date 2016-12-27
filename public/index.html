@@ -11,24 +11,113 @@
 
     <title>Домова книга</title>
     <style>
-        #radioBtn .notActive {
-            color: #3276b1;
-            background-color: #fff;
+        /* Related to SIde MENU Text */
+        
+        .tab-pane {
+            height: 200%;
+            width: 100%;
         }
         
-        input[type=radio]:not(old):checked+label>span>span {
+        .tab-pane {
+            height: absoulte;
+            width: 100%;
+        }
+        
+        .tabnav {
+            margin-top: -18px;
+        }
+        
+        .btn-nav {
+            color: #e92d00;
+            background-color: #fff;
+            border: 1px solid #e0e1db;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
+            /* Opera/IE 8+ */
+        }
+        
+        .btn-nav:hover {
+            color: green;
+            cursor: pointer;
+            -webkit-transition: color 1s;
+            /* For Safari 3.1 to 6.0 */
+            transition: color 1s;
+        }
+        
+        .btn-nav.active {
+            background: grey;
+            color: #1dcaff;
+            padding: auto;
+            border-top: 2px solid #1dcaff;
+            border-bottom: 2px solid #1dcaff;
+            border-left: 2px solid #1dcaff;
+            border-right: 2px solid #1dcaff;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -webkit-transition: border 0.3s ease-out, color 0.3s ease 0.5s;
+            -moz-transition: border 0.3s ease-out, color 0.3s ease 0.5s;
+            -ms-transition: border 0.3s ease-out, color 0.3s ease 0.5s;
+            /* IE10 is actually unprefixed */
+            -o-transition: border 0.3s ease-out, color 0.3s ease 0.5s;
+            transition: border 0.3s ease-out, color 0.3s ease 0.5s;
+            -webkit-animation: pulsate 1.2s linear infinite;
+            animation: pulsate 1.2s linear infinite;
+        }
+        
+        .btn-nav .glyphicon {
+            padding-top: 8px;
+            font-size: 30px;
+        }
+        
+        .btn-nav.active p {
+            margin-bottom: 8px;
+        }
+        
+        @-webkit-keyframes pulsate {
+            50% {
+                color: #000;
+            }
+        }
+        
+        @keyframes pulsate {
+            50% {
+                color: #000;
+            }
+        }
+        
+        @media (max-width: 100%) {
+            .btn-group {
+                display: block !important;
+                float: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+        
+        @media (max-width: 100%) {
+            .btn-nav .glyphicon {
+                padding-top: 12px;
+                font-size: 26px;
+            }
+        }
+        
+        body {
+            padding-top: 30px;
+        }
+        
+        .glyphicon {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+        
+        small {
             display: block;
-            width: 0.5em;
-            height: 0.5em;
-            margin: 0.125em;
-            border: 0.0625em solid rgb(115, 153, 77);
-            border-radius: 0.125em;
-            background: rgb(153, 204, 102);
-            background-image: -moz-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
-            background-image: -ms-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
-            background-image: -o-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
-            background-image: -webkit-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
-            background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+            line-height: 1.428571429;
+            color: #999;
         }
     </style>
     <!-- Bootstrap Core CSS -->

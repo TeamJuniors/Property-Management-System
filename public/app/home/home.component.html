@@ -6,7 +6,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-            <a class="navbar-brand btn-primary" style="color:darkgoldenrod" href="/login">Вход/Регистрация</a>
+            <a *ngIf="!isLogged" class="navbar-brand btn-primary" style="color:darkgoldenrod" href="/login">Вход/Регистрация</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -152,6 +152,142 @@
         </div>
     </section>
 </div>
+<div *ngIf="isLogged">
+    <div class="panel btn-pref btn-group btn-group-justified " role="group" style="margin-top:10px;height:720px;wight:900px; background-color:#adc;">
+        <div>
+            <div class="tab-content " style="margin-top:10px; ">
+                <div class="tab-pane panel  active" id="tab1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4>Профил</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="box box-info">
+                                            <div class="box-body">
+                                                <div class="col-sm-6">
+                                                    <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                                        <input id="profile-image-upload" class="hidden" type="file">
+                                                        <div style="color:#999;">кликни за да си избереш снимка</div>
+                                                        <!--Upload Image Js And Css-->
+                                                    </div>
+                                                    <br>
+                                                    <!-- /input-group -->
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 style="color:#00b1b1;">{{user.username}}</h4>
+                                                    <span><p><span *ngIf="user.manager">Управител на етажна собственост</span><span *ngIf="!user.manager">Собственик</span></p>
+                                                    </span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <hr style="margin:5px 0 5px 0;">
+
+
+                                                <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+                                                <div class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+                                                <div class="col-sm-7"> {{user.lastName}}</div>
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <div class="clearfix"></div>
+                                                <div class="bot-border"></div>
+
+                                                <!-- /.box-body -->
+                                            </div>
+                                            <!-- /.box -->
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane panel " id="tab2">
+                    <form role="form" class="form-inline">
+                        <h2> <br> ... Tab 2</h2>
+                    </form>
+                </div>
+                <div class="tab-pane panel " id="tab3">
+                    <form role="form" class="form-inline">
+                        <h2> <br> ... Tab 3</h2>
+                    </form>
+                </div>
+                <div class="tab-pane panel fade in " id="tab4">
+                    <form role="form" class="form-inline">
+                        <h2> <br> ... Tab 4</h2>
+                    </form>
+                </div>
+                <div class="tab-pane panel fade in " id="tab5">
+                    <form role="form" class="form-inline">
+                        <h2> <br> ... Tab 5</h2>
+                    </form>
+                </div>
+                <div class="tab-pane panel fade in " id="tab6">
+                    <form role="form" class="form-inline">
+                        <h2> <br> ... Tab 6</h2>
+                    </form>
+                </div>
+            </div>
+            <div class="tabnav">
+                <div class="btn-group btn-group-justified ">
+                    <div class="btn-group  " role="group">
+                        <button id="b1" type="button" class="btn btn-nav" href="#tab1" data-toggle="tab">
+                        <div class="visible" >Профил  <span class="glyphicon glyphicon-user" aria-hidden="true"> </span></div>
+                         </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-nav" href="#tab2" data-toggle="tab">
+                         <div class="visible">Location <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-nav" href="#tab3" data-toggle="tab">
+                             <div class="visible">Work <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></div>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-nav" href="#tab4" data-toggle="tab">
+                            
+                        <div class="visible">Upload <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></div>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-nav" href="#tab5" data-toggle="tab">
+                             <div class="visible">Dashboard <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-nav" href="#tab6" data-toggle="tab">
+                            <div class="visible">Studio <span class="glyphicon glyphicon-bell"  aria-hidden="true"></span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- Footer -->
 <footer class="text-center">
     <div class="footer-above">

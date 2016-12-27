@@ -88,6 +88,24 @@ export let fakeBackendProvider = {
                     users.push(newUser);
                     localStorage.setItem('users', JSON.stringify(users));
 
+                    /*************************SEND**************************/
+                    let body = {
+                        user: newUser
+                    };
+
+                    $.ajax({
+                        url: "/api/users",
+                        type: "post",
+                        cors: true,
+                        contentType: "application/json",
+                        data: JSON.stringify(body),
+                        success: function(response) {
+                           console.log(response); 
+                        }
+                    });
+
+                    /******************************************************/
+
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
