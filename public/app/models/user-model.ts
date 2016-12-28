@@ -8,4 +8,5 @@ export class User{
     apartmentNumber: string;
     flatNumber: string;
     exitNumber: string;
+    city: string;
 }

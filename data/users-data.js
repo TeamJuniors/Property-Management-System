@@ -24,7 +24,9 @@ module.exports = (models) => {
                 isManager: obj.manager,
                 flatNumber: obj.flatNumber,
                 apartmentNumber: obj.apartmentNumber,
-                exitNumber: obj.exitNumber
+                exitNumber: obj.exitNumber,
+                city: obj.city,
+                neighborhood: obj.neighborhood
             });
 
             return Promise.resolve(user.save());

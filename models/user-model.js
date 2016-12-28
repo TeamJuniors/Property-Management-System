@@ -36,6 +36,14 @@ let userSchema = new mongoose.Schema({
     exitNumber: {
         type: String,
         required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    neighborhood: {
+        type: String,
+        required: true
     }
 });
 

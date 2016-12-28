@@ -19,7 +19,9 @@ function usersController(data) {
                     imgUrl: user.imgUrl,
                     flatNumber: user.flatNumber,
                     apartmentNumber: user.apartmentNumber,
-                    exitNumber: user.exitNumber
+                    exitNumber: user.exitNumber,
+                    city: user.city,
+                    neighborhood: user.neighborhood
                 };
                 if (user.password == password) {
                     res.send(JSON.stringify(sendUser));
@@ -40,7 +42,9 @@ function usersController(data) {
                 manager: req.body.manager,
                 flatNumber: req.body.flatNumber,
                 apartmentNumber: req.body.apartmentNumber,
-                exitNumber: req.body.exitNumber
+                exitNumber: req.body.exitNumber,
+                city: req.body.city,
+                neighborhood: req.body.neighborhood
             }
             let username = user.username;
             let password = user.password
