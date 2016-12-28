@@ -6,7 +6,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-            <a *ngIf="!isLogged" class="navbar-brand btn-primary" style="color:darkgoldenrod" href="/login">Вход/Регистрация</a>
+            <a *ngIf="!isLogged" class="btn btn-primary" style="color:darkgoldenrod" href="/login">Вход/Регистрация</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,8 +16,15 @@
                     <a href="#page-top"></a>
                 </li>
                 <li *ngIf="isLogged" class="page-scroll">
-                    <a href="#portfolio">Привет, {{username}}!</a>
                     <a class="btn btn-primary" (click)="logout()" href="#">Изход</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li *ngIf="isLogged" class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li *ngIf="isLogged" class="page-scroll">
+                    <a href="#portfolio">Привет, {{username}}!</a>
                 </li>
             </ul>
         </div>
@@ -209,12 +216,12 @@
                                                 <hr style="margin:5px 0 5px 0;">
 
 
-                                                <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+                                                <div class="col-sm-5 col-xs-6 tital ">Име</div>
                                                 <div class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
                                                 <div class="clearfix"></div>
                                                 <div class="bot-border"></div>
 
-                                                <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+                                                <div class="col-sm-5 col-xs-6 tital ">Фамилия</div>
                                                 <div class="col-sm-7"> {{user.lastName}}</div>
                                                 <div class="clearfix"></div>
                                                 <div class="bot-border"></div>
