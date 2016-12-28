@@ -1,5 +1,5 @@
 import {Component} from '@angular/core'
-import {User} from '../_models/user'
+import {User} from '../models/user-model'
 declare var $:JQueryStatic;
 
 @Component({

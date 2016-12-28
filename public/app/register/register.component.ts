@@ -1,7 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 declare var $:JQueryStatic;
-import { AlertService, UserService } from '../_services/index';
+import { UserService } from '../services/user-service';
+import {AlertService} from '../services/alert-service';
 
 @Component({
     moduleId: module.id,
@@ -19,8 +20,10 @@ export class RegisterComponent {
         private userService: UserService,
         private alertService: AlertService) { }
 
-    register() {        console.log(this.model);        this.loading = true;
-        this.userService.create(this.model)
+    register() { 
+        //console.log(this.model);
+        this.loading = true;
+       this.userService.create(this.model)
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
