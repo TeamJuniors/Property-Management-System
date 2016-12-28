@@ -24,6 +24,18 @@ let userSchema = new mongoose.Schema({
     },
     imgUrl: {
         type: String
+    },
+    flatNumber: {
+        type: String,
+        required: true
+    },
+    apartmentNumber: {
+        type: String,
+        required: true
+    },
+    exitNumber: {
+        type: String,
+        required: true
     }
 });
 

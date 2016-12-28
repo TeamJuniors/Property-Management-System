@@ -5,4 +5,7 @@ export class User{
     password: string;
     manager: boolean;
     imgUrl: string;
+    apartmentNumber: string;
+    flatNumber: string;
+    exitNumber: string;
 }

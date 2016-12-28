@@ -21,7 +21,10 @@ module.exports = (models) => {
                 password: obj.password,
                 firstName: obj.firstName,
                 lastName: obj.lastName,
-                isManager: obj.manager
+                isManager: obj.manager,
+                flatNumber: obj.flatNumber,
+                apartmentNumber: obj.apartmentNumber,
+                exitNumber: obj.exitNumber
             });
 
             return Promise.resolve(user.save());

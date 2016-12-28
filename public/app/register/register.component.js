@@ -22,7 +22,6 @@ var RegisterComponent = (function () {
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
-        //console.log(this.model);
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(function (data) {

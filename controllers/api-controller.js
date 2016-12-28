@@ -16,7 +16,10 @@ function usersController(data) {
                     username: user.username,
                     password: user.password,
                     manager: user.isManager,
-                    imgUrl: user.imgUrl
+                    imgUrl: user.imgUrl,
+                    flatNumber: user.flatNumber,
+                    apartmentNumber: user.apartmentNumber,
+                    exitNumber: user.exitNumber
                 };
                 if (user.password == password) {
                     res.send(JSON.stringify(sendUser));
@@ -34,7 +37,10 @@ function usersController(data) {
                 lastName: req.body.lastName,
                 username: req.body.username,
                 password: req.body.password,
-                manager: req.body.manager
+                manager: req.body.manager,
+                flatNumber: req.body.flatNumber,
+                apartmentNumber: req.body.apartmentNumber,
+                exitNumber: req.body.exitNumber
             }
             let username = user.username;
             let password = user.password
