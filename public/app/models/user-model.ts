@@ -3,5 +3,6 @@ export class User{
     lastName: string;
     username: string;
     password: string;
-    manager: boolean
+    manager: boolean;
+    imgUrl: string;
 }

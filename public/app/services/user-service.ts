@@ -21,7 +21,12 @@ export class UserService{
         return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
     }
 
-     private jwt() {
+    changeImage(user: User, imgUrl: string) {
+        user.imgUrl = imgUrl;
+        return this.http.post('/api/change-image', user, this.jwt()).map((response: Response) => response.json());
+    }
+
+    private jwt() {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
             let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });

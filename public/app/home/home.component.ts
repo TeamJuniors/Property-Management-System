@@ -1,26 +1,33 @@
 import {Component} from '@angular/core'
 import {User} from '../models/user-model'
+import { UserService } from '../services/user-service';
 declare var $:JQueryStatic;
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/home/home.component.html' 
+    templateUrl: 'app/home/home.component.html',
+    styles: [`
+        .pointer-mouse {
+            cursor: pointer;
+        }
+    `]
 })
+
 export class HomeComponent{
-    
     isLogged: boolean = false;
     username: string;
     user: User;
+    newImgUrl: string;
 
-    constructor(){
-        console.log("Constructor");
+    constructor(private userService: UserService){
         if(localStorage.getItem('currentUser') != undefined){
-            console.log("True")
             this.isLogged = true;
         }else{
             this.isLogged = false;
         }
         console.log(localStorage.getItem('currentUser'));
+
+        this.newImgUrl = '';
     }
 
     ngOnInit(){
@@ -28,8 +35,11 @@ export class HomeComponent{
         if(localStorage.getItem('currentUser')){
             this.isLogged = true;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
-            this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+            this.username = this.user.username;
             var activeEl = 0;
+            //Setting defalt image
+            this.user.imgUrl = this.user.imgUrl || 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
+
             $(function() {
                 var items = $('.btn-nav');
                 $( items[activeEl] ).addClass('active');
@@ -40,10 +50,6 @@ export class HomeComponent{
                 });
             });
             console.log("LOADED");
-            $('#profile-image1').on('click', function() {
-                  console.log('Cliked');
-                  $('#profile-image-upload').click();
-            });
         }else{
             this.isLogged = false;
         }
@@ -56,6 +62,24 @@ export class HomeComponent{
         }else{
             this.isLogged = false;
         }
+    }
+
+    uploadImageClick() {
+        this.userService.changeImage(this.user, this.newImgUrl)
+            .subscribe(
+            (newUser: User) => {
+                    console.log('Upload Image')
+                    console.log(newUser)
+                    localStorage.setItem('currentUser', JSON.stringify(newUser));
+                    this.user.imgUrl = newUser.imgUrl;
+                    this.newImgUrl = '';
+                },
+                error => {
+                    console.log("Upload error");
+                    console.log(error);
+                    //this.alertService.error(error);
+                    //this.loading = false;
+                });
     }
 
     logout(){

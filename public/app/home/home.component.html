@@ -164,13 +164,37 @@
                                     <div class="panel-heading">
                                         <h4>Профил</h4>
                                     </div>
+                                    <!-- Upload Profile Image Popup -->
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Качи профилна снимка</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="img-input">Поставете линка към снимката:</label>
+                                                        <input type="text" class="form-control" id="img-input" [(ngModel)]="newImgUrl">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" (click)="uploadImageClick()" class="btn btn-success" data-dismiss="modal">Качи</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Затвори</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="panel-body">
                                         <div class="box box-info">
                                             <div class="box-body">
                                                 <div class="col-sm-6">
-                                                    <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
-                                                        <input id="profile-image-upload" class="hidden" type="file">
-                                                        <div style="color:#999;">кликни за да си избереш снимка</div>
+                                                    <div align="center">
+                                                        <img alt="User Pic" [src]="user.imgUrl" id="profile-image1" class="img-circle img-responsive pointer-mouse" data-toggle="modal" data-target="#myModal">
+                                                        <div style="color:#999;">
+                                                            <a class="pointer-mouse" id="profile-image-upload" data-toggle="modal" data-target="#myModal">Кликни</a> за да си избереш снимка
+                                                        </div>
                                                         <!--Upload Image Js And Css-->
                                                     </div>
                                                     <br>
@@ -210,10 +234,7 @@
                                                 <!-- /.box-body -->
                                             </div>
                                             <!-- /.box -->
-
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

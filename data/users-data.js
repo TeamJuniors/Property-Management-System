@@ -36,6 +36,24 @@ module.exports = (models) => {
                     return resolve(users);
                 })
             });
+        },
+        changeUserImage: function(username, password, imgUrl) {
+            return new Promise((resolve, reject) => {
+                User.findOneAndUpdate({
+                    username,
+                    password
+                }, {
+                    $set: {
+                        imgUrl: imgUrl
+                    }
+                }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    user.imgUrl = imgUrl;
+                    return resolve(user);
+                });
+            });
         }
     };
 };

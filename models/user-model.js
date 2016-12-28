@@ -21,6 +21,9 @@ let userSchema = new mongoose.Schema({
     isManager: {
         type: Boolean,
         required: true
+    },
+    imgUrl: {
+        type: String
     }
 });
 

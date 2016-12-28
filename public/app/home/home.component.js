@@ -9,26 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var user_service_1 = require("../services/user-service");
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(userService) {
+        this.userService = userService;
         this.isLogged = false;
-        console.log("Constructor");
         if (localStorage.getItem('currentUser') != undefined) {
-            console.log("True");
             this.isLogged = true;
         }
         else {
             this.isLogged = false;
         }
         console.log(localStorage.getItem('currentUser'));
+        this.newImgUrl = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log("OnInit");
         if (localStorage.getItem('currentUser')) {
             this.isLogged = true;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
-            this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+            this.username = this.user.username;
             var activeEl = 0;
+            //Setting defalt image
+            this.user.imgUrl = this.user.imgUrl || 'https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg';
             $(function () {
                 var items = $('.btn-nav');
                 $(items[activeEl]).addClass('active');
@@ -39,10 +42,6 @@ var HomeComponent = (function () {
                 });
             });
             console.log("LOADED");
-            $('#profile-image1').on('click', function () {
-                console.log('Cliked');
-                $('#profile-image-upload').click();
-            });
         }
         else {
             this.isLogged = false;
@@ -57,6 +56,22 @@ var HomeComponent = (function () {
             this.isLogged = false;
         }
     };
+    HomeComponent.prototype.uploadImageClick = function () {
+        var _this = this;
+        this.userService.changeImage(this.user, this.newImgUrl)
+            .subscribe(function (newUser) {
+            console.log('Upload Image');
+            console.log(newUser);
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            _this.user.imgUrl = newUser.imgUrl;
+            _this.newImgUrl = '';
+        }, function (error) {
+            console.log("Upload error");
+            console.log(error);
+            //this.alertService.error(error);
+            //this.loading = false;
+        });
+    };
     HomeComponent.prototype.logout = function () {
         console.log("Test");
         localStorage.removeItem('currentUser');
@@ -67,9 +82,10 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'app',
-        templateUrl: 'app/home/home.component.html'
+        templateUrl: 'app/home/home.component.html',
+        styles: ["\n        .pointer-mouse {\n            cursor: pointer;\n        }\n    "]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [user_service_1.UserService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

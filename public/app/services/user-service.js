@@ -22,6 +22,10 @@ var UserService = (function () {
     UserService.prototype.create = function (user) {
         return this.http.post('/api/users', user, this.jwt()).map(function (response) { return response.json(); });
     };
+    UserService.prototype.changeImage = function (user, imgUrl) {
+        user.imgUrl = imgUrl;
+        return this.http.post('/api/change-image', user, this.jwt()).map(function (response) { return response.json(); });
+    };
     UserService.prototype.jwt = function () {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {

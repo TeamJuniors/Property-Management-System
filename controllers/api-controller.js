@@ -15,7 +15,8 @@ function usersController(data) {
                     token: "server token",
                     username: user.username,
                     password: user.password,
-                    manager: user.isManager
+                    manager: user.isManager,
+                    imgUrl: user.imgUrl
                 };
                 if (user.password == password) {
                     res.send(JSON.stringify(sendUser));
@@ -32,7 +33,7 @@ function usersController(data) {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 username: req.body.username,
-                password: req.body.username,
+                password: req.body.password,
                 manager: req.body.manager
             }
             let username = user.username;
@@ -44,6 +45,21 @@ function usersController(data) {
                 res.status(404).send("Already exist");
             });
             console.log(username + " register " + password);
+        },
+        changeImage(req, res) {
+            console.log("Change img");
+
+            console.log(req.body);
+
+            let username = req.body.username;
+            let password = req.body.password;
+            let imgUrl = req.body.imgUrl;
+
+            data.changeUserImage(username, password, imgUrl).then((user) => {
+                res.send(user);
+            }).catch(err => {
+                res.status(404).send("Invalid username and password");
+            });
         }
     };
 };

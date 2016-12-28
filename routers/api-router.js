@@ -9,6 +9,7 @@ module.exports = function(app, data) {
 
     router.post('/users', apiController.register);
     router.post('/authenticate', apiController.login);
+    router.post('/change-image', apiController.changeImage);
 
     app.use('/api', router);
 };
