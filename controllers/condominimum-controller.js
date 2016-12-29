@@ -4,8 +4,8 @@ const constants = require('../utils/constants');
 function condominimumController(data) {
     return {
         findCondominimumBy(req, res) {
-            let floatNumber = req.body.floatNumber;
-            let entrance = req.body.entrance;
+            let floatNumber = req.body.floatNumber || req.body.flatNumber;
+            let entrance = req.body.entrance || req.body.exitNumber;
             let city = req.body.city;
             let neighborhood = req.body.neighborhood;
 

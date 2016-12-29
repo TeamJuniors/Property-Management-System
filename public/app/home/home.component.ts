@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {FacebookService, FacebookLoginResponse, FacebookInitParams} from '../../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js';
 import {User} from '../models/user-model'
 import { UserService } from '../services/user-service';
+import {CondominiumService} from '../services/condominium-service'
+import {ApartmentService} from '../services/apartment-service'
 
 declare var $:JQueryStatic;
 
@@ -21,11 +23,15 @@ export class HomeComponent{
     username: string;
     user: User;
     newImgUrl: string;
+    apartments: any;
+    condominium: any;
 
     constructor(private userService: UserService, 
                 private fb: FacebookService,
                 private route: ActivatedRoute,
-                private router: Router){
+                private router: Router,
+                private condominiumService:CondominiumService,
+                private apartmentService:ApartmentService){
         if(localStorage.getItem('currentUser') != undefined){
             this.isLogged = true;
         }else{
@@ -42,7 +48,28 @@ export class HomeComponent{
 
         this.newImgUrl = '';
     }
-
+    ngAfterViewInit(){
+        this.apartments = [];
+            this.condominiumService.getByProperties(this.user).subscribe(
+                data => {
+                    for(let i = 0; i < data.apartments.length; i++){
+                        this.apartmentService.getByProperties(data.apartments[i]).subscribe(
+                            data => {
+                                console.log(data);
+                                this.apartments.push(data);
+                            },
+                            err => {
+                                console.log("Cannot get apartment");
+                            }
+                        );
+                    }
+                    this.condominium = data;
+                },
+                err => {
+                    console.log("Error in home get condominium");
+                }
+            );
+    }
     ngOnInit(){
         console.log("OnInit");
         if(localStorage.getItem('currentUser')){

@@ -12,12 +12,16 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var ng2_facebook_sdk_js_1 = require("../../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js");
 var user_service_1 = require("../services/user-service");
+var condominium_service_1 = require("../services/condominium-service");
+var apartment_service_1 = require("../services/apartment-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService, fb, route, router) {
+    function HomeComponent(userService, fb, route, router, condominiumService, apartmentService) {
         this.userService = userService;
         this.fb = fb;
         this.route = route;
         this.router = router;
+        this.condominiumService = condominiumService;
+        this.apartmentService = apartmentService;
         this.isLogged = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -34,6 +38,23 @@ var HomeComponent = (function () {
         this.fb.init(fbParams);
         this.newImgUrl = '';
     }
+    HomeComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.apartments = [];
+        this.condominiumService.getByProperties(this.user).subscribe(function (data) {
+            for (var i = 0; i < data.apartments.length; i++) {
+                _this.apartmentService.getByProperties(data.apartments[i]).subscribe(function (data) {
+                    console.log(data);
+                    _this.apartments.push(data);
+                }, function (err) {
+                    console.log("Cannot get apartment");
+                });
+            }
+            _this.condominium = data;
+        }, function (err) {
+            console.log("Error in home get condominium");
+        });
+    };
     HomeComponent.prototype.ngOnInit = function () {
         console.log("OnInit");
         if (localStorage.getItem('currentUser')) {
@@ -111,7 +132,9 @@ HomeComponent = __decorate([
     __metadata("design:paramtypes", [user_service_1.UserService,
         ng2_facebook_sdk_js_1.FacebookService,
         router_1.ActivatedRoute,
-        router_1.Router])
+        router_1.Router,
+        condominium_service_1.CondominiumService,
+        apartment_service_1.ApartmentService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map
