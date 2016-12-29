@@ -353,23 +353,11 @@
                     <h3>Местоположение</h3>
                     <p>Академията на Телерик
                 </div>
-                <div class="footer-col col-md-4">
+                <div class="footer-col col-md-4" *ngIf="!isLogged">
                     <h3>Свържете се с нас</h3>
                     <ul class="list-inline">
                         <li>
                             <a (click)="facebookLoginClick()" class="btn-social btn-outline"><i (click)="facebookLoginClick()" class="fa fa-fw fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
                         </li>
                     </ul>
                 </div>
