@@ -16,36 +16,37 @@ function condominimumController(data) {
             });
         },
         createCondominium(req, res) {
+            console.log("Hello from create condominium");
             let condominimum = {
-                manager: req.body.manager,
                 apartments: req.body.apartments,
                 floatNumber: req.body.floatNumber,
                 entrance: req.body.entrance,
                 city: req.body.city,
                 neighborhood: req.body.neighborhood
             }
-            data.createCondominium(condominium).then(a => {
-                res.send("Create successfully condominium");
+            console.log(condominimum);
+            data.createCondominium(condominimum).then(a => {
+                res.send(a);
             }).catch(err => {
                 res.status(500).send("Cannot create condominium");
             });
         },
         getAllCondominiums(req, res) {
-            data.getAllCondominiums().then(condominiums => {
-                res.send(condominiums);
+            data.getAllCondominiums().then(condominimum => {
+                res.send(condominimum);
             }).catch(err => {
                 res.status(404).send("Cannot get all apartments");
             });
         },
         addApartmentToCondominium(req, res) {
-            let floatNumber = req.body.floatNumber;
-            let entrance = req.body.entrance;
-            let city = req.body.city;
-            let neighborhood = req.body.neighborhood;
+            let floatNumber = req.body.condominium.floatNumber;
+            let entrance = req.body.condominium.entrance;
+            let city = req.body.condominium.city;
+            let neighborhood = req.body.condominium.neighborhood;
             let apartment = req.body.apartment;
 
-            data.addUserToAppartment(floatNumber, entrance, city, neighborhood, apartment).then(condominium => {
-                res.send("Successfully added user to apartment");
+            data.addApartmentToCondominium(floatNumber, entrance, city, neighborhood, apartment).then(condominium => {
+                res.send(condominium);
             }).catch(err => {
                 res.status(404).send("Cannot add user to apartment");
             });

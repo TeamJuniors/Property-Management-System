@@ -18,18 +18,17 @@ function apartmentsController(data) {
         },
         createApartment(req, res) {
             //console.log("Hello from apartments controller");
-            var user = req.body.user;
 
             let apartment = {
-                apartmentNumber: req.body.apartment.apartmentNumber,
-                users: req.body.apartment.users,
-                floatNumber: req.body.apartment.floatNumber,
-                entrance: req.body.apartment.entrance,
-                city: req.body.apartment.city,
-                neighborhood: req.body.apartment.neighborhood
+                apartmentNumber: req.body.apartmentNumber,
+                users: req.body.users,
+                floatNumber: req.body.floatNumber,
+                entrance: req.body.entrance,
+                city: req.body.city,
+                neighborhood: req.body.neighborhood
             };
             //console.log(apartment);
-            data.createApartment(apartment, user).then(a => {
+            data.createApartment(apartment).then(a => {
                 res.send(apartment);
             }).catch(err => {
                 res.status(500).send("Cannot create apartment");

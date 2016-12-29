@@ -13,18 +13,21 @@ var router_1 = require("@angular/router");
 var user_service_1 = require("../services/user-service");
 var alert_service_1 = require("../services/alert-service");
 var apartment_service_1 = require("../services/apartment-service");
+var condominium_service_1 = require("../services/condominium-service");
 var RegisterComponent = (function () {
-    function RegisterComponent(router, userService, alertService, apartmentService) {
+    function RegisterComponent(router, userService, alertService, apartmentService, condominiumService) {
         this.router = router;
         this.userService = userService;
         this.alertService = alertService;
         this.apartmentService = apartmentService;
+        this.condominiumService = condominiumService;
         this.model = {};
         this.loading = false;
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
         var users = [];
+        users.push(this.model);
         this.loading = true;
         var apartmentProperties = {
             floatNumber: this.model.flatNumber,
@@ -44,8 +47,32 @@ var RegisterComponent = (function () {
                 console.log("Cannot add user");
             });
         }, function (error) {
-            _this.apartmentService.create(apartmentProperties, _this.model).subscribe(function (data) {
+            _this.apartmentService.create(apartmentProperties).subscribe(function (data) {
                 console.log("Successfully created apartment");
+                var apartments = [];
+                var condominiumProperties = {
+                    apartments: apartments,
+                    floatNumber: _this.model.flatNumber,
+                    entrance: _this.model.exitNumber,
+                    city: _this.model.city,
+                    neighborhood: _this.model.neighborhood
+                };
+                _this.condominiumService.getByProperties(condominiumProperties).subscribe(function (data) {
+                    console.log("Find condominium");
+                    _this.condominiumService.addApartment(condominiumProperties, apartmentProperties).subscribe(function (data) {
+                        console.log("Successfully added apartment");
+                    }, function (err) {
+                        console.log("Cannot add apartment");
+                    });
+                }, function (err) {
+                    console.log("Cannot find condominium");
+                    apartments.push(data);
+                    _this.condominiumService.create(condominiumProperties).subscribe(function (data) {
+                        console.log("Create condominium");
+                    }, function (err) {
+                        console.log("Cannot create condominium");
+                    });
+                });
             }, function (error) {
                 console.log("Cannot add apartment");
             });
@@ -86,7 +113,8 @@ RegisterComponent = __decorate([
     __metadata("design:paramtypes", [router_1.Router,
         user_service_1.UserService,
         alert_service_1.AlertService,
-        apartment_service_1.ApartmentService])
+        apartment_service_1.ApartmentService,
+        condominium_service_1.CondominiumService])
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map
