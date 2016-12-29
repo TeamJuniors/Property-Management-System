@@ -15,14 +15,14 @@ module.exports = (models) => {
         },
         createCondominium: function(obj) {
             const condominium = new Condominium({
-                manager: obj.manager,
                 apartments: obj.apartments,
                 floatNumber: obj.floatNumber,
                 entrance: obj.entrance,
                 city: obj.city,
                 neighborhood: obj.neighborhood
             });
-
+            console.log("Hello from condominium data.");
+            console.log(condominium);
             return Promise.resolve(condominium.save());
         },
         getAllCondominiums: function() {
@@ -38,20 +38,19 @@ module.exports = (models) => {
         },
         addApartmentToCondominium: function(floatNumber, entrance, city, neighborhood, apartment) {
             return new Promise((resolve, reject) => {
-                Condominium.findOneAndUpdate({
-                    floatNumber: floatNumber,
-                    entrance: entrance,
-                    city: city,
-                    neighborhood: neighborhood
-                }, {
-                    $push: { apartments: apartment }
-                }, (err, condominium) => {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    return resolve(condominium);
-                });
+                Condominium.findOne({
+                        floatNumber,
+                        entrance,
+                        city,
+                        neighborhood
+                    },
+                    function(err, condominium) {
+                        if (err) {
+                            return reject(err);
+                        }
+                        condominium.apartments.push(apartment);
+                        return resolve(condominium.save());
+                    });
             });
         }
     };

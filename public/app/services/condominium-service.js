@@ -10,34 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var ApartmentService = (function () {
-    function ApartmentService(http) {
+var CondominiumService = (function () {
+    function CondominiumService(http) {
         this.http = http;
     }
-    ApartmentService.prototype.getAll = function () {
-        return this.http.get('/api/apartments', this.jwt()).map(function (response) { return response.json(); });
+    CondominiumService.prototype.getAll = function () {
+        return this.http.get('/api/condominimums', this.jwt()).map(function (response) { return response.json(); });
     };
-    ApartmentService.prototype.create = function (apartment) {
-        return this.http.post('/api/apartments', apartment, this.jwt()).map(function (response) { return response.json(); });
+    CondominiumService.prototype.create = function (condominiumProperties) {
+        return this.http.post('/api/condominimums', condominiumProperties, this.jwt()).map(function (response) { return response.json(); });
     };
-    ApartmentService.prototype.addUser = function (apartment, user) {
-        return this.http.post('/api/addUserToApartment', { apartment: apartment, user: user }, this.jwt()).map(function (response) { return response.json(); });
+    CondominiumService.prototype.addApartment = function (condominium, apartment) {
+        return this.http.post('/api/addApartmentToCondominimum', { condominium: condominium, apartment: apartment }, this.jwt()).map(function (response) { return response.json(); });
     };
-    ApartmentService.prototype.getByProperties = function (properties) {
-        return this.http.post('/api/findApartments', properties, this.jwt()).map(function (response) { return response.json(); });
+    CondominiumService.prototype.getByProperties = function (properties) {
+        return this.http.post('/api/findCondominimums', properties, this.jwt()).map(function (response) { return response.json(); });
     };
-    ApartmentService.prototype.jwt = function () {
+    CondominiumService.prototype.jwt = function () {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
             var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
             return new http_1.RequestOptions({ headers: headers });
         }
     };
-    return ApartmentService;
+    return CondominiumService;
 }());
-ApartmentService = __decorate([
+CondominiumService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], ApartmentService);
-exports.ApartmentService = ApartmentService;
-//# sourceMappingURL=apartment-service.js.map
+], CondominiumService);
+exports.CondominiumService = CondominiumService;
+//# sourceMappingURL=condominium-service.js.map

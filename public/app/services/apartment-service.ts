@@ -14,8 +14,8 @@ export class ApartmentService{
         return this.http.get('/api/apartments', this.jwt()).map((response: Response) => response.json());
     }
 
-    create(apartment: any, user: User){
-        return this.http.post('/api/apartments', {apartment, user}, this.jwt()).map((response: Response) => response.json());
+    create(apartment: any){
+        return this.http.post('/api/apartments', apartment, this.jwt()).map((response: Response) => response.json());
     }
 
     addUser(apartment: any, user: User){

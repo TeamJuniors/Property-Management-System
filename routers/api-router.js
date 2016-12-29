@@ -13,9 +13,9 @@ module.exports = function(app, data) {
     router.post('/authenticate', apiController.login);
     router.post('/change-image', apiController.changeImage);
 
-    router.get('/condominimum', condominimumController.getAllCondominiums);
-    router.post('/condominimum', condominimumController.createCondominium);
-    router.get('/findCondominimum', condominimumController.findCondominimumBy);
+    router.get('/condominimums', condominimumController.getAllCondominiums);
+    router.post('/condominimums', condominimumController.createCondominium);
+    router.post('/findCondominimums', condominimumController.findCondominimumBy);
     router.post('/addApartmentToCondominimum', condominimumController.addApartmentToCondominium);
 
     router.get('/apartments', apartmentController.getAllApartments);

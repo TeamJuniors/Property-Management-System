@@ -19,14 +19,12 @@ module.exports = (models) => {
                 });
             })
         },
-        createApartment: function(obj, user) {
+        createApartment: function(obj) {
             console.log("Hello from apartment-data");
             //console.log(Apartment);
-            let users = [];
-            users.push(user);
             const apartment = new Apartment({
                 apartmentNumber: obj.apartmentNumber,
-                users: users,
+                users: obj.users,
                 floatNumber: obj.floatNumber,
                 entrance: obj.entrance,
                 city: obj.city,
@@ -46,15 +44,6 @@ module.exports = (models) => {
             });
         },
         addUserToAppartment: function(floatNumber, entrance, city, neighborhood, apartmentNumber, user) {
-            /*console.log("Hello from appartment-data");
-            console.log("floatNumber: " + floatNumber);
-            console.log("entrance: " + entrance);
-            console.log("city: " + city);
-            console.log("neighborhood: " + neighborhood);
-            console.log("apartmentNumber: " + apartmentNumber);
-*/
-            //console.log(user);
-
             return new Promise((resolve, reject) => {
                 Apartment.findOne({
                         floatNumber,

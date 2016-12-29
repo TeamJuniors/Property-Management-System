@@ -16,6 +16,7 @@ import { AuthenticationService } from './services/authentication-service';
 import { AlertService } from './services/alert-service';
 import { UserService } from './services/user-service';
 import {ApartmentService} from './services/apartment-service'
+import {CondominiumService} from './services/condominium-service'
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -41,6 +42,7 @@ import { RegisterComponent } from './register/index';
         AuthenticationService,
         UserService,
         ApartmentService,
+        CondominiumService,
         // providers used to create fake backend
         BaseRequestOptions
     ],

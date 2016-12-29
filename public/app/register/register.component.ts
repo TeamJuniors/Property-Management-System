@@ -5,6 +5,7 @@ import { UserService } from '../services/user-service';
 import {AlertService} from '../services/alert-service';
 import {ApartmentService} from '../services/apartment-service'
 import {Apartment} from '../models/apartment-model'
+import {CondominiumService} from '../services/condominium-service'
 
 @Component({
     moduleId: module.id,
@@ -21,10 +22,12 @@ export class RegisterComponent {
         private router: Router,
         private userService: UserService,
         private alertService: AlertService,
-        private apartmentService: ApartmentService) { }
+        private apartmentService: ApartmentService,
+        private condominiumService: CondominiumService) { }
 
     register() {
        let users:any = [];
+       users.push(this.model);
        this.loading = true;
        let apartmentProperties = {
            floatNumber: this.model.flatNumber,
@@ -49,9 +52,43 @@ export class RegisterComponent {
                      );
                  },
                  error => {
-                     this.apartmentService.create(apartmentProperties, this.model).subscribe(
+                     this.apartmentService.create(apartmentProperties).subscribe(
                          data => {
                             console.log("Successfully created apartment");
+                             let apartments: any = [];
+                             let condominiumProperties = {
+                                apartments: apartments,
+                                floatNumber: this.model.flatNumber,
+                                entrance: this.model.exitNumber,
+                                city: this.model.city,
+                                neighborhood: this.model.neighborhood
+                             }
+                             this.condominiumService.getByProperties(condominiumProperties).subscribe(
+                                 data => {
+                                     console.log("Find condominium");
+                                     this.condominiumService.addApartment(condominiumProperties, apartmentProperties).subscribe(
+                                         data => {
+                                             console.log("Successfully added apartment");
+                                         },
+                                         err => {
+                                             console.log("Cannot add apartment");
+                                         }
+                                     );
+                                 },
+                                 err => {
+                                     console.log("Cannot find condominium");
+                                     apartments.push(data);
+                                     this.condominiumService.create(condominiumProperties).subscribe(
+                                         data => {
+                                             console.log("Create condominium");
+                                         },
+                                         err => {
+                                             console.log("Cannot create condominium");
+                                         }
+                                     );
+                                 }
+                             );
+                             
                          },
                          error => {
                              console.log("Cannot add apartment");
