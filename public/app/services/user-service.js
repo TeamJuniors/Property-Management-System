@@ -19,6 +19,9 @@ var UserService = (function () {
     };
     UserService.prototype.getById = function (id) {
     };
+    UserService.prototype.getByFacebookAuthToken = function (facebookAuthToken) {
+        return this.http.post('/api/getUserByFacebookAuthToken', { facebookAuthToken: facebookAuthToken }, this.jwt()).map(function (response) { return response.json(); });
+    };
     UserService.prototype.create = function (user) {
         return this.http.post('/api/users', user, this.jwt()).map(function (response) { return response.json(); });
     };

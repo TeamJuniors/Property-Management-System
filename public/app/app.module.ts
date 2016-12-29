@@ -6,6 +6,9 @@ import { HttpModule } from '@angular/http';
 // used to create fake backend
 import { BaseRequestOptions } from '@angular/http';
 
+//Facebook api
+import {FacebookService} from '../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js';
+
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
 
@@ -20,6 +23,7 @@ import {ApartmentService} from './services/apartment-service'
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import { FacebookComponent } from './facebookLogin/index';
 
 @NgModule({
     imports: [
@@ -33,7 +37,8 @@ import { RegisterComponent } from './register/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        FacebookComponent
     ],
     providers: [
         AuthChecker,
@@ -42,7 +47,8 @@ import { RegisterComponent } from './register/index';
         UserService,
         ApartmentService,
         // providers used to create fake backend
-        BaseRequestOptions
+        BaseRequestOptions,
+        FacebookService
     ],
     bootstrap: [AppComponent]
 })

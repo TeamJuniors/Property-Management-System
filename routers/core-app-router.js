@@ -11,6 +11,7 @@ function getMainPage(req, res) {
 module.exports = function(app, data) {
     app.get('/', getMainPage);
     app.get('/home', getMainPage);
+    app.get('/login/facebook', getMainPage);
     app.get('/login', getMainPage);
     app.get('/register', getMainPage);
 };
