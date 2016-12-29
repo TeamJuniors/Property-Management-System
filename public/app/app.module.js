@@ -21,6 +21,7 @@ var auth_checker_component_1 = require("./autentication-checker/auth-checker.com
 var authentication_service_1 = require("./services/authentication-service");
 var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
+var apartment_service_1 = require("./services/apartment-service");
 var index_1 = require("./home/index");
 var index_2 = require("./login/index");
 var index_3 = require("./register/index");
@@ -49,6 +50,7 @@ AppModule = __decorate([
             alert_service_1.AlertService,
             authentication_service_1.AuthenticationService,
             user_service_1.UserService,
+            apartment_service_1.ApartmentService,
             // providers used to create fake backend
             http_2.BaseRequestOptions
         ],

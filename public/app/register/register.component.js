@@ -12,17 +12,39 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var user_service_1 = require("../services/user-service");
 var alert_service_1 = require("../services/alert-service");
+var apartment_service_1 = require("../services/apartment-service");
 var RegisterComponent = (function () {
-    function RegisterComponent(router, userService, alertService) {
+    function RegisterComponent(router, userService, alertService, apartmentService) {
         this.router = router;
         this.userService = userService;
         this.alertService = alertService;
+        this.apartmentService = apartmentService;
         this.model = {};
         this.loading = false;
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
+        var users = [];
         this.loading = true;
+        var apartmentProperties = {
+            floatNumber: this.model.flatNumber,
+            entrance: this.model.exitNumber,
+            city: this.model.city,
+            neighborhood: this.model.neighborhood,
+            apartmentNumber: this.model.apartmentNumber,
+            users: users
+        };
+        console.log(apartmentProperties);
+        this.apartmentService.getByProperties(apartmentProperties)
+            .subscribe(function (data) {
+            console.log("Found apartment");
+        }, function (error) {
+            _this.apartmentService.create(apartmentProperties, _this.model).subscribe(function (data) {
+                console.log("Successfully created apartment");
+            }, function (error) {
+                console.log("Cannot add apartment");
+            });
+        });
         this.userService.create(this.model)
             .subscribe(function (data) {
             _this.alertService.success('Registration successful', true);
@@ -58,7 +80,8 @@ RegisterComponent = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.Router,
         user_service_1.UserService,
-        alert_service_1.AlertService])
+        alert_service_1.AlertService,
+        apartment_service_1.ApartmentService])
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map

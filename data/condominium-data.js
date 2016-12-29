@@ -1,10 +1,10 @@
 module.exports = (models) => {
     let Condominium = models.Condominium;
     return {
-        findCondominiumByApartmentBuildingNumber: function(apartmentBuildingNumber) {
+        findCondominimumBy: function(floatNumber, entrance, city, neighborhood) {
             return new Promise((resolve, reject) => {
 
-                Condominium.findOne({ apartmentBuildingNumber }, function(err, condominium) {
+                Condominium.findOne({ floatNumber: floatNumber, entrance: entrance, city: city, neighborhood: neighborhood }, function(err, condominium) {
                     if (err) {
                         reject(err);
                     } else {
@@ -15,8 +15,9 @@ module.exports = (models) => {
         },
         createCondominium: function(obj) {
             const condominium = new Condominium({
-                homeOwners: [],
-                apartmentBuildingNumber: obj.apartmentBuildingNumber,
+                manager: obj.manager,
+                apartments: obj.apartments,
+                floatNumber: obj.floatNumber,
                 entrance: obj.entrance,
                 city: obj.city,
                 neighborhood: obj.neighborhood
@@ -35,12 +36,15 @@ module.exports = (models) => {
                 })
             });
         },
-        addHomeOwnerToCondominium: function(apartmentBuildingNumber, owner) {
+        addApartmentToCondominium: function(floatNumber, entrance, city, neighborhood, apartment) {
             return new Promise((resolve, reject) => {
                 Condominium.findOneAndUpdate({
-                    apartmentBuildingNumber
+                    floatNumber: floatNumber,
+                    entrance: entrance,
+                    city: city,
+                    neighborhood: neighborhood
                 }, {
-                    $push: { homeOwners: owner }
+                    $push: { apartments: apartment }
                 }, (err, condominium) => {
                     if (err) {
                         return reject(err);

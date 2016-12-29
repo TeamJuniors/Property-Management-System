@@ -1,0 +1,77 @@
+module.exports = (models) => {
+    let Apartment = models.Apartment;
+    return {
+        findApartmentBy: function(floatNumber, entrance, city, neighborhood, apartmentNumber) {
+            return new Promise((resolve, reject) => {
+
+                Apartment.findOne({
+                    floatNumber: floatNumber,
+                    entrance: entrance,
+                    city: city,
+                    neighborhood: neighborhood,
+                    apartmentNumber: apartmentNumber
+                }, function(err, apartment) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(apartment);
+                    }
+                });
+            })
+        },
+        createApartment: function(obj, user) {
+            console.log("Hello from apartment-data");
+            //console.log(Apartment);
+            let users = [];
+            users.push(user);
+            const apartment = new Apartment({
+                apartmentNumber: obj.apartmentNumber,
+                users: users,
+                floatNumber: obj.floatNumber,
+                entrance: obj.entrance,
+                city: obj.city,
+                neighborhood: obj.neighborhood
+            });
+            return Promise.resolve(apartment.save());
+        },
+        getAllApartments: function() {
+            return new Promise((resolve, reject) => {
+                Apartment.find((err, apartments) => {
+                    if (err) {
+                        return reject(err)
+                    }
+
+                    return resolve(apartments);
+                })
+            });
+        },
+        addUserToAppartment: function(floatNumber, entrance, city, neighborhood, apartmentNumber, user) {
+            console.log("Hello from appartment-data");
+            console.log("floatNumber: " + floatNumber);
+            console.log("entrance: " + entrance);
+            console.log("city: " + city);
+            console.log("neighborhood: " + neighborhood);
+            console.log("apartmentNumber: " + apartmentNumber);
+
+            console.log(user);
+
+            return new Promise((resolve, reject) => {
+                Apartment.findOneAndUpdate({
+                    floatNumber: floatNumber,
+                    entrance: entrance,
+                    city: city,
+                    neighborhood: neighborhood,
+                    apartmentNumber: apartmentNumber
+                }, {
+                    $push: { users: user }
+                }, (err, apartment) => {
+                    if (err) {
+                        console.log(err);
+                        return reject(err);
+                    }
+                    return resolve(apartment);
+                });
+            });
+        }
+    };
+};

@@ -10,7 +10,10 @@ module.exports = function(config) {
     mongoose.connect(config.connectionString);
 
     let User = require('../models/user-model');
-    let models = { User };
+    let Condominumum = require('../models/condominium-model');
+    let Apartment = require('../models/apartment-model');
+
+    let models = { User, Condominumum, Apartment };
 
     let data = {};
 

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 let propertySchema = new mongoose.Schema({
-    manager: {
-        type: Object,
+    apartmentNumber: {
+        type: String,
         required: true
     },
-    apartments: {
-        type: [Object],
-        required: true
+    users: {
+        type: [{}],
+        default: []
     },
     floatNumber: {
         type: String,
@@ -26,6 +26,6 @@ let propertySchema = new mongoose.Schema({
     }
 });
 
-mongoose.model('Condominium', propertySchema);
+mongoose.model('Apartment', propertySchema);
 
-module.exports = mongoose.model('Condominium');
+module.exports = mongoose.model('Apartment');

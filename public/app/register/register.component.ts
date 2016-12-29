@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 declare var $:JQueryStatic;
 import { UserService } from '../services/user-service';
 import {AlertService} from '../services/alert-service';
+import {ApartmentService} from '../services/apartment-service'
+import {Apartment} from '../models/apartment-model'
 
 @Component({
     moduleId: module.id,
@@ -18,10 +20,38 @@ export class RegisterComponent {
     constructor(
         private router: Router,
         private userService: UserService,
-        private alertService: AlertService) { }
+        private alertService: AlertService,
+        private apartmentService: ApartmentService) { }
 
-    register() { 
+    register() {
+       let users:any = [];
        this.loading = true;
+       let apartmentProperties = {
+           floatNumber: this.model.flatNumber,
+           entrance: this.model.exitNumber,
+           city: this.model.city,
+           neighborhood: this.model.neighborhood,
+           apartmentNumber: this.model.apartmentNumber,
+           users: users
+       }
+       console.log(apartmentProperties);
+       this.apartmentService.getByProperties(apartmentProperties)
+             .subscribe(
+                 data => {
+                     console.log("Found apartment");
+                 },
+                 error => {
+                     this.apartmentService.create(apartmentProperties, this.model).subscribe(
+                         data => {
+                            console.log("Successfully created apartment");
+                         },
+                         error => {
+                             console.log("Cannot add apartment");
+                         }
+                     );
+                 }
+             );
+
        this.userService.create(this.model)
             .subscribe(
                 data => {

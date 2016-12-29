@@ -15,6 +15,7 @@ import { AuthChecker } from './autentication-checker/auth-checker.component';
 import { AuthenticationService } from './services/authentication-service';
 import { AlertService } from './services/alert-service';
 import { UserService } from './services/user-service';
+import {ApartmentService} from './services/apartment-service'
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -39,7 +40,7 @@ import { RegisterComponent } from './register/index';
         AlertService,
         AuthenticationService,
         UserService,
-
+        ApartmentService,
         // providers used to create fake backend
         BaseRequestOptions
     ],
