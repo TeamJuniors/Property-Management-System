@@ -23,6 +23,9 @@ var CondominiumService = (function () {
     CondominiumService.prototype.addApartment = function (condominium, apartment) {
         return this.http.post('/api/addApartmentToCondominimum', { condominium: condominium, apartment: apartment }, this.jwt()).map(function (response) { return response.json(); });
     };
+    CondominiumService.prototype.addUserToApartmentInCondominium = function (condominium, apartment, user) {
+        return this.http.post('/api/addUserToApartmentInCondominium', { condominium: condominium, apartment: apartment, user: user }, this.jwt()).map(function (response) { return response.json(); });
+    };
     CondominiumService.prototype.getByProperties = function (properties) {
         return this.http.post('/api/findCondominimums', properties, this.jwt()).map(function (response) { return response.json(); });
     };

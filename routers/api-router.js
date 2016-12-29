@@ -17,6 +17,7 @@ module.exports = function(app, data) {
     router.post('/condominimums', condominimumController.createCondominium);
     router.post('/findCondominimums', condominimumController.findCondominimumBy);
     router.post('/addApartmentToCondominimum', condominimumController.addApartmentToCondominium);
+    router.post('/addUserToApartmentInCondominium', condominimumController.AddUserToApartmentInCondominium);
 
     router.get('/apartments', apartmentController.getAllApartments);
     router.post('/apartments', apartmentController.createApartment);

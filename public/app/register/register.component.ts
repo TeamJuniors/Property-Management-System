@@ -44,7 +44,14 @@ export class RegisterComponent {
                      console.log("Found apartment");
                      this.apartmentService.addUser(apartmentProperties, this.model).subscribe(
                          data => {
-                             console.log("Successfully added user");
+                             this.condominiumService.addUserToApartmentInCondominium(apartmentProperties, apartmentProperties, this.model).subscribe(
+                                data => {
+                                    console.log("Successfully added user to apartment to condominium");
+                                },
+                                err => {
+                                    console.log("Cannot add user to apartment to condominium");
+                                } 
+                             );
                          },
                          error => {
                              console.log("Cannot add user");

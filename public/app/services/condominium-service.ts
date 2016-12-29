@@ -21,7 +21,9 @@ export class CondominiumService{
     addApartment(condominium: any, apartment: any){
         return this.http.post('/api/addApartmentToCondominimum', {condominium, apartment}, this.jwt()).map((response: Response) => response.json());
     }
-
+    addUserToApartmentInCondominium(condominium: any, apartment: any, user: any){
+        return this.http.post('/api/addUserToApartmentInCondominium', {condominium, apartment, user}, this.jwt()).map((response: Response) => response.json());
+    }
     getByProperties(properties: any){
         return this.http.post('/api/findCondominimums', properties, this.jwt()).map((response: Response) => response.json());
     }

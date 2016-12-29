@@ -42,7 +42,11 @@ var RegisterComponent = (function () {
             .subscribe(function (data) {
             console.log("Found apartment");
             _this.apartmentService.addUser(apartmentProperties, _this.model).subscribe(function (data) {
-                console.log("Successfully added user");
+                _this.condominiumService.addUserToApartmentInCondominium(apartmentProperties, apartmentProperties, _this.model).subscribe(function (data) {
+                    console.log("Successfully added user to apartment to condominium");
+                }, function (err) {
+                    console.log("Cannot add user to apartment to condominium");
+                });
             }, function (error) {
                 console.log("Cannot add user");
             });

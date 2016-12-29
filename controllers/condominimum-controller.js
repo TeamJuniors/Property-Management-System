@@ -38,6 +38,17 @@ function condominimumController(data) {
                 res.status(404).send("Cannot get all apartments");
             });
         },
+        AddUserToApartmentInCondominium(req, res) {
+            let apartment = req.body.apartment;
+            let user = req.body.user;
+            let condominium = req.body.condominium;
+
+            data.AddUserToApartmentInCondominium(condominium, apartment, user).then((cond) => {
+                res.send(cond);
+            }).catch(err => {
+                res.status(401).send("Error");
+            });
+        },
         addApartmentToCondominium(req, res) {
             let floatNumber = req.body.condominium.floatNumber;
             let entrance = req.body.condominium.entrance;
