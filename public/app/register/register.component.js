@@ -38,6 +38,11 @@ var RegisterComponent = (function () {
         this.apartmentService.getByProperties(apartmentProperties)
             .subscribe(function (data) {
             console.log("Found apartment");
+            _this.apartmentService.addUser(apartmentProperties, _this.model).subscribe(function (data) {
+                console.log("Successfully added user");
+            }, function (error) {
+                console.log("Cannot add user");
+            });
         }, function (error) {
             _this.apartmentService.create(apartmentProperties, _this.model).subscribe(function (data) {
                 console.log("Successfully created apartment");

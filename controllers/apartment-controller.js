@@ -52,7 +52,7 @@ function apartmentsController(data) {
             let user = req.body.user;
             console.log(req.body);
             data.addUserToAppartment(floatNumber, entrance, city, neighborhood, apartmentNumber, user).then(apartment => {
-                res.send("Successfully added user to apartment");
+                res.send(apartment);
             }).catch(err => {
                 res.status(500).send("Cannot add user to apartment");
             });

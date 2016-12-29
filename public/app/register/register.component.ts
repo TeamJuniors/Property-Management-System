@@ -39,6 +39,14 @@ export class RegisterComponent {
              .subscribe(
                  data => {
                      console.log("Found apartment");
+                     this.apartmentService.addUser(apartmentProperties, this.model).subscribe(
+                         data => {
+                             console.log("Successfully added user");
+                         },
+                         error => {
+                             console.log("Cannot add user");
+                         }
+                     );
                  },
                  error => {
                      this.apartmentService.create(apartmentProperties, this.model).subscribe(
