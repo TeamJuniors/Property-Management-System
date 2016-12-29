@@ -2,7 +2,7 @@
  * System configuration for Angular 2 samples
  * Adjust as necessary for your application needs.
  */
-(function (global) {
+(function(global) {
     System.config({
         paths: {
             // paths serve as alias

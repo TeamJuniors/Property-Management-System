@@ -9,10 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var ng2_facebook_sdk_js_1 = require("../../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js");
 var user_service_1 = require("../services/user-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService) {
+    function HomeComponent(userService, fb, route, router) {
         this.userService = userService;
+        this.fb = fb;
+        this.route = route;
+        this.router = router;
         this.isLogged = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -21,6 +26,12 @@ var HomeComponent = (function () {
             this.isLogged = false;
         }
         console.log(localStorage.getItem('currentUser'));
+        var fbParams = {
+            appId: '1064731376969661',
+            xfbml: true,
+            version: 'v2.6'
+        };
+        this.fb.init(fbParams);
         this.newImgUrl = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -77,6 +88,18 @@ var HomeComponent = (function () {
         localStorage.removeItem('currentUser');
         this.isLogged = false;
     };
+    HomeComponent.prototype.facebookLoginClick = function () {
+        var _this = this;
+        this.fb.login().then(function (response) {
+            console.log("Facebook response");
+            console.log(response);
+            if (response.status === 'connected') {
+                localStorage.setItem('facebookAuthToken', response.authResponse.userID);
+                _this.router.navigateByUrl('/login/facebook');
+            }
+        }, function (error) {
+        });
+    };
     return HomeComponent;
 }());
 HomeComponent = __decorate([
@@ -85,7 +108,10 @@ HomeComponent = __decorate([
         templateUrl: 'app/home/home.component.html',
         styles: ["\n        .pointer-mouse {\n            cursor: pointer;\n        }\n    "]
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        ng2_facebook_sdk_js_1.FacebookService,
+        router_1.ActivatedRoute,
+        router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

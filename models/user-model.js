@@ -44,6 +44,9 @@ let userSchema = new mongoose.Schema({
     neighborhood: {
         type: String,
         required: true
+    },
+    facebookAuthToken: {
+        type: String
     }
 });
 

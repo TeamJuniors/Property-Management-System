@@ -1,6 +1,9 @@
 import {Component} from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router';
+import {FacebookService, FacebookLoginResponse, FacebookInitParams} from '../../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js';
 import {User} from '../models/user-model'
 import { UserService } from '../services/user-service';
+
 declare var $:JQueryStatic;
 
 @Component({
@@ -19,13 +22,23 @@ export class HomeComponent{
     user: User;
     newImgUrl: string;
 
-    constructor(private userService: UserService){
+    constructor(private userService: UserService, 
+                private fb: FacebookService,
+                private route: ActivatedRoute,
+                private router: Router){
         if(localStorage.getItem('currentUser') != undefined){
             this.isLogged = true;
         }else{
             this.isLogged = false;
         }
         console.log(localStorage.getItem('currentUser'));
+
+        let fbParams: FacebookInitParams = {
+                                   appId: '1064731376969661',
+                                   xfbml: true,
+                                   version: 'v2.6'
+                                   };
+        this.fb.init(fbParams);
 
         this.newImgUrl = '';
     }
@@ -86,5 +99,21 @@ export class HomeComponent{
         console.log("Test");
         localStorage.removeItem('currentUser');
         this.isLogged = false;
+    }
+
+    facebookLoginClick(): void {
+        this.fb.login().then(
+            (response: FacebookLoginResponse) => {
+                console.log("Facebook response");
+                console.log(response)
+
+                if(response.status === 'connected') {
+                    localStorage.setItem('facebookAuthToken', response.authResponse.userID);
+                    this.router.navigateByUrl('/login/facebook')
+                }
+            },
+            (error: any) => {
+            }
+        );
     }
 }

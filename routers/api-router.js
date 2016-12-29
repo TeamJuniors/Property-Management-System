@@ -12,6 +12,7 @@ module.exports = function(app, data) {
     router.post('/users', apiController.register);
     router.post('/authenticate', apiController.login);
     router.post('/change-image', apiController.changeImage);
+    router.post('/getUserByFacebookAuthToken', apiController.getUserByFacebookAuthToken);
 
     router.get('/condominimums', condominimumController.getAllCondominiums);
     router.post('/condominimums', condominimumController.createCondominium);

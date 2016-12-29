@@ -33,7 +33,6 @@ function usersController(data) {
             });
         },
         register(req, res) {
-            console.log(req.body);
             let user = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -44,8 +43,11 @@ function usersController(data) {
                 apartmentNumber: req.body.apartmentNumber,
                 exitNumber: req.body.exitNumber,
                 city: req.body.city,
-                neighborhood: req.body.neighborhood
+                neighborhood: req.body.neighborhood,
+                imgUrl: req.body.imgUrl || '',
+                facebookAuthToken: req.body.facebookAuthToken || ''
             }
+
             let username = user.username;
             let password = user.password
 
@@ -54,7 +56,6 @@ function usersController(data) {
             }).catch(err => {
                 res.status(404).send("Already exist");
             });
-            console.log(username + " register " + password);
         },
         changeImage(req, res) {
             console.log("Change img");
@@ -69,6 +70,18 @@ function usersController(data) {
                 res.send(user);
             }).catch(err => {
                 res.status(404).send("Invalid username and password");
+            });
+        },
+        getUserByFacebookAuthToken(req, res) {
+            console.log("facebookAuthToken " + req.body.facebookAuthToken);
+            console.log(req.body)
+
+            let facebookAuthToken = req.body.facebookAuthToken;
+
+            data.findUserByFacebookAuthToken(facebookAuthToken).then((user) => {
+                res.send(user);
+            }).catch(err => {
+                res.status(404).send("Not authenricated");
             });
         }
     };

@@ -17,6 +17,10 @@ export class UserService{
 
     }
 
+    getByFacebookAuthToken(facebookAuthToken: string){
+        return this.http.post('/api/getUserByFacebookAuthToken', {facebookAuthToken}, this.jwt()).map((response: Response) => response.json());
+    }
+
     create(user: User){
         return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
     }
