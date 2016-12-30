@@ -23,6 +23,7 @@ var HomeComponent = (function () {
         this.condominiumService = condominiumService;
         this.apartmentService = apartmentService;
         this.isLogged = false;
+        this.showApartment = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
         }
@@ -38,6 +39,13 @@ var HomeComponent = (function () {
         this.fb.init(fbParams);
         this.newImgUrl = '';
     }
+    HomeComponent.prototype.onApartmentTableClick = function (index) {
+        this.showingApartment = this.apartments[index];
+        this.showApartment = true;
+    };
+    HomeComponent.prototype.returnApartmentPage = function () {
+        this.showApartment = false;
+    };
     HomeComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         this.apartments = [];

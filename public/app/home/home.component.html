@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+<nav *ngIf="!isLogged" id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -31,6 +31,17 @@
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
+</nav>
+
+<nav *ngIf="isLogged" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Привет, {{user.username}}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>
+        </ul>
+    </div>
 </nav>
 
 <!-- Header -->
@@ -275,23 +286,41 @@
                 </div>
                 <div class="tab-pane panel " id="tab2" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h4>Всички апартаменти в етажната собственост</h4>
-                        <table class="table">
+                        <h4 *ngIf="!showApartment">Всички апартаменти в етажната собственост</h4>
+                        <h4 *ngIf="showApartment">Собственици,обитатели и/или ползватели на апартамент {{showingApartment.apartmentNumber}}</h4>
+                        <table *ngIf="!showApartment" class="table">
                             <thead>
                                 <tr>
                                     <th>Покажи</th>
                                     <th>Номер</th>
-                                    <th>Брой живущи</th>
+                                    <th>Брой живeeщи</th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="condominium">
-                                <tr *ngFor="let apartment of apartments">
-                                    <td><a href="">Click</a></td>
+                                <tr *ngFor="let apartment of apartments; let index = index">
+                                    <td style="cursor: pointer;" (click)="onApartmentTableClick(index)" id="{{apartment.apartmentNumber}}"><span style="color: blue;">Покажи</span></td>
                                     <td>{{apartment.apartmentNumber}}</td>
                                     <td>{{apartment.users.length}}</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <table *ngIf="showApartment" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Потребителско име</th>
+                                    <th>Име</th>
+                                    <th>Фамилия</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="condominium">
+                                <tr *ngFor="let user of showingApartment.users; let index = index">
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.firstName}}</td>
+                                    <td>{{user.lastName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span style="margin-left: 45%;" *ngIf="showApartment" (click)="returnApartmentPage()" class="btn btn-primary">Назад</span>
                     </form>
                 </div>
                 <div class="tab-pane panel " id="tab3">

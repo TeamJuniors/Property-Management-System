@@ -25,6 +25,8 @@ export class HomeComponent{
     newImgUrl: string;
     apartments: any;
     condominium: any;
+    showApartment: boolean = false;
+    showingApartment: any;
 
     constructor(private userService: UserService, 
                 private fb: FacebookService,
@@ -47,6 +49,13 @@ export class HomeComponent{
         this.fb.init(fbParams);
 
         this.newImgUrl = '';
+    }
+    onApartmentTableClick(index: any){
+        this.showingApartment = this.apartments[index];
+        this.showApartment = true;
+    }
+    returnApartmentPage(){
+        this.showApartment = false;
     }
     ngAfterViewInit(){
         this.apartments = [];
