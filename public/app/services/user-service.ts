@@ -30,6 +30,10 @@ export class UserService{
         return this.http.post('/api/change-image', user, this.jwt()).map((response: Response) => response.json());
     }
 
+    addTask(username: string, task: any) {
+        return this.http.post('/api/addTask', {username, task}, this.jwt()).map((response: Response) => response.json());
+    }
+
     private jwt() {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {

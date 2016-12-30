@@ -10,4 +10,5 @@ export class User{
     exitNumber: string;
     city: string;
     facebookAuthToken: string;
+    tasks: any[]
 }

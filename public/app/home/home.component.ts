@@ -20,6 +20,7 @@ declare var $:JQueryStatic;
 
 export class HomeComponent{
     isLogged: boolean = false;
+    isManager: boolean = false;
     username: string;
     user: User;
     newImgUrl: string;
@@ -54,9 +55,11 @@ export class HomeComponent{
         this.showingApartment = this.apartments[index];
         this.showApartment = true;
     }
+
     returnApartmentPage(){
         this.showApartment = false;
     }
+    
     ngAfterViewInit(){
         this.apartments = [];
             this.condominiumService.getByProperties(this.user).subscribe(
@@ -84,6 +87,7 @@ export class HomeComponent{
         if(localStorage.getItem('currentUser')){
             this.isLogged = true;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
+            this.isManager = this.user.manager;
             this.username = this.user.username;
             var activeEl = 0;
             //Setting defalt image

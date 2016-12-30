@@ -1,0 +1,90 @@
+﻿<nav *ngIf="isLogged" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a href="/home"><span class="glyphicon"></span> Начало</a></li>
+            <li *ngIf="isManager"><a href="/manager"><span class="glyphicon glyphicon-user"></span> Управление на ЕС</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div>
+    <h5>Домоуправител: {{user.firstName}} {{user.lastName}}</h5>
+</div>
+
+<button class="btn btn-info" data-toggle="modal" data-target="#myModal">Добави задължение</button>
+
+<!-- Upload Popup -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Добави задължение</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div>
+                        <label for="task-title">Заглавие на задължението:</label>
+                        <input type="text" class="form-control" id="task-title" [(ngModel)]="taskTitle">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="comment">Подробности за задължението:</label>
+                        <textarea class="form-control" rows="5" id="comment" [(ngModel)]="comment"></textarea>
+                    </div>
+                    <br>
+                    <div>Изберете дата след сегашната</div>
+                    <input type="date" name="maxDate" [(ngModel)]="maxDate"><br><br>
+                    <br>
+                    <div class="container">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Номер на апартамент</th>
+                                    <th>Брой жители</th>
+                                    <th>Избери</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let apartment of apartments; let index = index">
+                                <tr>
+                                    <td>{{apartment.apartmentNumber}}</td>
+                                    <td>{{apartment.users.length}}</td>
+                                    <td>
+                                        <input (click)="changeCheckbox(index)" type="checkbox" value="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="addTasks()" class="btn btn-success" data-dismiss="modal">Добави</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Откажи</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Заглавие на задължението</th>
+                <th>Съдържание на задължението</th>
+                <th>Краен срок на задължението</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let task of tasks; let index = index">
+            <tr>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -21,7 +21,8 @@ function usersController(data) {
                     apartmentNumber: user.apartmentNumber,
                     exitNumber: user.exitNumber,
                     city: user.city,
-                    neighborhood: user.neighborhood
+                    neighborhood: user.neighborhood,
+                    tasks: user.tasks
                 };
                 if (user.password == password) {
                     res.send(JSON.stringify(sendUser));
@@ -73,12 +74,16 @@ function usersController(data) {
             });
         },
         getUserByFacebookAuthToken(req, res) {
-            console.log("facebookAuthToken " + req.body.facebookAuthToken);
-            console.log(req.body)
-
             let facebookAuthToken = req.body.facebookAuthToken;
 
             data.findUserByFacebookAuthToken(facebookAuthToken).then((user) => {
+                res.send(user);
+            }).catch(err => {
+                res.status(404).send("Not authenricated");
+            });
+        },
+        addTask(req, res) {
+            data.addTask(req.body.username, req.body.task).then(user => {
                 res.send(user);
             }).catch(err => {
                 res.status(404).send("Not authenricated");

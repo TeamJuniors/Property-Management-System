@@ -23,6 +23,7 @@ var HomeComponent = (function () {
         this.condominiumService = condominiumService;
         this.apartmentService = apartmentService;
         this.isLogged = false;
+        this.isManager = false;
         this.showApartment = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -68,6 +69,7 @@ var HomeComponent = (function () {
         if (localStorage.getItem('currentUser')) {
             this.isLogged = true;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
+            this.isManager = this.user.manager;
             this.username = this.user.username;
             var activeEl = 0;
             //Setting defalt image

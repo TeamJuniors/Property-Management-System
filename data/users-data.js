@@ -43,7 +43,8 @@ module.exports = (models) => {
                 city: obj.city,
                 neighborhood: obj.neighborhood,
                 imgUrl: obj.imgUrl || '',
-                facebookAuthToken: obj.facebookAuthToken || ''
+                facebookAuthToken: obj.facebookAuthToken || '',
+                tasks: []
             });
 
             return Promise.resolve(user.save());
@@ -73,6 +74,25 @@ module.exports = (models) => {
                         return reject(err);
                     }
                     user.imgUrl = imgUrl;
+                    return resolve(user);
+                });
+            });
+        },
+        addTask: function(username, task) {
+            console.log(username);
+            console.log(task);
+            console.log('adding task');
+            return new Promise((resolve, reject) => {
+                User.findOneAndUpdate({
+                    username
+                }, {
+                    $push: { tasks: task }
+                }, (err, user) => {
+                    console.log(err);
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log('task added');
                     return resolve(user);
                 });
             });

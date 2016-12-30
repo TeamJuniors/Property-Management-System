@@ -20,6 +20,7 @@ import { AlertService } from './services/alert-service';
 import { UserService } from './services/user-service';
 import {ApartmentService} from './services/apartment-service'
 import {CondominiumService} from './services/condominium-service'
+import {ManagerComponent} from './manager/index'
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -39,7 +40,8 @@ import { FacebookComponent } from './facebookLogin/index';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        FacebookComponent
+        FacebookComponent,
+        ManagerComponent
     ],
     providers: [
         AuthChecker,

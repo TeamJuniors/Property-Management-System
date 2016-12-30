@@ -47,6 +47,9 @@ let userSchema = new mongoose.Schema({
     },
     facebookAuthToken: {
         type: String
+    },
+    tasks: {
+        type: Object
     }
 });
 

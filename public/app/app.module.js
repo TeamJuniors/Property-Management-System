@@ -25,10 +25,11 @@ var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
 var apartment_service_1 = require("./services/apartment-service");
 var condominium_service_1 = require("./services/condominium-service");
-var index_1 = require("./home/index");
-var index_2 = require("./login/index");
-var index_3 = require("./register/index");
-var index_4 = require("./facebookLogin/index");
+var index_1 = require("./manager/index");
+var index_2 = require("./home/index");
+var index_3 = require("./login/index");
+var index_4 = require("./register/index");
+var index_5 = require("./facebookLogin/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -45,10 +46,11 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             alert_component_1.AlertComponent,
-            index_1.HomeComponent,
-            index_2.LoginComponent,
-            index_3.RegisterComponent,
-            index_4.FacebookComponent
+            index_2.HomeComponent,
+            index_3.LoginComponent,
+            index_4.RegisterComponent,
+            index_5.FacebookComponent,
+            index_1.ManagerComponent
         ],
         providers: [
             auth_checker_component_1.AuthChecker,
