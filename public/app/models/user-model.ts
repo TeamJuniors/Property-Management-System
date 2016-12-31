@@ -9,4 +9,6 @@ export class User{
     flatNumber: string;
     exitNumber: string;
     city: string;
+    facebookAuthToken: string;
+    tasks: any[]
 }

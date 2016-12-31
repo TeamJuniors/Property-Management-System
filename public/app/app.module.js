@@ -18,6 +18,8 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 // used to create fake backend
 var http_2 = require("@angular/http");
+//Facebook api
+var ng2_facebook_sdk_js_1 = require("../node_modules/ng2-facebook-sdk/dist/ng2-facebook-sdk.js");
 var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
 var alert_component_1 = require("./directives/alert.component");
@@ -25,9 +27,14 @@ var auth_checker_component_1 = require("./autentication-checker/auth-checker.com
 var authentication_service_1 = require("./services/authentication-service");
 var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
-var index_1 = require("./home/index");
-var index_2 = require("./login/index");
-var index_3 = require("./register/index");
+var apartment_service_1 = require("./services/apartment-service");
+var condominium_service_1 = require("./services/condominium-service");
+var protocol_service_1 = require("./services/protocol-service");
+var index_1 = require("./manager/index");
+var index_2 = require("./home/index");
+var index_3 = require("./login/index");
+var index_4 = require("./register/index");
+var index_5 = require("./facebookLogin/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,12 +51,14 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             alert_component_1.AlertComponent,
-            index_1.HomeComponent,
-            index_2.LoginComponent,
-            index_3.RegisterComponent,
+            index_2.HomeComponent,
+            index_3.LoginComponent,
+            index_4.RegisterComponent,
             chat_component_1.ChatComponent,
             safe_html_pipe_1.SafeHtml,
-            chat_popup_component_1.ChatPopupComponent
+            chat_popup_component_1.ChatPopupComponent,
+            index_5.FacebookComponent,
+            index_1.ManagerComponent
         ],
         providers: [
             auth_checker_component_1.AuthChecker,
@@ -57,8 +66,12 @@ AppModule = __decorate([
             authentication_service_1.AuthenticationService,
             user_service_1.UserService,
             chat_service_1.ChatService,
+            apartment_service_1.ApartmentService,
+            condominium_service_1.CondominiumService,
+            protocol_service_1.ProtocolService,
             // providers used to create fake backend
-            http_2.BaseRequestOptions
+            http_2.BaseRequestOptions,
+            ng2_facebook_sdk_js_1.FacebookService
         ],
         bootstrap: [app_component_1.AppComponent]
     }),

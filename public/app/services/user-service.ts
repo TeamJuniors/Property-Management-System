@@ -17,6 +17,10 @@ export class UserService{
 
     }
 
+    getByFacebookAuthToken(facebookAuthToken: string){
+        return this.http.post('/api/getUserByFacebookAuthToken', {facebookAuthToken}, this.jwt()).map((response: Response) => response.json());
+    }
+
     create(user: User){
         return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
     }
@@ -24,6 +28,10 @@ export class UserService{
     changeImage(user: User, imgUrl: string) {
         user.imgUrl = imgUrl;
         return this.http.post('/api/change-image', user, this.jwt()).map((response: Response) => response.json());
+    }
+
+    addTask(username: string, task: any) {
+        return this.http.post('/api/addTask', {username, task}, this.jwt()).map((response: Response) => response.json());
     }
 
     private jwt() {

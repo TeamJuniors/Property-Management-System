@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 let propertySchema = new mongoose.Schema({
-    homeOwners: {
-        type: [Object]
+    manager: {
+        type: Object
     },
-    apartmentBuildingNumber: {
-        type: Number,
+    apartments: {
+        type: [{}],
+        default: []
+    },
+    floatNumber: {
+        type: String,
         required: true
     },
     entrance: {

@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+<nav *ngIf="!isLogged" id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -31,6 +31,18 @@
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
+</nav>
+
+<nav *ngIf="isLogged" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Привет, {{user.username}}</a></li>
+            <li *ngIf="isManager"><a href="/manager"><span class="glyphicon glyphicon-book"></span> Управление на ЕС</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>
+        </ul>
+    </div>
 </nav>
 
 <!-- Header -->
@@ -275,13 +287,123 @@
                 </div>
                 <div class="tab-pane panel " id="tab2" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h4> <br> Закон за управление на етажната собственост</h4>
-                        <h4>http://lex.bg/en/laws/ldoc/2135614516</h4>
+                        <h4 *ngIf="!showApartment">Всички апартаменти в етажната собственост</h4>
+                        <h4 *ngIf="showApartment">Собственици,обитатели и/или ползватели на апартамент {{showingApartment.apartmentNumber}}</h4>
+                        <table *ngIf="!showApartment" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Покажи</th>
+                                    <th>Номер</th>
+                                    <th>Брой живeeщи</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="condominium">
+                                <tr *ngFor="let apartment of apartments; let index = index">
+                                    <td style="cursor: pointer;" (click)="onApartmentTableClick(index)" id="{{apartment.apartmentNumber}}"><span style="color: blue;">Покажи</span></td>
+                                    <td>{{apartment.apartmentNumber}}</td>
+                                    <td>{{apartment.users.length}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table *ngIf="showApartment" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Потребителско име</th>
+                                    <th>Име</th>
+                                    <th>Фамилия</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="condominium">
+                                <tr *ngFor="let user of showingApartment.users; let index = index">
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.firstName}}</td>
+                                    <td>{{user.lastName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span style="margin-left: 45%;" *ngIf="showApartment" (click)="returnApartmentPage()" class="btn btn-primary">Назад</span>
                     </form>
                 </div>
-                <div class="tab-pane panel " id="tab3">
+                <div class="tab-pane panel " id="tab3" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h2> <br> ... Tab 3</h2>
+                        <h4 style="text-align: center">Протоколи</h4>
+
+                        <!-- BEGIN # BOOTSNIP INFO -->
+                        <div class="container">
+                            <div class="row">
+                                <table *ngIf="!showProtocol" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Покажи</th>
+                                            <th>Номер</th>
+                                            <th>Дата</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="protocols">
+                                        <tr *ngFor="let protocol of protocols; let index = index">
+                                            <td style="cursor: pointer;" (click)="onProtocolTableClick(index)" id="{{protocol._id}}"><span style="color: blue;">Покажи</span></td>
+                                            <td>{{protocol.number}}</td>
+                                            <td>{{protocol.date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h3 style="text-align: center;" *ngIf="showProtocol">Протокол с номер: {{showingProtocol.number}}</h3>
+                                <div *ngIf="showProtocol">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <h5>Издаден на {{showingProtocol.date}}</h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5>Съдържание:</h5>
+                                            <p>
+                                                {{showingProtocol.content}}
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span style="margin-left: 45%;" *ngIf="showProtocol" (click)="returnProtocolPage()" class="btn btn-primary">Назад</span>
+                                <p *ngIf="!showProtocol && user.manager" class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Нов протокол</a></p>
+                            </div>
+                        </div>
+                        <!-- END # BOOTSNIP INFO -->
+
+                        <!-- BEGIN # MODAL LOGIN -->
+                        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" align="center">
+                                        <img class="img-circle" id="img_logo" src="https://a.optnmnstr.com/users/3cbeee57fc1c/images/30f9b75891501472785456-Book-Transparent-Background.png">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                                    </div>
+
+                                    <!-- Begin # DIV Form -->
+                                    <div id="div-forms">
+
+                                        <!-- Begin # Login Form -->
+                                        <form id="login-form">
+                                            <div class="modal-body">
+                                                <label for="number">Номер:</label>
+                                                <input id="login_username" name="number" class="form-control" type="text" placeholder="Номер" required>
+                                                <label for="text">Съдържание:</label>
+                                                <textarea id="login_password" name="text" class="form-control" type="text" placeholder="Съдържание" required cols="30" rows="10"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div>
+                                                    <button (click)="createProtocol()" type="submit" class="btn btn-primary btn-lg btn-block">Запиши</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- End # DIV Form -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END # MODAL LOGIN -->
+
                     </form>
                 </div>
                 <div class="tab-pane panel fade in " id="tab4" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
@@ -315,7 +437,7 @@
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-nav" href="#tab3" data-toggle="tab">
+                        <button (click)="onProtocolsClick()" type="button" class="btn btn-nav" href="#tab3" data-toggle="tab">
                              <div class="visible">Протоколи <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></div>
                         </button>
                     </div>
@@ -354,23 +476,11 @@
                     <h3>Местоположение</h3>
                     <p>Академията на Телерик
                 </div>
-                <div class="footer-col col-md-4">
+                <div class="footer-col col-md-4" *ngIf="!isLogged">
                     <h3>Свържете се с нас</h3>
                     <ul class="list-inline">
                         <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                            <a (click)="facebookLoginClick()" class="btn-social btn-outline"><i (click)="facebookLoginClick()" class="fa fa-fw fa-facebook"></i></a>
                         </li>
                     </ul>
                 </div>

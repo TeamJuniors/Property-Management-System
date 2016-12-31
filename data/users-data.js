@@ -13,8 +13,23 @@ module.exports = (models) => {
                 });
             })
         },
-        createUser: function(obj) {
+        findUserByFacebookAuthToken: function(facebookAuthToken) {
+            return new Promise((resolve, reject) => {
+                if (!facebookAuthToken) {
+                    reject('Doesnt match');
+                }
 
+                User.findOne({ facebookAuthToken }, function(err, user) {
+                    console.log("Searching facebook user auth " + facebookAuthToken)
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(user);
+                    }
+                });
+            })
+        },
+        createUser: function(obj) {
             //console.log(`Username: ${username}, Password: ${password}`);
             const user = new User({
                 username: obj.username,
@@ -26,7 +41,10 @@ module.exports = (models) => {
                 apartmentNumber: obj.apartmentNumber,
                 exitNumber: obj.exitNumber,
                 city: obj.city,
-                neighborhood: obj.neighborhood
+                neighborhood: obj.neighborhood,
+                imgUrl: obj.imgUrl || '',
+                facebookAuthToken: obj.facebookAuthToken || '',
+                tasks: []
             });
 
             return Promise.resolve(user.save());
@@ -56,6 +74,25 @@ module.exports = (models) => {
                         return reject(err);
                     }
                     user.imgUrl = imgUrl;
+                    return resolve(user);
+                });
+            });
+        },
+        addTask: function(username, task) {
+            console.log(username);
+            console.log(task);
+            console.log('adding task');
+            return new Promise((resolve, reject) => {
+                User.findOneAndUpdate({
+                    username
+                }, {
+                    $push: { tasks: task }
+                }, (err, user) => {
+                    console.log(err);
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log('task added');
                     return resolve(user);
                 });
             });

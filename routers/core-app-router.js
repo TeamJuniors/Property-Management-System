@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 
 function getMainPage(req, res) {
+    console.log('Get')
     res.sendFile(path.resolve('public/index.html'));
 }
 
@@ -11,6 +12,8 @@ function getMainPage(req, res) {
 module.exports = function(app, data) {
     app.get('/', getMainPage);
     app.get('/home', getMainPage);
+    app.get('/login/facebook', getMainPage);
     app.get('/login', getMainPage);
     app.get('/register', getMainPage);
+    app.get('/manager', getMainPage);
 };
