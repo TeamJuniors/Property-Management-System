@@ -20,6 +20,7 @@ import { AlertService } from './services/alert-service';
 import { UserService } from './services/user-service';
 import {ApartmentService} from './services/apartment-service'
 import {CondominiumService} from './services/condominium-service'
+import {ProtocolService} from './services/protocol-service'
 import {ManagerComponent} from './manager/index'
 
 import { HomeComponent } from './home/index';
@@ -50,6 +51,7 @@ import { FacebookComponent } from './facebookLogin/index';
         UserService,
         ApartmentService,
         CondominiumService,
+        ProtocolService,
         // providers used to create fake backend
         BaseRequestOptions,
         FacebookService

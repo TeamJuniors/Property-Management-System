@@ -12,8 +12,9 @@ module.exports = function(config) {
     let User = require('../models/user-model');
     let Condominium = require('../models/condominium-model');
     let Apartment = require('../models/apartment-model');
+    let Protocol = require('../models/protocol-model');
 
-    let models = { User, Condominium, Apartment };
+    let models = { User, Condominium, Apartment, Protocol };
 
     let data = {};
 

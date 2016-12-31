@@ -25,6 +25,7 @@ var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
 var apartment_service_1 = require("./services/apartment-service");
 var condominium_service_1 = require("./services/condominium-service");
+var protocol_service_1 = require("./services/protocol-service");
 var index_1 = require("./manager/index");
 var index_2 = require("./home/index");
 var index_3 = require("./login/index");
@@ -59,6 +60,7 @@ AppModule = __decorate([
             user_service_1.UserService,
             apartment_service_1.ApartmentService,
             condominium_service_1.CondominiumService,
+            protocol_service_1.ProtocolService,
             // providers used to create fake backend
             http_2.BaseRequestOptions,
             ng2_facebook_sdk_js_1.FacebookService

@@ -6,6 +6,7 @@ module.exports = function(app, data) {
     let apiController = require('../controllers/api-controller')(data);
     let condominimumController = require('../controllers/condominimum-controller')(data);
     let apartmentController = require('../controllers/apartment-controller')(data);
+    let protocolController = require('../controllers/protocols-controller')(data);
 
     let router = express.Router();
 
@@ -25,6 +26,10 @@ module.exports = function(app, data) {
     router.post('/apartments', apartmentController.createApartment);
     router.post('/findApartments', apartmentController.findApartmentBy);
     router.post('/addUserToApartment', apartmentController.addUserToApartment);
+
+    router.get('/protocols', protocolController.getAllProtocols);
+    router.post('/protocols', protocolController.createProtocol);
+    router.post('/findProtocol', protocolController.findProtocolBy);
 
     app.use('/api', router);
 };
