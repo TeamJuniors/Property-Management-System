@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20161119044246"
+    "jquery": "registry:dt/jquery#1.10.0+20161119044246",
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   }
 }

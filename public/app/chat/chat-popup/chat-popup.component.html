@@ -1,0 +1,22 @@
+<div class="popup-box chat-popup" id="{{username}}">
+    <div class="popup-head">
+        <div class="popup-head-left">{{username}}</div>
+        <div class="popup-head-right">
+            <a (click)="closePopup()" class="popup-close">&#10005;</a>
+        </div>
+        <div style="clear: both">
+</div>
+</div>
+<div class="popup-messages">
+    <ul>
+        <li *ngFor="let message of allMessages">
+            <span id="chat-message" [class]="message.type">
+                {{message.text}}
+            </span>
+            <div class="clear"></div>
+        </li>
+    </ul>
+    <input type="text" placeholder="Type message" class="message-input" />
+    <button (click)="sendMessage()" class="message-button">Send</button>
+</div>
+</div>

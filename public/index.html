@@ -119,6 +119,239 @@
             line-height: 1.428571429;
             color: #999;
         }
+
+        /* Chat CSS */
+        /*@media only screen and (max-width : 540px) 
+            {
+                .chat-sidebar
+                {
+                    display: none !important;
+                }
+                
+                .chat-popup
+                {
+                    display: none !important;
+                }
+            }*/
+            
+            body
+            {
+                background-color: #e9eaed;
+            }
+            
+            .chat-sidebar
+            {
+                width: 200px;
+                position: fixed;
+                height: 100%;
+                right: 0px;
+                top: 0px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border: 1px solid rgba(29, 49, 91, .3);
+                overflow: scroll;
+                margin-top: 100px;
+            }
+            
+            .sidebar-name 
+            {
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 4px;
+                font-size: 12px;
+            }
+            
+            .sidebar-name span
+            {
+                padding-left: 5px;
+            }
+            
+            .sidebar-name a
+            {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .sidebar-name:hover
+            {
+                background-color:#e1e2e5;
+            }
+            
+            .sidebar-name img
+            {
+                width: 32px;
+                height: 32px;
+                vertical-align:middle;
+            }
+            
+            .popup-box
+            {
+                display: block;
+                position: fixed;
+                bottom: 0px;
+                right: 220px;
+                height: 285px;
+                background-color: rgb(237, 239, 244);
+                width: 300px;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            
+            .popup-box .popup-head
+            {
+                background-color: #6d84b4;
+                padding: 5px;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                clear: both;
+            }
+            
+            .popup-box .popup-head .popup-head-left
+            {
+                float: left;
+            }
+            
+            .popup-box .popup-head .popup-head-right
+            {
+                float: right;
+                opacity: 0.5;
+            }
+            
+            .popup-box .popup-head .popup-head-right a
+            {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .popup-box .popup-messages
+            {
+                height: 84%;
+                overflow-y: scroll;
+            }
+
+            .popup-close
+            {
+                cursor: pointer;
+            }
+
+            .message-input
+            {
+                position:absolute;
+                bottom: 0px;
+                width: 300px;
+            }
+
+            .message-button
+            {
+                position:absolute;
+                bottom: 0px;
+                width: 59px;
+                height: 26px;
+                margin-left: 240px;
+            }
+
+            #chat-message
+            {
+                display: inline-block;
+                max-width: 200px;
+                background-color: white;
+                padding: 5px;
+                border-radius: 4px;
+                position: relative;
+                border-width: 1px;
+                border-style: solid;
+                border-color: grey;
+            }
+
+            .received-message
+            {
+                float: left;
+            }
+
+            #chat-message.received-message:after
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -8.5px;
+                top: 7px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 8px solid white;
+            }
+
+            #chat-message.received-message:before
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -9px;
+                top: 7px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 8px solid black;
+            }
+
+            #chat-message.sent-message:after
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                right: -8px;
+                top: 6px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid #dbedfe;
+            }
+
+            #chat-message.sent-message:before
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                right: -9px;
+                top: 6px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid black;
+            }
+
+            #chat-message.sent-message
+            {
+                float: right;
+                background-color: #dbedfe;
+            }
+
+            .clear
+            {
+                clear: both;
+            }
+
+            .popup-messages ul
+            {
+                padding: 0px;
+                list-style-type: none;
+            }
+
+            .popup-messages ul li
+            {
+                height: auto;
+                margin-bottom: 10px;
+                clear: both;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
     </style>
     <!-- Bootstrap Core CSS -->
     <link href="./app/home/dependencies/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -184,6 +417,8 @@
 
     <!-- Theme JavaScript -->
     <script src="./app/home/dependencies/js/freelancer.min.js"></script>
+    
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>

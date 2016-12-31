@@ -4,6 +4,7 @@
   "description": "_Single-page Applications with Angular 2_",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,20 +19,24 @@
   "homepage": "https://github.com/TeamJuniors/Property-Management-System#readme",
   "dependencies": {
     "angular2-universal": "^2.1.0-rc.1",
-    "morgan": "^1.7.0",
-    "preboot": "^4.5.2",
-	"rxjs": "5.0.0-beta.12",
-    "zone.js": "^0.6.26",
-	"body-parser": "^1.15.2",
+    "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "isotope": "0.0.1-security",
     "moment": "^2.17.0",
     "mongoose": "^4.7.0",
+    "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "simple-encryptor": "^1.1.0"
+    "preboot": "^4.5.2",
+    "rxjs": "5.0.0-beta.12",
+    "simple-encryptor": "^1.1.0",
+    "socket.io": "^1.7.2",
+    "zone.js": "^0.6.26"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

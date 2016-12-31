@@ -9,20 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var ComponentsList = require("./index");
-var HomeModule = (function () {
-    function HomeModule() {
+var platform_browser_1 = require("@angular/platform-browser");
+var SafeHtml = (function () {
+    function SafeHtml(sanitizer) {
+        this.sanitizer = sanitizer;
     }
-    return HomeModule;
+    SafeHtml.prototype.transform = function (html) {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    };
+    return SafeHtml;
 }());
-HomeModule = __decorate([
-    core_1.NgModule({
-        imports: [common_1.CommonModule],
-        declarations: [ComponentsList.HomeComponent],
-        exports: [ComponentsList.HomeComponent]
-    }),
-    __metadata("design:paramtypes", [])
-], HomeModule);
-exports.HomeModule = HomeModule;
-//# sourceMappingURL=home.module.js.map
+SafeHtml = __decorate([
+    core_1.Pipe({ name: 'safeHtml' }),
+    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer])
+], SafeHtml);
+exports.SafeHtml = SafeHtml;
+//# sourceMappingURL=safe-html.pipe.js.map

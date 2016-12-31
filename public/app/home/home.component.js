@@ -8,11 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var chat_service_1 = require("../services/chat-service");
 var core_1 = require("@angular/core");
 var user_service_1 = require("../services/user-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService) {
+    function HomeComponent(userService, chatService) {
         this.userService = userService;
+        this.chatService = chatService;
         this.isLogged = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -74,8 +76,10 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.logout = function () {
         console.log("Test");
+        var username = JSON.parse(localStorage.getItem('currentUser')).username;
         localStorage.removeItem('currentUser');
         this.isLogged = false;
+        this.chatService.logoutUser(username);
     };
     return HomeComponent;
 }());
@@ -85,7 +89,7 @@ HomeComponent = __decorate([
         templateUrl: 'app/home/home.component.html',
         styles: ["\n        .pointer-mouse {\n            cursor: pointer;\n        }\n    "]
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, chat_service_1.ChatService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

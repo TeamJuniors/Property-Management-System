@@ -1,0 +1,9 @@
+<div class="chat-sidebar">
+    <div *ngFor="let onlineUser of onlineUsers" class="sidebar-name">
+        <a *ngIf="currentUsername != onlineUser.username" (click)="registerPopup(onlineUser.username)">
+            <img width="30" height="30" src="{{onlineUser.imgUrl}}" />
+            <span>{{onlineUser.username}}</span>
+        </a>
+    </div>
+</div>
+<chat-box *ngIf="showPopup"></chat-box>

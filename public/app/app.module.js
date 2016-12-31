@@ -8,6 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var chat_popup_component_1 = require("./chat/chat-popup/chat-popup.component");
+var safe_html_pipe_1 = require("./pipes/safe-html.pipe");
+var chat_service_1 = require("./services/chat-service");
+var chat_component_1 = require("./chat/chat.component");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
@@ -42,13 +46,17 @@ AppModule = __decorate([
             alert_component_1.AlertComponent,
             index_1.HomeComponent,
             index_2.LoginComponent,
-            index_3.RegisterComponent
+            index_3.RegisterComponent,
+            chat_component_1.ChatComponent,
+            safe_html_pipe_1.SafeHtml,
+            chat_popup_component_1.ChatPopupComponent
         ],
         providers: [
             auth_checker_component_1.AuthChecker,
             alert_service_1.AlertService,
             authentication_service_1.AuthenticationService,
             user_service_1.UserService,
+            chat_service_1.ChatService,
             // providers used to create fake backend
             http_2.BaseRequestOptions
         ],

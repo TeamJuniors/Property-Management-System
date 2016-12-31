@@ -5,12 +5,13 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
-module.exports = function(config) {
+module.exports = function (config) {
     mongoose.Promise = global.Promise;
     mongoose.connect(config.connectionString);
 
     let User = require('../models/user-model');
-    let models = { User };
+    let Chat = require('../models/chat-model');
+    let models = { User, Chat };
 
     let data = {};
 

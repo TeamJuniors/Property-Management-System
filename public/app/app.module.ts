@@ -1,4 +1,8 @@
-﻿import { NgModule }      from '@angular/core';
+﻿import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
+import { SafeHtml } from './pipes/safe-html.pipe';
+import { ChatService } from './services/chat-service';
+import { ChatComponent } from './chat/chat.component';
+import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -32,13 +36,17 @@ import { RegisterComponent } from './register/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        ChatComponent,
+        SafeHtml,
+        ChatPopupComponent
     ],
     providers: [
         AuthChecker,
         AlertService,
         AuthenticationService,
         UserService,
+        ChatService,
 
         // providers used to create fake backend
         BaseRequestOptions
