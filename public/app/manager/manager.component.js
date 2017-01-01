@@ -120,12 +120,15 @@ var ManagerComponent = (function () {
         for (var i = 0; i < this.apartments.length; i += 1) {
             if (this.checkboxes[i]) {
                 for (var j = 0; j < this.apartments[i].users.length; j += 1) {
+                    console.log(this.apartments[i].users[j].username);
+                    console.log(task);
                     this.userService.addTask(this.apartments[i].users[j].username, task).subscribe(function (data) {
                         if (data.username === _this.user.username) {
                             _this.user.tasks.push(task);
                         }
                     }, function (err) {
                         console.log("Error in addtask");
+                        console.log(err);
                     });
                 }
             }

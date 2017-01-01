@@ -79,8 +79,6 @@ module.exports = (models) => {
             });
         },
         addTask: function(username, task) {
-            console.log(username);
-            console.log(task);
             console.log('adding task');
             return new Promise((resolve, reject) => {
                 User.findOneAndUpdate({
@@ -88,18 +86,17 @@ module.exports = (models) => {
                 }, {
                     $push: { tasks: task }
                 }, (err, user) => {
-                    console.log(err);
                     if (err) {
+                        console.log('task added failed');
                         return reject(err);
+                    } else {
+                        console.log('task added');
+                        return resolve(user);
                     }
-                    console.log('task added');
-                    return resolve(user);
                 });
             });
         },
         removeTask: function(username, task) {
-            console.log(username);
-            console.log(task);
             console.log('removing task');
             return new Promise((resolve, reject) => {
                 User.findOneAndUpdate({

@@ -144,6 +144,8 @@ export class ManagerComponent {
         for(let i = 0; i < this.apartments.length; i+=1) {
             if(this.checkboxes[i]) {
                 for(let j = 0; j < this.apartments[i].users.length; j+=1) {
+                    console.log(this.apartments[i].users[j].username);
+                    console.log(task);
                     this.userService.addTask(this.apartments[i].users[j].username, task).subscribe(data => {
                         if(data.username === this.user.username) {
                             this.user.tasks.push(task);
@@ -151,6 +153,7 @@ export class ManagerComponent {
                     },
                     err => {
                         console.log("Error in addtask");
+                        console.log(err);
                     });
                 }
             }

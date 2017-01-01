@@ -84,9 +84,12 @@ function usersController(data) {
         },
         addTask(req, res) {
             data.addTask(req.body.username, req.body.task).then(user => {
-                user.tasks.push(task);
+                user.tasks.push(req.body.task);
+                console.log('res send task')
                 res.send(user);
             }).catch(err => {
+                console.log('error')
+                console.log(err);
                 res.status(404).send("Invalid task");
             });
         }
