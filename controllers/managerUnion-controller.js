@@ -17,10 +17,40 @@ function managerUnionController(data) {
             console.log("Create managerUnion");
             console.log(req.body.managerUnion);
             let managerUnion = req.body.managerUnion;
-            data.createManagerUnion(managerUnion).then(m => {
-                res.send(m);
+            data.getAllUsers().then(users => {
+                let manager;
+                for (let i = 0; i < users.length; i++) {
+                    console.log("User: " + i);
+                    console.log(users[i]);
+                    if (users[i].flatNumber === managerUnion.floatNumber &&
+                        users[i].exitNumber === managerUnion.entrance &&
+                        users[i].city === managerUnion.city &&
+                        users[i].neighborhood === managerUnion.neighborhood &&
+                        users[i].isManager === true) {
+                        manager = users[i];
+                    }
+                }
+                console.log("Manager");
+                console.log(manager);
+                let arr = [];
+                let p = {
+                    cashier: {
+                        username: managerUnion.cashier.username
+                    },
+                    manager: manager,
+                    members: arr,
+                    floatNumber: managerUnion.floatNumber,
+                    entrance: managerUnion.entrance,
+                    city: managerUnion.city,
+                    neighborhood: managerUnion.neighborhood
+                };
+                data.createManagerUnion(p).then(m => {
+                    res.send(m);
+                }).catch(err => {
+                    res.status(500).send("Cannot create managerUnion");
+                });
             }).catch(err => {
-                res.status(500).send("Cannot create managerUnion");
+                res.status(500).send("Cannot find users");
             });
         },
         getAllManagerUnions(req, res) {

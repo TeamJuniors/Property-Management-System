@@ -88,39 +88,68 @@ var HomeComponent = (function () {
     HomeComponent.prototype.changeCashier = function () {
         var _this = this;
         var name = $('#cashierName').val();
-        var prop = {
-            floatNumber: this.user.flatNumber,
-            entrance: this.user.exitNumber,
-            city: this.user.city,
-            neighborhood: this.user.neighborhood
-        };
-        var cashier = {
-            username: name
-        };
-        this.managerUnionService.changeCashierName(prop, cashier).subscribe(function (data) {
-            _this.union = data;
-        }, function (err) {
-            console.log("Error change cashier");
-        });
+        var isAddedThisUser = false;
+        if (this.union.manager.username === name) {
+            isAddedThisUser = true;
+        }
+        if (this.union.cashier.username === name) {
+            isAddedThisUser = true;
+        }
+        for (var i = 0; i < this.union.members.length; i++) {
+            if (this.union.members[i].username === name) {
+                isAddedThisUser = true;
+            }
+        }
+        if (!isAddedThisUser) {
+            var prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            var cashier = {
+                username: name
+            };
+            this.managerUnionService.changeCashierName(prop, cashier).subscribe(function (data) {
+                _this.union = data;
+            }, function (err) {
+                console.log("Error change cashier");
+            });
+        }
     };
     HomeComponent.prototype.addMemberToManagerUnion = function () {
         var _this = this;
         var name = $('#memberName').val();
-        var prop = {
-            floatNumber: this.user.flatNumber,
-            entrance: this.user.exitNumber,
-            city: this.user.city,
-            neighborhood: this.user.neighborhood
-        };
-        var member = {
-            username: name
-        };
-        this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(function (data) {
-            console.log("Successfully added memeber to managerUnion");
-            _this.union = data;
-        }, function (err) {
-            console.log("Cannot add manager to union");
-        });
+        var isAddedThisUser = false;
+        if (this.union.manager.username === name) {
+            isAddedThisUser = true;
+        }
+        if (this.union.cashier.username === name) {
+            isAddedThisUser = true;
+        }
+        for (var i = 0; i < this.union.members.length; i++) {
+            console.log(this.union.members[i]);
+            if (this.union.members[i].username === name) {
+                isAddedThisUser = true;
+            }
+        }
+        if (!isAddedThisUser) {
+            var prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            var member = {
+                username: name
+            };
+            this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(function (data) {
+                console.log("Successfully added memeber to managerUnion");
+                _this.union = data;
+            }, function (err) {
+                console.log("Cannot add manager to union");
+            });
+        }
     };
     HomeComponent.prototype.onManagerUnionClick = function () {
         var _this = this;
