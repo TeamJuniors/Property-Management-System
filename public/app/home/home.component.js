@@ -16,8 +16,9 @@ var user_service_1 = require("../services/user-service");
 var condominium_service_1 = require("../services/condominium-service");
 var apartment_service_1 = require("../services/apartment-service");
 var protocol_service_1 = require("../services/protocol-service");
+var managerUnion_service_1 = require("../services/managerUnion-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService) {
+    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService) {
         this.userService = userService;
         this.chatService = chatService;
         this.fb = fb;
@@ -26,10 +27,12 @@ var HomeComponent = (function () {
         this.condominiumService = condominiumService;
         this.apartmentService = apartmentService;
         this.protocolService = protocolService;
+        this.managerUnionService = managerUnionService;
         this.isLogged = false;
         this.isManager = false;
         this.showApartment = false;
         this.showProtocol = false;
+        this.showUnion = false;
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
         }
@@ -63,6 +66,85 @@ var HomeComponent = (function () {
         }, function (err) {
             console.log("Cannot get protocols");
         });
+    };
+    HomeComponent.prototype.onControlUnionClick = function () {
+        this.showUnion = true;
+        this.unionType = "control";
+    };
+    HomeComponent.prototype.changeCashier = function () {
+        var _this = this;
+        var name = $('#cashierName').val();
+        var prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        var cashier = {
+            username: name
+        };
+        this.managerUnionService.changeCashierName(prop, cashier).subscribe(function (data) {
+            _this.union = data;
+        }, function (err) {
+            console.log("Error change cashier");
+        });
+    };
+    HomeComponent.prototype.addMemberToManagerUnion = function () {
+        var _this = this;
+        var name = $('#memberName').val();
+        var prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        var member = {
+            username: name
+        };
+        this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(function (data) {
+            console.log("Successfully added memeber to managerUnion");
+            _this.union = data;
+        }, function (err) {
+            console.log("Cannot add manager to union");
+        });
+    };
+    HomeComponent.prototype.onManagerUnionClick = function () {
+        var _this = this;
+        this.showUnion = true;
+        this.unionType = "manager";
+        var prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        this.managerUnionService.getByProperties(prop).subscribe(function (data) {
+            _this.union = data;
+        }, function (err) {
+            var arr = [];
+            var p = {
+                cashier: {
+                    username: 'Неизвестен'
+                },
+                manager: _this.user,
+                members: arr,
+                floatNumber: _this.user.flatNumber,
+                entrance: _this.user.exitNumber,
+                city: _this.user.city,
+                neighborhood: _this.user.neighborhood
+            };
+            console.log("Error get managerUnion");
+            _this.managerUnionService.create(p).subscribe(function (data) {
+                console.log("Created manager union");
+                _this.union = data;
+            }, function (err) {
+                console.log("Cannot create manager union");
+            });
+        });
+    };
+    HomeComponent.prototype.returnUnionPage = function () {
+        console.log("Exit union.");
+        this.showUnion = false;
     };
     HomeComponent.prototype.returnApartmentPage = function () {
         this.showApartment = false;
@@ -213,7 +295,8 @@ HomeComponent = __decorate([
         router_1.Router,
         condominium_service_1.CondominiumService,
         apartment_service_1.ApartmentService,
-        protocol_service_1.ProtocolService])
+        protocol_service_1.ProtocolService,
+        managerUnion_service_1.ManagerUnionService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 function setPopup() {

@@ -25,8 +25,9 @@ import { UserService } from './services/user-service';
 import {ApartmentService} from './services/apartment-service'
 import {CondominiumService} from './services/condominium-service'
 import {ProtocolService} from './services/protocol-service'
-import {ManagerComponent} from './manager/index'
+import {ManagerUnionService} from './services/managerUnion-service'
 
+import {ManagerComponent} from './manager/index'
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
@@ -57,7 +58,8 @@ import { FacebookComponent } from './facebookLogin/index';
         AuthenticationService,
         UserService,
         ChatService,
-
+        ManagerUnionService,
+        
         ApartmentService,
         CondominiumService,
         ProtocolService,

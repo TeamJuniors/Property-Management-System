@@ -7,6 +7,7 @@ module.exports = function(app, data) {
     let condominimumController = require('../controllers/condominimum-controller')(data);
     let apartmentController = require('../controllers/apartment-controller')(data);
     let protocolController = require('../controllers/protocols-controller')(data);
+    let managerUnionController = require('../controllers/managerUnion-controller')(data);
 
     let router = express.Router();
 
@@ -30,6 +31,12 @@ module.exports = function(app, data) {
     router.get('/protocols', protocolController.getAllProtocols);
     router.post('/protocols', protocolController.createProtocol);
     router.post('/findProtocol', protocolController.findProtocolBy);
+
+    router.get('/managerUnions', managerUnionController.getAllManagerUnions);
+    router.post('/managerUnions', managerUnionController.createManagerUnion);
+    router.post('/findManagerUnion', managerUnionController.findManagerUnionBy);
+    router.post('/addMemberToManagerUnion', managerUnionController.addMemberToManagerUnion);
+    router.post('/changeCashierName', managerUnionController.changeCashierName);
 
     app.use('/api', router);
 };

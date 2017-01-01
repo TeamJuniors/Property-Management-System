@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
-module.exports = function (config) {
+module.exports = function(config) {
     mongoose.Promise = global.Promise;
     mongoose.connect(config.connectionString);
 
@@ -14,8 +14,10 @@ module.exports = function (config) {
     let Condominium = require('../models/condominium-model');
     let Apartment = require('../models/apartment-model');
     let Protocol = require('../models/protocol-model');
+    let ManagerUnion = require('../models/managerUnion-model');
+    let ControlUnion = require('../models/controlUnion-model');
 
-    let models = { User, Condominium, Apartment, Protocol, Chat };
+    let models = { User, Condominium, Apartment, Protocol, Chat, ManagerUnion, ControlUnion };
 
     let data = {};
 

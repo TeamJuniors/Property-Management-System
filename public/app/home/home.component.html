@@ -413,9 +413,112 @@
                         <h6 style="text-align: center">Можете да намерите закона <a href="http://lex.bg/en/laws/ldoc/2135614516">тук</a></h6>
                     </form>
                 </div>
-                <div class="tab-pane panel fade in " id="tab5">
+                <div class="tab-pane panel fade in " id="tab5" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h2> <br> ... Tab 5</h2>
+                        <h2 *ngIf="!showUnion" style="text-align: center;">Съвети на етажната собственост</h2>
+                        <div *ngIf="!showUnion" style="margin-top: 25%;" class="row">
+                            <div class="col-md-9 col-md-offset-3">
+                                <button (click)="onManagerUnionClick()" type="button" class="btn btn-info btn-lg" id="managerUnion">Управителен съвет</button>
+                                <button (click)="onControlUnionClick()" type="button" class="btn btn-info btn-lg" id="controlUnion">Контролен съвет</button>
+                            </div>
+                        </div>
+                        <h3 *ngIf="showUnion && unionType=='manager'" style="text-align: center;">Управителен съвет</h3>
+                        <h3 *ngIf="showUnion && unionType=='control'" style="text-align: center;">Контролен съвет</h3>
+                        <ul *ngIf="showUnion && unionType=='manager'" class="pre-scrollable list-group col-md-8 col-md-offset-2" style="width: 70%;">
+                            <li class="list-group-item">
+                                Управител:
+                                <ul class="list-group">
+                                    <h5 *ngIf="union && union.manager">Име: {{union.manager.username}}</h5>
+                                    <h5 *ngIf="union && union.manager">Фамилия: {{union.manager.firstName}}</h5>
+                                    <h5 *ngIf="union && union.manager">Потребителско име: {{union.manager.lastName}}</h5>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                Касиер:
+                                <ul class="list-group">
+                                    <h5 *ngIf="union && union.cashier && union.cashier.firstName">Име: {{union.cashier.firstName}}</h5>
+                                    <h5 *ngIf="union && union.cashier && union.cashier.lastName">Фамилия: {{union.cashier.lastName}}</h5>
+                                    <h5 *ngIf="union && union.cashier">Потребителско име: {{union.cashier.username}}</h5>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    Членове:
+                                    <div *ngIf="union && union.members">
+                                        <li *ngFor="let m of union.members; let index = index" class="list-group-item">
+                                            <h5>Име: {{m.firstName}}</h5>
+                                            <h5>Фамилия: {{m.lastName}}</h5>
+                                            <h5>Потребителско име: {{m.username}}</h5>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div *ngIf="showUnion && unionType=='manager'" style="margin-top: 25%;" class="row">
+                            <div class="col-md-9 col-md-offset-3">
+
+                                <div id="enquirypopup" class="modal fade in" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content row">
+                                            <div class="modal-header custom-modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                                <h4 class="modal-title">Редактиране</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form name="info_form" class="form-inline" action="#" method="post">
+                                                    <div class="form-group col-sm-12">
+                                                        <label for="cashierName">Касиер:</label>
+                                                        <input type="text" class="form-control" name="cashierName" id="cashierName" placeholder="Потребителско име">
+                                                    </div>
+                                                    <span (click)="changeCashier()" style="margin-left: 45%;" class="btn btn-primary">Смени</span>
+                                                    <h5 style="text-align: center">Добави членове</h5>
+                                                    <ul class="pre-scrollable list-group">
+                                                        <li class="list-group-item">
+                                                            Касиер:
+                                                            <ul class="list-group">
+                                                                <li *ngIf="union && union.cashier" class="list-group-item">{{union.cashier.username}}</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <ul class="list-group">
+                                                                Членове:
+                                                                <div *ngIf="union && union.members">
+                                                                    <li *ngFor="let m of union.members; let index = index" class="list-group-item">
+                                                                        {{m.username}}
+                                                                    </li>
+                                                                </div>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                    <hr>
+                                                    <div class="form-group col-sm-12">
+                                                        <label for="memberName">Член:</label>
+                                                        <input type="text" class="form-control" name="memberName" id="memberName" placeholder="Потребителско име">
+                                                    </div>
+                                                    <span (click)="addMemberToManagerUnion()" style="margin-left: 45%;" class="btn btn-primary">Добави</span>
+
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <button *ngIf="user.manager" type="button" style="margin-left: 20%" class="btn btn-info btn-lg" data-toggle="modal" data-target="#enquirypopup">Редактирай</button>
+                            </div>
+                        </div>
+                        <div *ngIf="showUnion && unionType=='control'" style="margin-top: 25%;" class="row">
+                            <div class="col-md-9 col-md-offset-3">
+                                <h3>control</h3>
+                            </div>
+                        </div>
+                        <span style="margin-left: 45%;" *ngIf="showUnion" (click)="returnUnionPage()" class="btn btn-primary">Назад</span>
                     </form>
                 </div>
                 <div class="tab-pane panel fade in " id="tab6">

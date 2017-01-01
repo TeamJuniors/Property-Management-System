@@ -7,6 +7,7 @@ import { UserService } from '../services/user-service';
 import { CondominiumService } from '../services/condominium-service'
 import { ApartmentService } from '../services/apartment-service'
 import { ProtocolService } from '../services/protocol-service'
+import {ManagerUnionService} from '../services/managerUnion-service'
 
 declare var $: JQueryStatic;
 
@@ -33,6 +34,9 @@ export class HomeComponent {
     protocols: any[];
     showProtocol: boolean = false;
     showingProtocol: any;
+    showUnion: boolean = false;
+    unionType: string;
+    union: any;
 
     constructor(private userService: UserService,
         private chatService: ChatService,
@@ -41,7 +45,8 @@ export class HomeComponent {
         private router: Router,
         private condominiumService: CondominiumService,
         private apartmentService: ApartmentService,
-        private protocolService: ProtocolService) {
+        private protocolService: ProtocolService,
+        private managerUnionService: ManagerUnionService) {
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
         } else {
@@ -78,6 +83,95 @@ export class HomeComponent {
                 console.log("Cannot get protocols");
             }
         );
+    }
+    onControlUnionClick(){
+        this.showUnion = true;
+        this.unionType = "control";
+    }
+    changeCashier(){
+        let name = $('#cashierName').val();
+         let prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        let cashier = {
+            username: name
+        };
+        this.managerUnionService.changeCashierName(prop, cashier).subscribe(
+            data => {
+                this.union = data;
+            },
+            err => {
+                console.log("Error change cashier");
+            }
+        );
+    }
+    addMemberToManagerUnion(){
+        let name = $('#memberName').val();
+        let prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        let member = {
+            username: name
+        };
+        this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(
+            data => {
+                console.log("Successfully added memeber to managerUnion");
+                this.union = data;
+            },
+            err => {
+                console.log("Cannot add manager to union");
+            }
+        );
+    }
+    onManagerUnionClick(){
+        this.showUnion = true;
+        this.unionType = "manager";
+        let prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+
+        this.managerUnionService.getByProperties(prop).subscribe(
+            data => {
+                this.union = data;
+            },
+            err => {
+                let arr: any = [];
+                let p = {
+                    cashier: {
+                        username: 'Неизвестен'
+                    },
+                    manager: this.user,
+                    members: arr,
+                    floatNumber: this.user.flatNumber,
+                    entrance: this.user.exitNumber,
+                    city: this.user.city,
+                    neighborhood: this.user.neighborhood
+                };
+                console.log("Error get managerUnion");
+                this.managerUnionService.create(p).subscribe(
+                    data => {
+                        console.log("Created manager union");
+                        this.union = data;
+                    },
+                    err => {
+                        console.log("Cannot create manager union");
+                    }
+                );
+            }
+        );
+    }
+    returnUnionPage(){
+        console.log("Exit union.");
+        this.showUnion = false;
     }
     returnApartmentPage() {
         this.showApartment = false;

@@ -30,6 +30,7 @@ var user_service_1 = require("./services/user-service");
 var apartment_service_1 = require("./services/apartment-service");
 var condominium_service_1 = require("./services/condominium-service");
 var protocol_service_1 = require("./services/protocol-service");
+var managerUnion_service_1 = require("./services/managerUnion-service");
 var index_1 = require("./manager/index");
 var index_2 = require("./home/index");
 var index_3 = require("./login/index");
@@ -66,6 +67,7 @@ AppModule = __decorate([
             authentication_service_1.AuthenticationService,
             user_service_1.UserService,
             chat_service_1.ChatService,
+            managerUnion_service_1.ManagerUnionService,
             apartment_service_1.ApartmentService,
             condominium_service_1.CondominiumService,
             protocol_service_1.ProtocolService,
