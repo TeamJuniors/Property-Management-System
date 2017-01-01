@@ -63,6 +63,7 @@ var ChatService = (function () {
                     }
                 }
                 _this.allMessages.next({ allMessages: allMessages });
+                $('.popup-messages').animate({ scrollTop: $('body').height() }, 'slow');
             }
         });
     };
@@ -83,6 +84,7 @@ var ChatService = (function () {
         this.popupUsername.next({ popupUsername: username });
         $('.sent-message.received-message').html('');
         this.getMessages(this.getCurrentUser().username, username);
+        $('.popup-messages').animate({ scrollTop: $('body').height() }, 'slow');
     };
     ChatService.prototype.getMessages = function (firstUser, secondUser) {
         this.socket.emit('get-messages', firstUser, secondUser);

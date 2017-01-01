@@ -76,6 +76,7 @@ export class ChatService {
                 }
 
                 this.allMessages.next({ allMessages: allMessages });
+                $('.popup-messages').animate({ scrollTop: $('body').height() }, 'slow');
             }
         });
     }
@@ -100,6 +101,7 @@ export class ChatService {
         this.popupUsername.next({ popupUsername: username });
         $('.sent-message.received-message').html('');
         this.getMessages(this.getCurrentUser().username, username);
+        $('.popup-messages').animate({ scrollTop: $('body').height() }, 'slow');
     }
 
     getMessages(firstUser: string, secondUser: string) {
