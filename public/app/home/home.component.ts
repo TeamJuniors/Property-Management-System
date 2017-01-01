@@ -105,44 +105,80 @@ export class HomeComponent {
     }
     changeCashier(){
         let name = $('#cashierName').val();
-         let prop = {
-            floatNumber: this.user.flatNumber,
-            entrance: this.user.exitNumber,
-            city: this.user.city,
-            neighborhood: this.user.neighborhood
-        };
-        let cashier = {
-            username: name
-        };
-        this.managerUnionService.changeCashierName(prop, cashier).subscribe(
-            data => {
-                this.union = data;
-            },
-            err => {
-                console.log("Error change cashier");
+        let isAddedThisUser:any = false;
+
+        if(this.union.manager.username === name){
+            isAddedThisUser = true;
+        }
+
+        if(this.union.cashier.username === name){
+            isAddedThisUser = true;
+        }
+
+        for(let i = 0; i < this.union.members.length;i++){
+            if(this.union.members[i].username === name){
+                isAddedThisUser = true;
             }
-        );
+        }
+        if(!isAddedThisUser){
+            let prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            let cashier = {
+                username: name
+            };
+            this.managerUnionService.changeCashierName(prop, cashier).subscribe(
+                data => {
+                    this.union = data;
+                },
+                err => {
+                    console.log("Error change cashier");
+                }
+            );
+        }
     }
     addMemberToManagerUnion(){
         let name = $('#memberName').val();
-        let prop = {
-            floatNumber: this.user.flatNumber,
-            entrance: this.user.exitNumber,
-            city: this.user.city,
-            neighborhood: this.user.neighborhood
-        };
-        let member = {
-            username: name
-        };
-        this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(
-            data => {
-                console.log("Successfully added memeber to managerUnion");
-                this.union = data;
-            },
-            err => {
-                console.log("Cannot add manager to union");
+        let isAddedThisUser:any = false;
+
+        if(this.union.manager.username === name){
+            isAddedThisUser = true;
+        }
+
+        if(this.union.cashier.username === name){
+            isAddedThisUser = true;
+        }
+
+        for(let i = 0; i < this.union.members.length;i++){
+            console.log(this.union.members[i]);
+            if(this.union.members[i].username === name){
+                isAddedThisUser = true;
             }
-        );
+        }
+
+        if(!isAddedThisUser){
+            let prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            let member = {
+                username: name
+            };
+            this.managerUnionService.addMemberToManagerUnion(prop, member).subscribe(
+                data => {
+                    console.log("Successfully added memeber to managerUnion");
+                    this.union = data;
+                },
+                err => {
+                    console.log("Cannot add manager to union");
+                }
+            );
+        }
     }
     onManagerUnionClick(){
         this.showUnion = true;
