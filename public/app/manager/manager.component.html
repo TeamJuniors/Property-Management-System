@@ -80,7 +80,7 @@
                 <th>Краен срок на задължението</th>
             </tr>
         </thead>
-        <tbody *ngFor="let task of tasks; let index = index">
+        <tbody *ngFor="let task of (tasks | dateSort); let index = index">
             <tr>
                 <td>{{task.title}}</td>
                 <td>{{task.description}}</td>

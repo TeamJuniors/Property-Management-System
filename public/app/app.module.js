@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var chat_popup_component_1 = require("./chat/chat-popup/chat-popup.component");
 var safe_html_pipe_1 = require("./pipes/safe-html.pipe");
+var date_sorting_pipe_1 = require("./pipes/date-sorting.pipe");
+var uppercase_pipe_1 = require("./pipes/uppercase.pipe");
 var chat_service_1 = require("./services/chat-service");
 var chat_component_1 = require("./chat/chat.component");
 var core_1 = require("@angular/core");
@@ -57,9 +59,11 @@ AppModule = __decorate([
             index_4.RegisterComponent,
             chat_component_1.ChatComponent,
             safe_html_pipe_1.SafeHtml,
+            date_sorting_pipe_1.DateSort,
             chat_popup_component_1.ChatPopupComponent,
             index_5.FacebookComponent,
-            index_1.ManagerComponent
+            index_1.ManagerComponent,
+            uppercase_pipe_1.UppercasePipe
         ],
         providers: [
             auth_checker_component_1.AuthChecker,

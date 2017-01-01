@@ -1,5 +1,7 @@
 ﻿import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
 import { SafeHtml } from './pipes/safe-html.pipe';
+import { DateSort } from './pipes/date-sorting.pipe';
+import { UppercasePipe } from './pipes/uppercase.pipe';
 import { ChatService } from './services/chat-service';
 import { ChatComponent } from './chat/chat.component';
 import { NgModule }      from '@angular/core';
@@ -48,9 +50,11 @@ import { FacebookComponent } from './facebookLogin/index';
         RegisterComponent,
         ChatComponent,
         SafeHtml,
+        DateSort,
         ChatPopupComponent,
         FacebookComponent,
-        ManagerComponent
+        ManagerComponent,
+        UppercasePipe
     ],
     providers: [
         AuthChecker,
