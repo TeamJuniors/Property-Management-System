@@ -19,7 +19,7 @@ function controlUnionController(data) {
             let controlUnion = req.body.controlUnion;
             let arr = [];
             let c = {
-                leader: leader,
+                leader: controlUnion.leader,
                 members: arr,
                 floatNumber: controlUnion.floatNumber,
                 entrance: controlUnion.entrance,

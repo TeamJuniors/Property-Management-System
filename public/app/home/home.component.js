@@ -19,8 +19,9 @@ var protocol_service_1 = require("../services/protocol-service");
 var managerUnion_service_1 = require("../services/managerUnion-service");
 var authentication_service_1 = require("../services/authentication-service");
 var alert_service_1 = require("../services/alert-service");
+var controlUnion_service_1 = require("../services/controlUnion-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService, authenticationService, alertService) {
+    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService, authenticationService, alertService, controlUnionService) {
         var _this = this;
         this.userService = userService;
         this.chatService = chatService;
@@ -33,6 +34,7 @@ var HomeComponent = (function () {
         this.managerUnionService = managerUnionService;
         this.authenticationService = authenticationService;
         this.alertService = alertService;
+        this.controlUnionService = controlUnionService;
         this.isLogged = false;
         this.isManager = false;
         this.showApartment = false;
@@ -62,6 +64,68 @@ var HomeComponent = (function () {
         this.fb.init(fbParams);
         this.newImgUrl = '';
     }
+    HomeComponent.prototype.addMemberToControlUnion = function () {
+        var _this = this;
+        console.log("Add member to control union");
+        var name = $('#memberControlName').val();
+        var isAddedThisUser = false;
+        if (this.union.leader.username === name) {
+            isAddedThisUser = true;
+        }
+        for (var i = 0; i < this.union.members.length; i++) {
+            console.log(this.union.members[i]);
+            if (this.union.members[i].username === name) {
+                isAddedThisUser = true;
+            }
+        }
+        if (!isAddedThisUser) {
+            console.log("Search");
+            var prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            var member = {
+                username: name
+            };
+            this.controlUnionService.addMemberToControlUnion(prop, member).subscribe(function (data) {
+                console.log("Successfully added memeber to controlUnion");
+                _this.union = data;
+            }, function (err) {
+                console.log("Cannot add control to union");
+            });
+        }
+    };
+    HomeComponent.prototype.changeLeader = function () {
+        var _this = this;
+        var name = $('#leaderName').val();
+        var isAddedThisUser = false;
+        if (this.union.leader.username === name) {
+            isAddedThisUser = true;
+        }
+        for (var i = 0; i < this.union.members.length; i++) {
+            if (this.union.members[i].username === name) {
+                isAddedThisUser = true;
+            }
+        }
+        if (!isAddedThisUser) {
+            var prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            var leader = {
+                username: name
+            };
+            this.controlUnionService.changeLeaderName(prop, leader).subscribe(function (data) {
+                _this.union = data;
+            }, function (err) {
+                console.log("Error change leader");
+            });
+        }
+    };
     HomeComponent.prototype.onApartmentTableClick = function (index) {
         console.log("Apartment click");
         this.showingApartment = this.apartments[index];
@@ -82,8 +146,40 @@ var HomeComponent = (function () {
         });
     };
     HomeComponent.prototype.onControlUnionClick = function () {
+        var _this = this;
         this.showUnion = true;
         this.unionType = "control";
+        var prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+        this.controlUnionService.getByProperties(prop).subscribe(function (data) {
+            console.log("Get control union");
+            console.log(data);
+            _this.union = data;
+        }, function (err) {
+            var arr = [];
+            var p = {
+                leader: {
+                    username: 'Неизвестен'
+                },
+                members: arr,
+                floatNumber: _this.user.flatNumber,
+                entrance: _this.user.exitNumber,
+                city: _this.user.city,
+                neighborhood: _this.user.neighborhood
+            };
+            console.log("Error get ControlUnion");
+            _this.controlUnionService.create(p).subscribe(function (data) {
+                console.log("Created control union");
+                console.log(data);
+                _this.union = data;
+            }, function (err) {
+                console.log("Cannot create control union");
+            });
+        });
     };
     HomeComponent.prototype.changeCashier = function () {
         var _this = this;
@@ -341,7 +437,8 @@ HomeComponent = __decorate([
         protocol_service_1.ProtocolService,
         managerUnion_service_1.ManagerUnionService,
         authentication_service_1.AuthenticationService,
-        alert_service_1.AlertService])
+        alert_service_1.AlertService,
+        controlUnion_service_1.ControlUnionService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 function setPopup() {
