@@ -10,6 +10,7 @@ import { ProtocolService } from '../services/protocol-service'
 import {ManagerUnionService} from '../services/managerUnion-service'
 import { AuthenticationService } from '../services/authentication-service';
 import { AlertService} from '../services/alert-service';
+import {ControlUnionService} from '../services/controlUnion-service'
 
 declare var $: JQueryStatic;
 
@@ -50,7 +51,8 @@ export class HomeComponent {
         private protocolService: ProtocolService,
         private managerUnionService: ManagerUnionService,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) {
+        private alertService: AlertService,
+        private controlUnionService: ControlUnionService) {
             console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -78,6 +80,76 @@ export class HomeComponent {
 
         this.newImgUrl = '';
     }
+    addMemberToControlUnion(){
+        console.log("Add member to control union");
+        let name = $('#memberControlName').val();
+        let isAddedThisUser:any = false;
+
+        if(this.union.leader.username === name){
+            isAddedThisUser = true;
+        }
+        for(let i = 0; i < this.union.members.length;i++){
+            console.log(this.union.members[i]);
+            if(this.union.members[i].username === name){
+                isAddedThisUser = true;
+            }
+        }
+
+        if(!isAddedThisUser){
+            console.log("Search");
+            let prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            let member = {
+                username: name
+            };
+            this.controlUnionService.addMemberToControlUnion(prop, member).subscribe(
+                data => {
+                    console.log("Successfully added memeber to controlUnion");
+                    this.union = data;
+                },
+                err => {
+                    console.log("Cannot add control to union");
+                }
+            );
+        }
+    }
+    changeLeader(){
+        let name = $('#leaderName').val();
+        let isAddedThisUser:any = false;
+
+        if(this.union.leader.username === name){
+            isAddedThisUser = true;
+        }
+
+        for(let i = 0; i < this.union.members.length;i++){
+            if(this.union.members[i].username === name){
+                isAddedThisUser = true;
+            }
+        }
+        if(!isAddedThisUser){
+            let prop = {
+                floatNumber: this.user.flatNumber,
+                entrance: this.user.exitNumber,
+                city: this.user.city,
+                neighborhood: this.user.neighborhood
+            };
+            let leader = {
+                username: name
+            };
+            this.controlUnionService.changeLeaderName(prop, leader).subscribe(
+                data => {
+                    this.union = data;
+                },
+                err => {
+                    console.log("Error change leader");
+                }
+            );
+        }
+    }
     onApartmentTableClick(index: any) {
         console.log("Apartment click");
         this.showingApartment = this.apartments[index];
@@ -102,6 +174,44 @@ export class HomeComponent {
     onControlUnionClick(){
         this.showUnion = true;
         this.unionType = "control";
+        let prop = {
+            floatNumber: this.user.flatNumber,
+            entrance: this.user.exitNumber,
+            city: this.user.city,
+            neighborhood: this.user.neighborhood
+        };
+
+        this.controlUnionService.getByProperties(prop).subscribe(
+            data => {
+                console.log("Get control union");
+                console.log(data);
+                this.union = data;
+            },
+            err => {
+                let arr: any = [];
+                let p = {
+                    leader: {
+                        username: 'Неизвестен'
+                    },
+                    members: arr,
+                    floatNumber: this.user.flatNumber,
+                    entrance: this.user.exitNumber,
+                    city: this.user.city,
+                    neighborhood: this.user.neighborhood
+                };
+                console.log("Error get ControlUnion");
+                this.controlUnionService.create(p).subscribe(
+                    data => {
+                        console.log("Created control union");
+                        console.log(data);
+                        this.union = data;
+                    },
+                    err => {
+                        console.log("Cannot create control union");
+                    }
+                );
+            }
+        );
     }
     changeCashier(){
         let name = $('#cashierName').val();
