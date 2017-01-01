@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) { 
+        private alertService: AlertService) {  
             console.log("Login init");
         }
 

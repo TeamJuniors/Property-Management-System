@@ -8,6 +8,8 @@ import { CondominiumService } from '../services/condominium-service'
 import { ApartmentService } from '../services/apartment-service'
 import { ProtocolService } from '../services/protocol-service'
 import {ManagerUnionService} from '../services/managerUnion-service'
+import { AuthenticationService } from '../services/authentication-service';
+import { AlertService} from '../services/alert-service';
 
 declare var $: JQueryStatic;
 
@@ -46,13 +48,26 @@ export class HomeComponent {
         private condominiumService: CondominiumService,
         private apartmentService: ApartmentService,
         private protocolService: ProtocolService,
-        private managerUnionService: ManagerUnionService) {
+        private managerUnionService: ManagerUnionService,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) {
+            console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
+            let userNow: User = JSON.parse(localStorage.getItem('currentUser'));
+            this.authenticationService.login(userNow.username, userNow.password)
+                .subscribe(
+                data => {
+                },
+                error => {
+                    console.log("From error");
+                    this.alertService.error('Your cerdenials are not valid please log in again', true);
+                    localStorage.removeItem('currentUser');
+                    this.router.navigateByUrl('/login');
+                });
         } else {
             this.isLogged = false;
         }
-        console.log(localStorage.getItem('currentUser'));
 
         let fbParams: FacebookInitParams = {
             appId: '1064731376969661',

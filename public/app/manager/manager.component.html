@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a href="/home"><span class="glyphicon"></span> Начало</a></li>
-            <li *ngIf="isManager"><a href="/manager"><span class="glyphicon glyphicon-user"></span> Управление на ЕС</a></li>
+            <li><a href="/manager"><span class="glyphicon glyphicon-user"></span> Управление на ЕС</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>
@@ -11,10 +11,11 @@
 </nav>
 
 <div>
-    <h5>Домоуправител: {{user.firstName}} {{user.lastName}}</h5>
+    <h5 *ngIf="theManager">Домоуправител: {{theManager.firstName}} {{theManager.lastName}}</h5>
+    <h5 *ngIf="!theManager">Няма назначен домоуправител</h5>
 </div>
 
-<button class="btn btn-info" data-toggle="modal" data-target="#myModal">Добави задължение</button>
+<button *ngIf="isManager" class="btn btn-info" data-toggle="modal" data-target="#myModal">Добави задължение</button>
 
 <!-- Upload Popup -->
 <div class="modal fade" id="myModal" role="dialog">

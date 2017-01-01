@@ -5,7 +5,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 require('./routers')(app, data);
-
+require('./config/task-time-checker')(data);
 require('./config/socket')(io, data);
 
 server.listen(constants.port, function() {

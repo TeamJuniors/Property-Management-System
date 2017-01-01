@@ -17,8 +17,11 @@ var condominium_service_1 = require("../services/condominium-service");
 var apartment_service_1 = require("../services/apartment-service");
 var protocol_service_1 = require("../services/protocol-service");
 var managerUnion_service_1 = require("../services/managerUnion-service");
+var authentication_service_1 = require("../services/authentication-service");
+var alert_service_1 = require("../services/alert-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService) {
+    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService, authenticationService, alertService) {
+        var _this = this;
         this.userService = userService;
         this.chatService = chatService;
         this.fb = fb;
@@ -28,18 +31,29 @@ var HomeComponent = (function () {
         this.apartmentService = apartmentService;
         this.protocolService = protocolService;
         this.managerUnionService = managerUnionService;
+        this.authenticationService = authenticationService;
+        this.alertService = alertService;
         this.isLogged = false;
         this.isManager = false;
         this.showApartment = false;
         this.showProtocol = false;
         this.showUnion = false;
+        console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
+            var userNow = JSON.parse(localStorage.getItem('currentUser'));
+            this.authenticationService.login(userNow.username, userNow.password)
+                .subscribe(function (data) {
+            }, function (error) {
+                console.log("From error");
+                _this.alertService.error('Your cerdenials are not valid please log in again', true);
+                localStorage.removeItem('currentUser');
+                _this.router.navigateByUrl('/login');
+            });
         }
         else {
             this.isLogged = false;
         }
-        console.log(localStorage.getItem('currentUser'));
         var fbParams = {
             appId: '1064731376969661',
             xfbml: true,
@@ -296,7 +310,9 @@ HomeComponent = __decorate([
         condominium_service_1.CondominiumService,
         apartment_service_1.ApartmentService,
         protocol_service_1.ProtocolService,
-        managerUnion_service_1.ManagerUnionService])
+        managerUnion_service_1.ManagerUnionService,
+        authentication_service_1.AuthenticationService,
+        alert_service_1.AlertService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 function setPopup() {

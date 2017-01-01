@@ -84,9 +84,10 @@ function usersController(data) {
         },
         addTask(req, res) {
             data.addTask(req.body.username, req.body.task).then(user => {
+                user.tasks.push(task);
                 res.send(user);
             }).catch(err => {
-                res.status(404).send("Not authenricated");
+                res.status(404).send("Invalid task");
             });
         }
     };

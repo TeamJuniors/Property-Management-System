@@ -37,7 +37,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Привет, {{user.username}}</a></li>
-            <li *ngIf="isManager"><a href="/manager"><span class="glyphicon glyphicon-book"></span> Управление на ЕС</a></li>
+            <li><a href="/manager"><span class="glyphicon glyphicon-book"></span> Управление на ЕС</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>

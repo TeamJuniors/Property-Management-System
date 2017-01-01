@@ -96,6 +96,24 @@ module.exports = (models) => {
                     return resolve(user);
                 });
             });
+        },
+        removeTask: function(username, task) {
+            console.log(username);
+            console.log(task);
+            console.log('removing task');
+            return new Promise((resolve, reject) => {
+                User.findOneAndUpdate({
+                    username
+                }, {
+                    $pull: { tasks: task }
+                }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log('task removed');
+                    return resolve(user);
+                });
+            });
         }
     };
 };
