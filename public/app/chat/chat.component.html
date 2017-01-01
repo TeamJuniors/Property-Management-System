@@ -1,4 +1,5 @@
 <div class="chat-sidebar">
+    <h6 id="online-users-title">Online users:</h6>
     <div *ngFor="let onlineUser of onlineUsers" class="sidebar-name">
         <a *ngIf="currentUsername != onlineUser.username" (click)="registerPopup(onlineUser.username)">
             <img width="30" height="30" src="{{onlineUser.imgUrl}}" />

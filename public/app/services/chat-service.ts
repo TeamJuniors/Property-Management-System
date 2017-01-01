@@ -33,6 +33,10 @@ export class ChatService {
         });
 
         this.socket.on('send-online-users', (onlineUsers: User[]) => {
+            if (!onlineUsers.map(x => x.username).includes(this.popupUsername.value.popupUsername)) {
+                $('chat-box').css('display', 'none');
+            }
+
             this.onlineUsers.next({ onlineUsers: onlineUsers });
         });
 

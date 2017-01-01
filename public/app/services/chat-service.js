@@ -26,6 +26,9 @@ var ChatService = (function () {
             }
         });
         this.socket.on('send-online-users', function (onlineUsers) {
+            if (!onlineUsers.map(function (x) { return x.username; }).includes(_this.popupUsername.value.popupUsername)) {
+                $('chat-box').css('display', 'none');
+            }
             _this.onlineUsers.next({ onlineUsers: onlineUsers });
         });
         this.socket.on('send-chat', function (chat) {
