@@ -50,5 +50,18 @@ module.exports = function(app, data) {
     router.post('/townshipMessages', townshipMessageController.createTownshipMessage);
     router.post('/findTownshipMessage', townshipMessageController.findTownshipMessageBy);
 
+    router.post('/TownshipLogin', function(req, res) {
+        console.log("Township");
+        console.log(req.body.authenticationNumber);
+        if (req.body.authenticationNumber === "1234567") {
+            let response = {
+                number: "1234567"
+            }
+            res.send(response);
+        } else {
+            res.status(404).send("Not found");
+        }
+    });
+
     app.use('/api', router);
 };

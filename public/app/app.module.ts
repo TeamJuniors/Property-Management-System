@@ -37,6 +37,7 @@ import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { FacebookComponent } from './facebookLogin/index';
 import {NotFoundComponent} from './notfound/index'
+import {TownshipComponent} from './township/index'
 
 @NgModule({
     imports: [
@@ -58,7 +59,8 @@ import {NotFoundComponent} from './notfound/index'
         FacebookComponent,
         ManagerComponent,
         UppercasePipe,
-        NotFoundComponent
+        NotFoundComponent,
+        TownshipComponent
     ],
     providers: [
         AuthChecker,

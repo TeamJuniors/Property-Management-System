@@ -14,6 +14,9 @@ var TownshipMessageService = (function () {
     function TownshipMessageService(http) {
         this.http = http;
     }
+    TownshipMessageService.prototype.LogLikeTownship = function (authenticationNumber) {
+        return this.http.post('/api/TownshipLogin', { authenticationNumber: authenticationNumber }, this.jwt()).map(function (response) { return response.json(); });
+    };
     TownshipMessageService.prototype.getAll = function () {
         return this.http.get('/api/townshipMessages', this.jwt()).map(function (response) { return response.json(); });
     };
