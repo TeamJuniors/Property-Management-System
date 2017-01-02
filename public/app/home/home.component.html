@@ -600,11 +600,11 @@
                         <div class="col-md-9 col-md-offset-1">
                             <div class="form-group">
                                 <label for="memberName">Заглавие:</label>
-                                <input type="text" class="form-control" name="memberName" id="memberControlName">
+                                <input type="text" class="form-control" name="memberName" id="townshipTitle">
                                 <br>
                                 <label for="comment">Съдържание:</label>
-                                <textarea class="form-control" rows="4" cols="80" id="comment"></textarea>
-                                <button type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>
+                                <textarea class="form-control" rows="4" cols="80" id="townshipMessage"></textarea>
+                                <button (click)="sendTownshipMessage()" type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>
                             </div>
                         </div>
                     </form>

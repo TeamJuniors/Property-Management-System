@@ -29,6 +29,7 @@ import {CondominiumService} from './services/condominium-service'
 import {ProtocolService} from './services/protocol-service'
 import {ManagerUnionService} from './services/managerUnion-service'
 import {ControlUnionService} from './services/controlUnion-service'
+import {TownshipMessageService} from './services/townshipMessage-service'
 
 import {ManagerComponent} from './manager/index'
 import { HomeComponent } from './home/index';
@@ -67,6 +68,7 @@ import {NotFoundComponent} from './notfound/index'
         ChatService,
         ManagerUnionService,
         ControlUnionService,
+        TownshipMessageService,
 
         ApartmentService,
         CondominiumService,

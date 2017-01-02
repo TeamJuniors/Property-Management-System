@@ -11,6 +11,7 @@ import {ManagerUnionService} from '../services/managerUnion-service'
 import { AuthenticationService } from '../services/authentication-service';
 import { AlertService} from '../services/alert-service';
 import {ControlUnionService} from '../services/controlUnion-service'
+import {TownshipMessageService} from '../services/townshipMessage-service'
 
 declare var $: JQueryStatic;
 
@@ -52,7 +53,8 @@ export class HomeComponent {
         private managerUnionService: ManagerUnionService,
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
-        private controlUnionService: ControlUnionService) {
+        private controlUnionService: ControlUnionService,
+        private townshipMessage: TownshipMessageService) {
             console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -79,6 +81,26 @@ export class HomeComponent {
         this.fb.init(fbParams);
 
         this.newImgUrl = '';
+    }
+    sendTownshipMessage(){
+        let title = $("#townshipTitle").val();
+        let content = $("#townshipMessage").val();
+
+        let msg = {
+            from: this.user,
+            title: title,
+            content: content
+        }
+
+        this.townshipMessage.create(msg).subscribe(
+            data => {
+                console.log("create township message");
+                console.log(data);
+            },
+            err => {
+                console.log("Cannot create township message");
+            }
+        );
     }
     addMemberToControlUnion(){
         console.log("Add member to control union");

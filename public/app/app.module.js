@@ -34,6 +34,7 @@ var condominium_service_1 = require("./services/condominium-service");
 var protocol_service_1 = require("./services/protocol-service");
 var managerUnion_service_1 = require("./services/managerUnion-service");
 var controlUnion_service_1 = require("./services/controlUnion-service");
+var townshipMessage_service_1 = require("./services/townshipMessage-service");
 var index_1 = require("./manager/index");
 var index_2 = require("./home/index");
 var index_3 = require("./login/index");
@@ -76,6 +77,7 @@ AppModule = __decorate([
             chat_service_1.ChatService,
             managerUnion_service_1.ManagerUnionService,
             controlUnion_service_1.ControlUnionService,
+            townshipMessage_service_1.TownshipMessageService,
             apartment_service_1.ApartmentService,
             condominium_service_1.CondominiumService,
             protocol_service_1.ProtocolService,
