@@ -41,6 +41,7 @@ export class HomeComponent {
     showUnion: boolean = false;
     unionType: string;
     union: any;
+    townshipMessages: any;
 
     constructor(private userService: UserService,
         private chatService: ChatService,
@@ -54,7 +55,7 @@ export class HomeComponent {
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
         private controlUnionService: ControlUnionService,
-        private townshipMessage: TownshipMessageService) {
+        private townshipMessageService: TownshipMessageService) {
             console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -82,9 +83,24 @@ export class HomeComponent {
 
         this.newImgUrl = '';
     }
+    loadTownshipMessages(){
+        console.log("Township messages");
+        this.townshipMessageService.getByProperties(this.user).subscribe(
+            data => {
+                console.log("Successfully get township messages");
+                this.townshipMessages = data;
+                console.log(this.townshipMessages);
+            },
+            err => {
+                console.log("Cannot get township messages");
+            }
+        );
+    }
     sendTownshipMessage(){
         let title = $("#townshipTitle").val();
         let content = $("#townshipMessage").val();
+        $("#townshipTitle").val("");
+        $("#townshipMessage").val("");
 
         let msg = {
             from: this.user,
@@ -92,10 +108,20 @@ export class HomeComponent {
             content: content
         }
 
-        this.townshipMessage.create(msg).subscribe(
-            data => {
+        this.townshipMessageService.create(msg).subscribe(
+            d => {
                 console.log("create township message");
-                console.log(data);
+                console.log(d);
+                this.townshipMessageService.getByProperties(this.user).subscribe(
+                    data => {
+                        console.log("Successfully get township messages");
+                        this.townshipMessages = data;
+                        console.log(this.townshipMessages);
+                    },
+                    err => {
+                        console.log("Cannot get township messages");
+                    }
+                );
             },
             err => {
                 console.log("Cannot create township message");

@@ -605,6 +605,30 @@
                                 <label for="comment">Съдържание:</label>
                                 <textarea class="form-control" rows="4" cols="80" id="townshipMessage"></textarea>
                                 <button (click)="sendTownshipMessage()" type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>
+                                <ul *ngIf="townshipMessages" class="pre-scrollable list-group" style="margin-top: 5%">
+                                    <li *ngFor="let msg of townshipMessages; let index = index" class="list-group-item">
+                                        <h4>Въпрос {{index + 1}}:</h4>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                Заглавие:
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">{{msg.title}}</li>
+                                                </ul>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <ul class="list-group">
+                                                    Съдържание:
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                            {{msg.content}}
+                                                        </li>
+                                                    </ul>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </form>
@@ -642,7 +666,7 @@
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-nav" href="#tab6" data-toggle="tab">
-                            <div class="visible">Съобщения <span class="glyphicon glyphicon-bell"  aria-hidden="true"></span></div>
+                            <div (click)="loadTownshipMessages()" class="visible">Съобщения <span class="glyphicon glyphicon-bell"  aria-hidden="true"></span></div>
                         </button>
                     </div>
                 </div>

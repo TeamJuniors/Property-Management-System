@@ -5,6 +5,8 @@ function townshipMessageController(data) {
     return {
         findTownshipMessageBy(req, res) {
             let prop = req.body.prop;
+            console.log("Getting township");
+            console.log(prop);
             data.findTownshipMessageByUser(prop).then(msg => {
                 res.send(msg);
             }).catch(err => {

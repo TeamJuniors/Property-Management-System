@@ -8,7 +8,8 @@ module.exports = (models) => {
                         return reject(err)
                     }
                     let userMsgs = [];
-                    for (let i = 0; i < msgs.lenght; i++) {
+                    for (let i = 0; i < msgs.length; i++) {
+                        console.log(msgs[i].from.username + " - " + properties.username);
                         if (msgs[i].from.username === properties.username) {
                             userMsgs.push(msgs[i]);
                         }
