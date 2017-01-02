@@ -1,0 +1,15 @@
+<button (click)="showFeedback()" class="btn btn-primary" id="show-feedback-button">{{showHide}} отзиви:</button>
+<div *ngIf="shouldShowFeedback" class="panel panel-primary">
+    <div *ngFor="let item of feedback">
+        <h4>отзив: </h4>
+        <h5 class="feedback-info feedback-meta-info" cursive-directive>Име: </h5>
+        <h5 class="feedback-info panel panel-primary panel-body" highlight-directive>{{item.name}}</h5>
+        <h5 class="feedback-info feedback-meta-info" cursive-directive>Email: </h5>
+        <h5 class="feedback-info panel panel-primary panel-body" highlight-directive>{{item.email}}</h5>
+        <h5 class="feedback-info feedback-meta-info" cursive-directive>Телефон: </h5>
+        <h5 class="feedback-info panel panel-primary panel-body" highlight-directive>{{item.phoneNumber}}</h5>
+        <h5 class="feedback-info feedback-meta-info" cursive-directive>Съобщение: </h5>
+        <p class="feedback-info panel panel-primary" highlight-directive>{{item.message}}</p>
+        <div class="feedback-separation"></div>
+    </div>
+</div>

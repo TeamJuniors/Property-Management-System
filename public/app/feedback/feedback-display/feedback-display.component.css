@@ -1,0 +1,18 @@
+#show-feedback-button
+{
+    margin-bottom: 50px;
+}
+
+.feedback-info
+{
+    height: 50px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.feedback-separation
+{
+    height: 2px;
+    background-color: #000;
+}

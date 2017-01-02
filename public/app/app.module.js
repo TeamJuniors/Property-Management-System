@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var cursive_directive_1 = require("./directives/cursive-directive");
+var feedback_display_component_1 = require("./feedback/feedback-display/feedback-display.component");
+var feedback_form_component_1 = require("./feedback/feedback-form.component");
 var chat_popup_component_1 = require("./chat/chat-popup/chat-popup.component");
 var safe_html_pipe_1 = require("./pipes/safe-html.pipe");
 var date_sorting_pipe_1 = require("./pipes/date-sorting.pipe");
@@ -29,6 +32,7 @@ var auth_checker_component_1 = require("./autentication-checker/auth-checker.com
 var authentication_service_1 = require("./services/authentication-service");
 var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
+var chat_profile_image_directive_1 = require("./directives/chat-profile-image.directive");
 var apartment_service_1 = require("./services/apartment-service");
 var condominium_service_1 = require("./services/condominium-service");
 var protocol_service_1 = require("./services/protocol-service");
@@ -40,6 +44,7 @@ var index_2 = require("./home/index");
 var index_3 = require("./login/index");
 var index_4 = require("./register/index");
 var index_5 = require("./facebookLogin/index");
+var highlight_directive_1 = require("./directives/highlight-directive");
 var index_6 = require("./notfound/index");
 var index_7 = require("./township/index");
 var AppModule = (function () {
@@ -69,6 +74,11 @@ AppModule = __decorate([
             index_1.ManagerComponent,
             uppercase_pipe_1.UppercasePipe,
             index_6.NotFoundComponent,
+            chat_profile_image_directive_1.ChatProfileImageDirective,
+            feedback_form_component_1.FeedbackFormComponent,
+            feedback_display_component_1.FeedbackDisplayComponent,
+            highlight_directive_1.HighlightDirective,
+            cursive_directive_1.CursiveDirective,
             index_7.TownshipComponent
         ],
         providers: [
