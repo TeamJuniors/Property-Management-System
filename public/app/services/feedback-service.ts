@@ -7,7 +7,7 @@ export class FeedbackService {
     constructor(private http: Http) { }
 
     createFeedbackRequest(name: string, email: string, phoneNumber: string, message: string) {
-        return this.http.post('/feedback', { name, email, phoneNumber, message }).map(x => x.text());
+        return this.http.post('/feedback', { name, email, phoneNumber, message }).map(x => x.json());
     }
 
     getFeedback() {

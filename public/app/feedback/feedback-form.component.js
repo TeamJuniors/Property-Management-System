@@ -29,7 +29,12 @@ var FeedbackFormComponent = (function () {
             $('#feedback-email').val('');
             $('#feedback-phone').val('');
             $('#feedback-message').val('');
-            _this.alertService.success(x, true);
+            if (x.wasSuccessfull) {
+                _this.alertService.success(x.message, true);
+            }
+            else {
+                _this.alertService.error(x.message, true);
+            }
         });
     };
     return FeedbackFormComponent;

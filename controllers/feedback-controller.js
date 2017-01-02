@@ -13,9 +13,15 @@ function feedbackController(data) {
 
             data.createFeedback(feedback)
                 .then((createdFeedback) => {
-                    res.send('Feedback sent successfully');
+                    res.send({
+                        message: 'Feedback sent successfully',
+                        wasSuccessfull: true
+                    });
                 }).catch((err) => {
-                    res.send('Feedback not sent successfully');
+                    res.send({
+                        message: 'Feedback not sent successfully',
+                        wasSuccessfull: false
+                    });
                 });
         },
         getFeedback(req, res) {

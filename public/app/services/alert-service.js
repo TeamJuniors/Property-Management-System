@@ -35,14 +35,22 @@ var AlertService = (function () {
         if (keepAfterNavigationChange === void 0) { keepAfterNavigationChange = false; }
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'success', text: message });
+        this.hideAlert();
     };
     AlertService.prototype.error = function (message, keepAfterNavigationChange) {
         if (keepAfterNavigationChange === void 0) { keepAfterNavigationChange = false; }
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'error', text: message });
+        this.hideAlert();
     };
     AlertService.prototype.getMessage = function () {
         return this.subject.asObservable();
+    };
+    AlertService.prototype.hideAlert = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.subject.next({ type: null, text: null });
+        }, 5000);
     };
     return AlertService;
 }());

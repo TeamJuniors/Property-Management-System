@@ -28,7 +28,11 @@ export class FeedbackFormComponent implements OnInit {
                 $('#feedback-phone').val('');
                 $('#feedback-message').val('');
 
-                this.alertService.success(x, true);
+                if(x.wasSuccessfull) {
+                    this.alertService.success(x.message, true);
+                } else {
+                    this.alertService.error(x.message, true);
+                }
             });
     }
 }

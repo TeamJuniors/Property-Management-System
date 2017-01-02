@@ -15,7 +15,7 @@ var FeedbackService = (function () {
         this.http = http;
     }
     FeedbackService.prototype.createFeedbackRequest = function (name, email, phoneNumber, message) {
-        return this.http.post('/feedback', { name: name, email: email, phoneNumber: phoneNumber, message: message }).map(function (x) { return x.text(); });
+        return this.http.post('/feedback', { name: name, email: email, phoneNumber: phoneNumber, message: message }).map(function (x) { return x.json(); });
     };
     FeedbackService.prototype.getFeedback = function () {
         return this.http.post('/receive', {}).map(function (response) { return response.json(); });
