@@ -16,4 +16,5 @@ module.exports = function(app, data) {
     app.get('/login', getMainPage);
     app.get('/register', getMainPage);
     app.get('/manager', getMainPage);
+    app.get('*', getMainPage);
 };

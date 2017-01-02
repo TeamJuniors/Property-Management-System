@@ -39,6 +39,7 @@ var index_2 = require("./home/index");
 var index_3 = require("./login/index");
 var index_4 = require("./register/index");
 var index_5 = require("./facebookLogin/index");
+var index_6 = require("./notfound/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -64,7 +65,8 @@ AppModule = __decorate([
             chat_popup_component_1.ChatPopupComponent,
             index_5.FacebookComponent,
             index_1.ManagerComponent,
-            uppercase_pipe_1.UppercasePipe
+            uppercase_pipe_1.UppercasePipe,
+            index_6.NotFoundComponent
         ],
         providers: [
             auth_checker_component_1.AuthChecker,
