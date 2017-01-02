@@ -49,7 +49,7 @@ module.exports = function(app, data) {
     router.get('/townshipMessages', townshipMessageController.getAllTownshipMessages);
     router.post('/townshipMessages', townshipMessageController.createTownshipMessage);
     router.post('/findTownshipMessage', townshipMessageController.findTownshipMessageBy);
-
+    router.post('/setAnswerToTownshipMessage', townshipMessageController.setAnswerToTownshipMessage)
     router.post('/TownshipLogin', function(req, res) {
         console.log("Township");
         console.log(req.body.authenticationNumber);

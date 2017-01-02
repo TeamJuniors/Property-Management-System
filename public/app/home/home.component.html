@@ -625,6 +625,14 @@
                                                     </ul>
                                                 </ul>
                                             </li>
+                                            <li *ngIf="msg.answer" class="list-group-item">
+                                                <ul class="list-group">
+                                                    Отговор:
+                                                    <li class="list-group-item">
+                                                        {{msg.answer}}
+                                                    </li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
 

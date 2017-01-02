@@ -9,6 +9,9 @@ export class TownshipMessageService{
     constructor(private http: Http){
 
     }
+    setAnswerToTownshipMessage(prop: any, newContent: any){
+        return this.http.post('/api/setAnswerToTownshipMessage', {prop, newContent}, this.jwt()).map((response: Response) => response.json());
+    }
     LogLikeTownship(authenticationNumber: any){
         return this.http.post('/api/TownshipLogin', {authenticationNumber}, this.jwt()).map((response: Response) => response.json());    
     }

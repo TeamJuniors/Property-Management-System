@@ -12,6 +12,9 @@ let propertySchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
+    },
+    answer: {
+        type: String
     }
 });
 

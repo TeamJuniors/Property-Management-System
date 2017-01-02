@@ -31,10 +31,35 @@ export class TownshipComponent {
             }
         );
     }
+    returnPage(){
+        this.showDetail = false;
+    }
     showDetailed(index:any){
         console.log(index);
         this.showDetail = true;
         this.showElement = this.messages[index];
+    }
+    sendAnswerToTownship(){
+        let answer = $('#townshipMessage').val();
+        $('#townshipMessage').val("");
+        
+        this.townshipMessageService.setAnswerToTownshipMessage(this.showElement, answer).subscribe(
+            data => {
+                console.log("Set new answer");
+                this.showElement = data;
+                this.townshipMessageService.getAll().subscribe(
+                    data => {
+                        this.messages = data;
+                    },
+                    err => {
+
+                    }
+                );
+            },
+            err => {
+                console.log("Cannot set new asnwer");
+            }
+        );
     }
     ngOnInit(){
         if(localStorage.getItem('townshipLogin')){
