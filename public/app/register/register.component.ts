@@ -37,7 +37,6 @@ export class RegisterComponent {
            apartmentNumber: this.model.apartmentNumber,
            users: users
        }
-       console.log(apartmentProperties);
        this.apartmentService.getByProperties(apartmentProperties)
              .subscribe(
                  data => {
@@ -107,11 +106,11 @@ export class RegisterComponent {
        this.userService.create(this.model)
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
+                    this.alertService.success('Успешна регистрация', true);
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Потребител с това име вече съществува');
                     this.loading = false;
                 });
     }

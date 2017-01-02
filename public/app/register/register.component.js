@@ -37,7 +37,6 @@ var RegisterComponent = (function () {
             apartmentNumber: this.model.apartmentNumber,
             users: users
         };
-        console.log(apartmentProperties);
         this.apartmentService.getByProperties(apartmentProperties)
             .subscribe(function (data) {
             console.log("Found apartment");
@@ -83,10 +82,10 @@ var RegisterComponent = (function () {
         });
         this.userService.create(this.model)
             .subscribe(function (data) {
-            _this.alertService.success('Registration successful', true);
+            _this.alertService.success('Успешна регистрация', true);
             _this.router.navigate(['/login']);
         }, function (error) {
-            _this.alertService.error(error);
+            _this.alertService.error('Потребител с това име вече съществува');
             _this.loading = false;
         });
     };

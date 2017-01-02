@@ -21,7 +21,6 @@ module.exports = (models) => {
                 neighborhood: obj.neighborhood
             });
             console.log("Hello from condominium data.");
-            console.log(condominium);
             return Promise.resolve(condominium.save());
         },
         getAllCondominiums: function() {
