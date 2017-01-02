@@ -9,18 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var NotFoundComponent = (function () {
-    function NotFoundComponent() {
+var HighlightDirective = (function () {
+    function HighlightDirective(elementRef) {
+        this.elementRef = elementRef;
+        this.elementRef.nativeElement.style.color = '#00284d';
     }
-    return NotFoundComponent;
+    return HighlightDirective;
 }());
-NotFoundComponent = __decorate([
-    core_1.Component({
-        selector: 'notfound',
-        templateUrl: 'app/notfound/notfound.component.html',
-        styleUrls: ['css/style.css']
-    }),
-    __metadata("design:paramtypes", [])
-], NotFoundComponent);
-exports.NotFoundComponent = NotFoundComponent;
-//# sourceMappingURL=notfound.component.js.map
+HighlightDirective = __decorate([
+    core_1.Directive({ selector: '[highlight-directive]' }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], HighlightDirective);
+exports.HighlightDirective = HighlightDirective;
+//# sourceMappingURL=highlight-directive.js.map

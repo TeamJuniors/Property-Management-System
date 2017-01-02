@@ -9,18 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var NotFoundComponent = (function () {
-    function NotFoundComponent() {
+var CursiveDirective = (function () {
+    function CursiveDirective(elementRef) {
+        this.elementRef = elementRef;
+        this.elementRef.nativeElement.style.fontStyle = 'italic';
     }
-    return NotFoundComponent;
+    return CursiveDirective;
 }());
-NotFoundComponent = __decorate([
-    core_1.Component({
-        selector: 'notfound',
-        templateUrl: 'app/notfound/notfound.component.html',
-        styleUrls: ['css/style.css']
-    }),
-    __metadata("design:paramtypes", [])
-], NotFoundComponent);
-exports.NotFoundComponent = NotFoundComponent;
-//# sourceMappingURL=notfound.component.js.map
+CursiveDirective = __decorate([
+    core_1.Directive({ selector: '[cursive-directive]' }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], CursiveDirective);
+exports.CursiveDirective = CursiveDirective;
+//# sourceMappingURL=cursive-directive.js.map

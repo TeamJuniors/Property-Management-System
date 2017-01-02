@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var NotFoundComponent = (function () {
-    function NotFoundComponent() {
+var ChatProfileImageDirective = (function () {
+    function ChatProfileImageDirective(elementRef) {
+        this.elementRef = elementRef;
+        this.elementRef.nativeElement.style.width = '35px';
+        this.elementRef.nativeElement.style.height = '35px';
+        this.elementRef.nativeElement.className += " img-circle";
     }
-    return NotFoundComponent;
+    return ChatProfileImageDirective;
 }());
-NotFoundComponent = __decorate([
-    core_1.Component({
-        selector: 'notfound',
-        templateUrl: 'app/notfound/notfound.component.html',
-        styleUrls: ['css/style.css']
-    }),
-    __metadata("design:paramtypes", [])
-], NotFoundComponent);
-exports.NotFoundComponent = NotFoundComponent;
-//# sourceMappingURL=notfound.component.js.map
+ChatProfileImageDirective = __decorate([
+    core_1.Directive({ selector: '[chat-profile-image]' }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], ChatProfileImageDirective);
+exports.ChatProfileImageDirective = ChatProfileImageDirective;
+//# sourceMappingURL=chat-profile-image.directive.js.map
