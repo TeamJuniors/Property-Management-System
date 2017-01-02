@@ -32,10 +32,28 @@ var TownshipComponent = (function () {
             console.log("Cannot get");
         });
     };
+    TownshipComponent.prototype.returnPage = function () {
+        this.showDetail = false;
+    };
     TownshipComponent.prototype.showDetailed = function (index) {
         console.log(index);
         this.showDetail = true;
         this.showElement = this.messages[index];
+    };
+    TownshipComponent.prototype.sendAnswerToTownship = function () {
+        var _this = this;
+        var answer = $('#townshipMessage').val();
+        $('#townshipMessage').val("");
+        this.townshipMessageService.setAnswerToTownshipMessage(this.showElement, answer).subscribe(function (data) {
+            console.log("Set new answer");
+            _this.showElement = data;
+            _this.townshipMessageService.getAll().subscribe(function (data) {
+                _this.messages = data;
+            }, function (err) {
+            });
+        }, function (err) {
+            console.log("Cannot set new asnwer");
+        });
     };
     TownshipComponent.prototype.ngOnInit = function () {
         if (localStorage.getItem('townshipLogin')) {

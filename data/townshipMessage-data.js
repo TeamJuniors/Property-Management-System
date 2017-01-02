@@ -18,6 +18,23 @@ module.exports = (models) => {
                 })
             });
         },
+        setAnswerToTownshipMessage: function(properties, content) {
+            console.log(properties);
+            console.log(content);
+            return new Promise((resolve, reject) => {
+                TownshipMessage.findOne({
+                    content: properties.content,
+                    title: properties.title
+                }, function(err, msg) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        msg.content = content;
+                        resolve(msg.save());
+                    }
+                });
+            });
+        },
         createTownshipMessage: function(obj) {
             //console.log(`Username: ${username}, Password: ${password}`);
             const msg = new TownshipMessage({

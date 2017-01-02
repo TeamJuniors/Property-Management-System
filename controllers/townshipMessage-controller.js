@@ -13,6 +13,13 @@ function townshipMessageController(data) {
                 res.status(404).send("Not found");
             });
         },
+        setAnswerToTownshipMessage(req, res) {
+            let prop = req.body.prop;
+            let newContent = req.body.newContent;
+            data.setAnswerToTownshipMessage(prop, newContent).then((msg) => {
+                res.send(msg);
+            });
+        },
         createTownshipMessage(req, res) {
             console.log("Create message");
             console.log(req.body.townshipMessage);
