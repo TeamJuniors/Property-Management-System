@@ -32,19 +32,21 @@ var auth_checker_component_1 = require("./autentication-checker/auth-checker.com
 var authentication_service_1 = require("./services/authentication-service");
 var alert_service_1 = require("./services/alert-service");
 var user_service_1 = require("./services/user-service");
+var chat_profile_image_directive_1 = require("./directives/chat-profile-image.directive");
 var apartment_service_1 = require("./services/apartment-service");
 var condominium_service_1 = require("./services/condominium-service");
 var protocol_service_1 = require("./services/protocol-service");
 var managerUnion_service_1 = require("./services/managerUnion-service");
 var controlUnion_service_1 = require("./services/controlUnion-service");
-var chat_profile_image_directive_1 = require("./directives/chat-profile-image.directive");
+var townshipMessage_service_1 = require("./services/townshipMessage-service");
 var index_1 = require("./manager/index");
 var index_2 = require("./home/index");
 var index_3 = require("./login/index");
 var index_4 = require("./register/index");
 var index_5 = require("./facebookLogin/index");
-var index_6 = require("./notfound/index");
 var highlight_directive_1 = require("./directives/highlight-directive");
+var index_6 = require("./notfound/index");
+var index_7 = require("./township/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -76,7 +78,8 @@ AppModule = __decorate([
             feedback_form_component_1.FeedbackFormComponent,
             feedback_display_component_1.FeedbackDisplayComponent,
             highlight_directive_1.HighlightDirective,
-            cursive_directive_1.CursiveDirective
+            cursive_directive_1.CursiveDirective,
+            index_7.TownshipComponent
         ],
         providers: [
             auth_checker_component_1.AuthChecker,
@@ -86,6 +89,7 @@ AppModule = __decorate([
             chat_service_1.ChatService,
             managerUnion_service_1.ManagerUnionService,
             controlUnion_service_1.ControlUnionService,
+            townshipMessage_service_1.TownshipMessageService,
             apartment_service_1.ApartmentService,
             condominium_service_1.CondominiumService,
             protocol_service_1.ProtocolService,

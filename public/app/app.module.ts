@@ -27,20 +27,22 @@ import { AuthChecker } from './autentication-checker/auth-checker.component';
 import { AuthenticationService } from './services/authentication-service';
 import { AlertService } from './services/alert-service';
 import { UserService } from './services/user-service';
-import { ApartmentService } from './services/apartment-service'
-import { CondominiumService } from './services/condominium-service'
-import { ProtocolService } from './services/protocol-service'
-import { ManagerUnionService } from './services/managerUnion-service'
-import { ControlUnionService } from './services/controlUnion-service'
 import { ChatProfileImageDirective } from './directives/chat-profile-image.directive'
+import {ApartmentService} from './services/apartment-service'
+import {CondominiumService} from './services/condominium-service'
+import {ProtocolService} from './services/protocol-service'
+import {ManagerUnionService} from './services/managerUnion-service'
+import {ControlUnionService} from './services/controlUnion-service'
+import {TownshipMessageService} from './services/townshipMessage-service'
 
 import { ManagerComponent } from './manager/index'
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { FacebookComponent } from './facebookLogin/index';
-import { NotFoundComponent } from './notfound/index';
 import { HighlightDirective } from './directives/highlight-directive';
+import {NotFoundComponent} from './notfound/index'
+import {TownshipComponent} from './township/index'
 
 @NgModule({
     imports: [
@@ -67,7 +69,8 @@ import { HighlightDirective } from './directives/highlight-directive';
         FeedbackFormComponent,
         FeedbackDisplayComponent,
         HighlightDirective,
-        CursiveDirective
+        CursiveDirective,
+        TownshipComponent
     ],
     providers: [
         AuthChecker,
@@ -77,6 +80,7 @@ import { HighlightDirective } from './directives/highlight-directive';
         ChatService,
         ManagerUnionService,
         ControlUnionService,
+        TownshipMessageService,
 
         ApartmentService,
         CondominiumService,

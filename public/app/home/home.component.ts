@@ -11,6 +11,7 @@ import {ManagerUnionService} from '../services/managerUnion-service'
 import { AuthenticationService } from '../services/authentication-service';
 import { AlertService} from '../services/alert-service';
 import {ControlUnionService} from '../services/controlUnion-service'
+import {TownshipMessageService} from '../services/townshipMessage-service'
 
 declare var $: JQueryStatic;
 
@@ -40,6 +41,7 @@ export class HomeComponent {
     showUnion: boolean = false;
     unionType: string;
     union: any;
+    townshipMessages: any;
 
     constructor(private userService: UserService,
         private chatService: ChatService,
@@ -52,7 +54,8 @@ export class HomeComponent {
         private managerUnionService: ManagerUnionService,
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
-        private controlUnionService: ControlUnionService) {
+        private controlUnionService: ControlUnionService,
+        private townshipMessageService: TownshipMessageService) {
             console.log(localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser') != undefined) {
             this.isLogged = true;
@@ -79,6 +82,51 @@ export class HomeComponent {
         this.fb.init(fbParams);
 
         this.newImgUrl = '';
+    }
+    loadTownshipMessages(){
+        console.log("Township messages");
+        this.townshipMessageService.getByProperties(this.user).subscribe(
+            data => {
+                console.log("Successfully get township messages");
+                this.townshipMessages = data;
+                console.log(this.townshipMessages);
+            },
+            err => {
+                console.log("Cannot get township messages");
+            }
+        );
+    }
+    sendTownshipMessage(){
+        let title = $("#townshipTitle").val();
+        let content = $("#townshipMessage").val();
+        $("#townshipTitle").val("");
+        $("#townshipMessage").val("");
+
+        let msg = {
+            from: this.user,
+            title: title,
+            content: content
+        }
+
+        this.townshipMessageService.create(msg).subscribe(
+            d => {
+                console.log("create township message");
+                console.log(d);
+                this.townshipMessageService.getByProperties(this.user).subscribe(
+                    data => {
+                        console.log("Successfully get township messages");
+                        this.townshipMessages = data;
+                        console.log(this.townshipMessages);
+                    },
+                    err => {
+                        console.log("Cannot get township messages");
+                    }
+                );
+            },
+            err => {
+                console.log("Cannot create township message");
+            }
+        );
     }
     addMemberToControlUnion(){
         console.log("Add member to control union");

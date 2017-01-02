@@ -1,0 +1,88 @@
+<nav *ngIf="!isLogged" id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+            <a class="btn btn-primary" style="color:darkgoldenrod" href="/home">Начало</a>
+        </div>
+
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<br><br><br>
+<nav *ngIf="IsLogged" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a (click)="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span>Изход</a></li>
+        </ul>
+    </div>
+</nav>
+<div *ngIf="IsLogged" class="container">
+    <h2 *ngIf="!showDetail">Въпроси</h2>
+    <table *ngIf="!showDetail" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Покажи</th>
+                <th>Заглавие</th>
+                <th>Име</th>
+                <th>Фамилия</th>
+                <th>Град</th>
+                <th>Квартал</th>
+                <th>Блок</th>
+                <th>Апартамент</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let msg of messages; let index = index">
+                <td (click)="showDetailed(index)" style="cursor: crosshair;color: blue">Покажи</td>
+                <td>{{msg.title}}</td>
+                <td>{{msg.from.firstName}}</td>
+                <td>{{msg.from.lastName}}</td>
+                <td>{{msg.from.city}}</td>
+                <td>{{msg.from.neighborhood}}</td>
+                <td>{{msg.from.flatNumber}}</td>
+                <td>{{msg.from.apartmentNumber}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="showDetail" class="col-md-6 col-md-offset-3">
+        <h3>Заглавие: {{showElement.title}}</h3>
+        <h3>Потребителско име: {{showElement.from.username}}</h3>
+        <h3>Име: {{showElement.from.firstName}}</h3>
+        <h3>Фамилия: {{showElement.from.lastName}}</h3>
+        <h3>Град: {{showElement.from.city}}</h3>
+        <h3>Квартал: {{showElement.from.neighborhood}}</h3>
+        <h3>Номер на блок: {{showElement.from.flatNumber}}</h3>
+        <h3>Номер на апартамент: {{showElement.from.apartmentNumber}}</h3>
+        <h3>
+            Съдържание:
+            <p>
+                {{showElement.content}}
+            </p>
+        </h3>
+        <h3 *ngIf="showElement.answer">
+            Отговор: {{showElement.answer}}
+        </h3>
+        <label for="comment">Отговор:</label>
+        <textarea class="form-control" rows="4" cols="80" id="townshipMessage"></textarea>
+        <button (click)="sendAnswerToTownship()" type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>
+        <span style="margin-left: 45%;" *ngIf="showDetail" (click)="returnPage()" class="btn btn-primary">Назад</span>
+    </div>
+</div>
+<div *ngIf="!IsLogged">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Вход за общински служители</h2>
+        <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !number.valid }">
+                <label for="number">Номер</label>
+                <input type="text" class="form-control" name="number" [(ngModel)]="model.number" #number="ngModel" required />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Вход</button>
+            </div>
+        </form>
+    </div>
+</div>

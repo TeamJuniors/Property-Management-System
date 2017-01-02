@@ -1,4 +1,4 @@
-<button (click)="showFeedback()" class="btn btn-primary" id="show-feedback-button">Покажи отзиви:</button>
+<button (click)="showFeedback()" class="btn btn-primary" id="show-feedback-button">{{showHide}} отзиви:</button>
 <div *ngIf="shouldShowFeedback" class="panel panel-primary">
     <div *ngFor="let item of feedback">
         <h4>отзив: </h4>

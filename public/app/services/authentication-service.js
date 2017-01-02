@@ -18,10 +18,8 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.login = function (username, password) {
         return this.http.post('/api/authenticate', { username: username, password: password })
             .map(function (response) {
-            console.log("Hello from AuthenticationService");
             // login successful if there's a jwt token in the response
             var user = response.json();
-            console.log(user);
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));

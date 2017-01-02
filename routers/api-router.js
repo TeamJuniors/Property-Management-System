@@ -9,6 +9,7 @@ module.exports = function(app, data) {
     let protocolController = require('../controllers/protocols-controller')(data);
     let managerUnionController = require('../controllers/managerUnion-controller')(data);
     let controlUnionController = require('../controllers/controlUnion-controller')(data);
+    let townshipMessageController = require('../controllers/townshipMessage-controller')(data);
 
     let router = express.Router();
 
@@ -44,6 +45,23 @@ module.exports = function(app, data) {
     router.post('/findControlUnion', controlUnionController.findControlUnionBy);
     router.post('/addMemberToControlUnion', controlUnionController.addMemberToControlUnion);
     router.post('/changeLeaderName', controlUnionController.changeLeaderName);
+
+    router.get('/townshipMessages', townshipMessageController.getAllTownshipMessages);
+    router.post('/townshipMessages', townshipMessageController.createTownshipMessage);
+    router.post('/findTownshipMessage', townshipMessageController.findTownshipMessageBy);
+    router.post('/setAnswerToTownshipMessage', townshipMessageController.setAnswerToTownshipMessage)
+    router.post('/TownshipLogin', function(req, res) {
+        console.log("Township");
+        console.log(req.body.authenticationNumber);
+        if (req.body.authenticationNumber === "1234567") {
+            let response = {
+                number: "1234567"
+            }
+            res.send(response);
+        } else {
+            res.status(404).send("Not found");
+        }
+    });
 
     app.use('/api', router);
 };

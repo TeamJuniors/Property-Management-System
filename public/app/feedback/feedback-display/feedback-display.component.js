@@ -17,17 +17,20 @@ var FeedbackDisplayComponent = (function () {
     FeedbackDisplayComponent.prototype.ngOnInit = function () {
         this.feedback = [];
         this.shouldShowFeedback = false;
+        this.showHide = 'Покажи';
     };
     FeedbackDisplayComponent.prototype.showFeedback = function () {
         var _this = this;
         if (this.shouldShowFeedback) {
             this.shouldShowFeedback = false;
+            this.showHide = 'Покажи';
         }
         else {
             this.feedbackService.getFeedback()
                 .subscribe(function (x) {
                 _this.feedback = x;
                 _this.shouldShowFeedback = true;
+                _this.showHide = 'Скрий';
             });
         }
     };

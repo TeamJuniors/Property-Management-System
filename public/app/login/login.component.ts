@@ -38,11 +38,12 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     console.log("From data");
+                    this.alertService.success('Успешно влизане!', true);
                     this.router.navigate(['/home']);
                 },
                 error => {
                     console.log("From error");
-                    this.alertService.error(error);
+                    this.alertService.error('Грешно потребителско име или парола.');
                     this.loading = false;
                 });
 

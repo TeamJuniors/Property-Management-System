@@ -20,8 +20,9 @@ var managerUnion_service_1 = require("../services/managerUnion-service");
 var authentication_service_1 = require("../services/authentication-service");
 var alert_service_1 = require("../services/alert-service");
 var controlUnion_service_1 = require("../services/controlUnion-service");
+var townshipMessage_service_1 = require("../services/townshipMessage-service");
 var HomeComponent = (function () {
-    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService, authenticationService, alertService, controlUnionService) {
+    function HomeComponent(userService, chatService, fb, route, router, condominiumService, apartmentService, protocolService, managerUnionService, authenticationService, alertService, controlUnionService, townshipMessageService) {
         var _this = this;
         this.userService = userService;
         this.chatService = chatService;
@@ -35,6 +36,7 @@ var HomeComponent = (function () {
         this.authenticationService = authenticationService;
         this.alertService = alertService;
         this.controlUnionService = controlUnionService;
+        this.townshipMessageService = townshipMessageService;
         this.isLogged = false;
         this.isManager = false;
         this.showApartment = false;
@@ -64,6 +66,42 @@ var HomeComponent = (function () {
         this.fb.init(fbParams);
         this.newImgUrl = '';
     }
+    HomeComponent.prototype.loadTownshipMessages = function () {
+        var _this = this;
+        console.log("Township messages");
+        this.townshipMessageService.getByProperties(this.user).subscribe(function (data) {
+            console.log("Successfully get township messages");
+            _this.townshipMessages = data;
+            console.log(_this.townshipMessages);
+        }, function (err) {
+            console.log("Cannot get township messages");
+        });
+    };
+    HomeComponent.prototype.sendTownshipMessage = function () {
+        var _this = this;
+        var title = $("#townshipTitle").val();
+        var content = $("#townshipMessage").val();
+        $("#townshipTitle").val("");
+        $("#townshipMessage").val("");
+        var msg = {
+            from: this.user,
+            title: title,
+            content: content
+        };
+        this.townshipMessageService.create(msg).subscribe(function (d) {
+            console.log("create township message");
+            console.log(d);
+            _this.townshipMessageService.getByProperties(_this.user).subscribe(function (data) {
+                console.log("Successfully get township messages");
+                _this.townshipMessages = data;
+                console.log(_this.townshipMessages);
+            }, function (err) {
+                console.log("Cannot get township messages");
+            });
+        }, function (err) {
+            console.log("Cannot create township message");
+        });
+    };
     HomeComponent.prototype.addMemberToControlUnion = function () {
         var _this = this;
         console.log("Add member to control union");
@@ -438,7 +476,8 @@ HomeComponent = __decorate([
         managerUnion_service_1.ManagerUnionService,
         authentication_service_1.AuthenticationService,
         alert_service_1.AlertService,
-        controlUnion_service_1.ControlUnionService])
+        controlUnion_service_1.ControlUnionService,
+        townshipMessage_service_1.TownshipMessageService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 function setPopup() {

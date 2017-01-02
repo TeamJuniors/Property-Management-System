@@ -36,10 +36,11 @@ var LoginComponent = (function () {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (data) {
             console.log("From data");
+            _this.alertService.success('Успешно влизане!', true);
             _this.router.navigate(['/home']);
         }, function (error) {
             console.log("From error");
-            _this.alertService.error(error);
+            _this.alertService.error('Грешно потребителско име или парола.');
             _this.loading = false;
         });
         return true;

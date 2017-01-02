@@ -17,21 +17,26 @@ export class FeedbackDisplayComponent implements OnInit {
 
     shouldShowFeedback: boolean;
 
+    showHide: string;
+
     constructor(private feedbackService: FeedbackService) { }
 
     ngOnInit() {
         this.feedback = [];
         this.shouldShowFeedback = false;
+        this.showHide = 'Покажи';
     }
 
     showFeedback() {
         if (this.shouldShowFeedback) {
             this.shouldShowFeedback = false;
+            this.showHide = 'Покажи';
         } else {
             this.feedbackService.getFeedback()
                 .subscribe((x) => {
                     this.feedback = x;
                     this.shouldShowFeedback = true;
+                    this.showHide = 'Скрий';
                 });
         }
     }

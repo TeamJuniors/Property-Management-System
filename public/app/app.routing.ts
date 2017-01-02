@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/index';
 import { AuthChecker } from './autentication-checker/auth-checker.component';
 import {ManagerComponent} from './manager/index';
 import {NotFoundComponent} from './notfound/index'
+import {TownshipComponent} from './township/index';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthChecker] },
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'manager', component: ManagerComponent },
     {path: '404', component: NotFoundComponent},
+    {path: 'township', component: TownshipComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '/404' }
