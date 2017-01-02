@@ -9,6 +9,7 @@ module.exports = function(app, data) {
     let protocolController = require('../controllers/protocols-controller')(data);
     let managerUnionController = require('../controllers/managerUnion-controller')(data);
     let controlUnionController = require('../controllers/controlUnion-controller')(data);
+    let townshipMessageController = require('../controllers/townshipMessage-controller')(data);
 
     let router = express.Router();
 
@@ -44,6 +45,10 @@ module.exports = function(app, data) {
     router.post('/findControlUnion', controlUnionController.findControlUnionBy);
     router.post('/addMemberToControlUnion', controlUnionController.addMemberToControlUnion);
     router.post('/changeLeaderName', controlUnionController.changeLeaderName);
+
+    router.get('/townshipMessages', townshipMessageController.getAllTownshipMessages);
+    router.post('/townshipMessages', townshipMessageController.createTownshipMessage);
+    router.post('/findTownshipMessage', townshipMessageController.findTownshipMessageBy);
 
     app.use('/api', router);
 };

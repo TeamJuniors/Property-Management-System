@@ -16,8 +16,9 @@ module.exports = function(config) {
     let Protocol = require('../models/protocol-model');
     let ManagerUnion = require('../models/managerUnion-model');
     let ControlUnion = require('../models/controlUnion-model');
+    let TownshipMessage = require('../models/townshipMessage-model');
 
-    let models = { User, Condominium, Apartment, Protocol, Chat, ManagerUnion, ControlUnion };
+    let models = { User, Condominium, Apartment, Protocol, Chat, ManagerUnion, ControlUnion, TownshipMessage };
 
     let data = {};
 

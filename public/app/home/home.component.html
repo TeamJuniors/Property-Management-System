@@ -594,9 +594,19 @@
                         <span style="margin-left: 45%;" *ngIf="showUnion" (click)="returnUnionPage()" class="btn btn-primary">Назад</span>
                     </form>
                 </div>
-                <div class="tab-pane panel fade in " id="tab6">
+                <div class="tab-pane panel fade in " id="tab6" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h2> <br> ... Tab 6</h2>
+                        <h4 style="text-align: center;">Съобщения към общината</h4>
+                        <div class="col-md-9 col-md-offset-1">
+                            <div class="form-group">
+                                <label for="memberName">Заглавие:</label>
+                                <input type="text" class="form-control" name="memberName" id="memberControlName">
+                                <br>
+                                <label for="comment">Съдържание:</label>
+                                <textarea class="form-control" rows="4" cols="80" id="comment"></textarea>
+                                <button type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
