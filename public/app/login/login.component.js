@@ -32,7 +32,6 @@ var LoginComponent = (function () {
         var _this = this;
         this.loading = true;
         console.log("Model");
-        console.log(this.model);
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (data) {
             console.log("From data");
