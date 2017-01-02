@@ -6,6 +6,7 @@ var index_3 = require("./facebookLogin/index");
 var index_4 = require("./register/index");
 var auth_checker_component_1 = require("./autentication-checker/auth-checker.component");
 var index_5 = require("./manager/index");
+var index_6 = require("./notfound/index");
 var appRoutes = [
     { path: '', component: index_1.HomeComponent, canActivate: [auth_checker_component_1.AuthChecker] },
     { path: 'home', component: index_1.HomeComponent },
@@ -13,8 +14,9 @@ var appRoutes = [
     { path: 'login', component: index_2.LoginComponent },
     { path: 'register', component: index_4.RegisterComponent },
     { path: 'manager', component: index_5.ManagerComponent },
+    { path: '404', component: index_6.NotFoundComponent },
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: '/404' }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
 //# sourceMappingURL=app.routing.js.map

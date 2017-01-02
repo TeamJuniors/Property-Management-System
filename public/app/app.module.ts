@@ -35,6 +35,7 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { FacebookComponent } from './facebookLogin/index';
+import {NotFoundComponent} from './notfound/index'
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { FacebookComponent } from './facebookLogin/index';
         ChatPopupComponent,
         FacebookComponent,
         ManagerComponent,
-        UppercasePipe
+        UppercasePipe,
+        NotFoundComponent
     ],
     providers: [
         AuthChecker,
