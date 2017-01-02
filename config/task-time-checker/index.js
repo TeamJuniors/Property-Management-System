@@ -16,5 +16,5 @@ module.exports = function(data) {
             })
     }
 
-    setInterval(removeTasks, 30000);
+    setInterval(removeTasks, 300000);
 };
