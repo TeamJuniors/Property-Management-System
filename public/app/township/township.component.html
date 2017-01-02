@@ -63,6 +63,9 @@
                 {{showElement.content}}
             </p>
         </h3>
+        <h3 *ngIf="showElement.answer">
+            Отговор: {{showElement.answer}}
+        </h3>
         <label for="comment">Отговор:</label>
         <textarea class="form-control" rows="4" cols="80" id="townshipMessage"></textarea>
         <button (click)="sendAnswerToTownship()" type="button" style="margin-top: 5%; margin-left: 40%" class="btn btn-info btn-lg">Изпрати</button>

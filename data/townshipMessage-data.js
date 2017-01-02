@@ -29,7 +29,7 @@ module.exports = (models) => {
                     if (err) {
                         reject(err);
                     } else {
-                        msg.content = content;
+                        msg.answer = content;
                         resolve(msg.save());
                     }
                 });
