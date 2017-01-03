@@ -457,6 +457,7 @@ export class HomeComponent {
                 localStorage.setItem('currentUser', JSON.stringify(newUser));
                 this.user.imgUrl = newUser.imgUrl;
                 this.newImgUrl = '';
+                this.chatService.getOnlineUsers(newUser);
             },
             error => {
                 console.log("Upload error");

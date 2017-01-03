@@ -390,6 +390,7 @@ var HomeComponent = (function () {
             localStorage.setItem('currentUser', JSON.stringify(newUser));
             _this.user.imgUrl = newUser.imgUrl;
             _this.newImgUrl = '';
+            _this.chatService.getOnlineUsers(newUser);
         }, function (error) {
             console.log("Upload error");
             console.log(error);

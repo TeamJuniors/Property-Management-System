@@ -83,5 +83,10 @@ module.exports = function (io, data) {
             }
             io.emit('send-online-users', onlineUsers);
         });
+
+        socket.on('get-online-users', (user) => {
+            onlineUsers.splice(onlineUsers.map(x => x.username).indexOf(user.username), 1, user);
+            io.emit('send-online-users', onlineUsers);
+        });
     });
 };

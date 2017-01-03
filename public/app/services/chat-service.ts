@@ -111,4 +111,8 @@ export class ChatService {
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('currentUser'));
     }
+
+    getOnlineUsers(user: User) {
+        this.socket.emit('get-online-users', user);
+    }
 }

@@ -92,6 +92,9 @@ var ChatService = (function () {
     ChatService.prototype.getCurrentUser = function () {
         return JSON.parse(localStorage.getItem('currentUser'));
     };
+    ChatService.prototype.getOnlineUsers = function (user) {
+        this.socket.emit('get-online-users', user);
+    };
     return ChatService;
 }());
 ChatService = __decorate([
