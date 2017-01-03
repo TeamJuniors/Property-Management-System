@@ -21,7 +21,7 @@ var ProtocolService = (function () {
         return this.http.post('/api/protocols', { protocol: protocol }, this.jwt()).map(function (response) { return response.json(); });
     };
     ProtocolService.prototype.getByProperties = function (prop) {
-        return this.http.post('/api/findProtocols', { prop: prop }, this.jwt()).map(function (response) { return response.json(); });
+        return this.http.post('/api/findProtocol', { prop: prop }, this.jwt()).map(function (response) { return response.json(); });
     };
     ProtocolService.prototype.jwt = function () {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));

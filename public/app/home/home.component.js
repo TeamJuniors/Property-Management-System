@@ -175,7 +175,7 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.onProtocolsClick = function () {
         var _this = this;
-        this.protocolService.getAll().subscribe(function (data) {
+        this.protocolService.getByProperties(this.user).subscribe(function (data) {
             _this.protocols = data;
             console.log("Protocols");
             console.log(_this.protocols);
@@ -448,7 +448,7 @@ var HomeComponent = (function () {
         }, function (err) {
             console.log("Cannot create protocol");
         })).then(function () {
-            _this.protocolService.getAll().subscribe(function (data) {
+            _this.protocolService.getByProperties(_this.user).subscribe(function (data) {
                 _this.protocols = data;
                 console.log("Protocols");
                 console.log(_this.protocols);

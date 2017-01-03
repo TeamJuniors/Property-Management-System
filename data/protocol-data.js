@@ -4,9 +4,9 @@ module.exports = (models) => {
         findProtocolBy: function(properties) {
             return new Promise((resolve, reject) => {
 
-                Protocol.findOne({
-                    floatNumber: properties.floatNumber,
-                    entrance: properties.entrance,
+                Protocol.find({
+                    floatNumber: properties.floatNumber || properties.flatNumber,
+                    entrance: properties.entrance || properties.exitNumber,
                     city: properties.city,
                     neighborhood: properties.neighborhood
                 }, function(err, protocol) {

@@ -208,7 +208,7 @@ export class HomeComponent {
         this.showProtocol = true;
     }
     onProtocolsClick() {
-        this.protocolService.getAll().subscribe(
+        this.protocolService.getByProperties(this.user).subscribe(
             data => {
                 this.protocols = data;
                 console.log("Protocols");
@@ -526,7 +526,7 @@ export class HomeComponent {
                 console.log("Cannot create protocol");
             }
         )).then(() => {
-            this.protocolService.getAll().subscribe(
+            this.protocolService.getByProperties(this.user).subscribe(
                 data => {
                     this.protocols = data;
                     console.log("Protocols");

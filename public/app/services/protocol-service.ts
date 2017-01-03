@@ -19,7 +19,7 @@ export class ProtocolService{
     }
 
     getByProperties(prop: any){
-        return this.http.post('/api/findProtocols', {prop}, this.jwt()).map((response: Response) => response.json());
+        return this.http.post('/api/findProtocol', {prop}, this.jwt()).map((response: Response) => response.json());
     }
 
     private jwt() {

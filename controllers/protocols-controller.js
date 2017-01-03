@@ -5,6 +5,7 @@ function protocolController(data) {
     return {
         findProtocolBy(req, res) {
             let prop = req.body.prop;
+            console.log(prop);
             data.findProtocolBy(prop).then(protocol => {
                 res.send(protocol);
             }).catch(err => {
