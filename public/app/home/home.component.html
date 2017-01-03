@@ -362,7 +362,7 @@
                 </div>
                 <div class="tab-pane panel fade in " id="tab5" style="margin-top:10px;height:500px;wight:900px; background-color:#bdc;">
                     <form role="form" class="form-inline">
-                        <h2 *ngIf="!showUnion" style="text-align: center;">Съвети на етажната собственост</h2>
+                        <h2 *ngIf="!showUnion" style="text-align: center;">Органи на Общото събрание</h2>
                         <div *ngIf="!showUnion" style="margin-top: 25%;" class="row">
                             <div class="col-md-9 col-md-offset-3">
                                 <button (click)="onManagerUnionClick()" type="button" class="btn btn-info btn-lg" id="managerUnion">Управителен съвет</button>
@@ -375,9 +375,9 @@
                             <li class="list-group-item">
                                 Управител:
                                 <ul class="list-group">
-                                    <h5 *ngIf="union && union.manager">Име: {{union.manager.username}}</h5>
-                                    <h5 *ngIf="union && union.manager">Фамилия: {{union.manager.firstName}}</h5>
-                                    <h5 *ngIf="union && union.manager">Потребителско име: {{union.manager.lastName}}</h5>
+                                    <h5 *ngIf="union && union.manager">Име: {{union.manager.firstName}}</h5>
+                                    <h5 *ngIf="union && union.manager">Фамилия: {{union.manager.lastName}}</h5>
+                                    <h5 *ngIf="union && union.manager">Потребителско име: {{union.manager.username}}</h5>
                                 </ul>
                             </li>
                             <li class="list-group-item">
@@ -403,11 +403,11 @@
                         </ul>
                         <ul *ngIf="showUnion && unionType=='control'" class="pre-scrollable list-group col-md-8 col-md-offset-2" style="width: 70%;">
                             <li class="list-group-item">
-                                Лидер:
+                                Председател:
                                 <ul class="list-group">
-                                    <h5 *ngIf="union && union.leader">Име: {{union.leader.username}}</h5>
-                                    <h5 *ngIf="union && union.leader">Фамилия: {{union.leader.firstName}}</h5>
-                                    <h5 *ngIf="union && union.leader">Потребителско име: {{union.leader.lastName}}</h5>
+                                    <h5 *ngIf="union && union.leader">Име: {{union.leader.firstName}}</h5>
+                                    <h5 *ngIf="union && union.leader">Фамилия: {{union.leader.lastName}}</h5>
+                                    <h5 *ngIf="union && union.leader">Потребителско име: {{union.leader.username}}</h5>
                                 </ul>
                             </li>
 
@@ -497,14 +497,14 @@
                                             <div class="modal-body">
                                                 <form name="info_form" class="form-inline" action="#" method="post">
                                                     <div class="form-group col-sm-12">
-                                                        <label for="cashierName">Лидер:</label>
+                                                        <label for="cashierName">Председател:</label>
                                                         <input type="text" class="form-control" name="cashierName" id="leaderName" placeholder="Потребителско име">
                                                     </div>
                                                     <span (click)="changeLeader()" style="margin-left: 45%;" class="btn btn-primary">Смени</span>
                                                     <h5 style="text-align: center">Добави членове</h5>
                                                     <ul class="pre-scrollable list-group">
                                                         <li class="list-group-item">
-                                                            Лидер:
+                                                            Председател:
                                                             <ul class="list-group">
                                                                 <li *ngIf="union && union.leader" class="list-group-item">{{union.leader.username}}</li>
                                                             </ul>
@@ -616,7 +616,7 @@
 
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-nav" href="#tab5" data-toggle="tab">
-                             <div class="visible">УС на ЕС <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></div>
+                             <div class="visible">ОС <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">

@@ -107,7 +107,7 @@ var HomeComponent = (function () {
         console.log("Add member to control union");
         var name = $('#memberControlName').val();
         var isAddedThisUser = false;
-        if (this.union.leader.username === name) {
+        if (this.union.leader != undefined && this.union.leader.username === name) {
             isAddedThisUser = true;
         }
         for (var i = 0; i < this.union.members.length; i++) {
@@ -139,7 +139,7 @@ var HomeComponent = (function () {
         var _this = this;
         var name = $('#leaderName').val();
         var isAddedThisUser = false;
-        if (this.union.leader.username === name) {
+        if (this.union.leader != undefined && this.union.leader.username === name) {
             isAddedThisUser = true;
         }
         for (var i = 0; i < this.union.members.length; i++) {
@@ -223,10 +223,10 @@ var HomeComponent = (function () {
         var _this = this;
         var name = $('#cashierName').val();
         var isAddedThisUser = false;
-        if (this.union.manager.username === name) {
+        if (this.union.manager != undefined && this.union.manager.username === name) {
             isAddedThisUser = true;
         }
-        if (this.union.cashier.username === name) {
+        if (this.union.cashier != undefined && this.union.cashier.username === name) {
             isAddedThisUser = true;
         }
         for (var i = 0; i < this.union.members.length; i++) {
@@ -255,10 +255,10 @@ var HomeComponent = (function () {
         var _this = this;
         var name = $('#memberName').val();
         var isAddedThisUser = false;
-        if (this.union.manager.username === name) {
+        if (this.union.manager != undefined && this.union.manager.username === name) {
             isAddedThisUser = true;
         }
-        if (this.union.cashier.username === name) {
+        if (this.union.cashier != undefined && this.union.cashier.username === name) {
             isAddedThisUser = true;
         }
         for (var i = 0; i < this.union.members.length; i++) {

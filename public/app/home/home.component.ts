@@ -133,7 +133,7 @@ export class HomeComponent {
         let name = $('#memberControlName').val();
         let isAddedThisUser:any = false;
 
-        if(this.union.leader.username === name){
+        if(this.union.leader != undefined && this.union.leader.username === name){
             isAddedThisUser = true;
         }
         for(let i = 0; i < this.union.members.length;i++){
@@ -169,7 +169,7 @@ export class HomeComponent {
         let name = $('#leaderName').val();
         let isAddedThisUser:any = false;
 
-        if(this.union.leader.username === name){
+        if(this.union.leader != undefined && this.union.leader.username === name){
             isAddedThisUser = true;
         }
 
@@ -265,11 +265,11 @@ export class HomeComponent {
         let name = $('#cashierName').val();
         let isAddedThisUser:any = false;
 
-        if(this.union.manager.username === name){
+        if(this.union.manager != undefined && this.union.manager.username === name){
             isAddedThisUser = true;
         }
 
-        if(this.union.cashier.username === name){
+        if(this.union.cashier != undefined && this.union.cashier.username === name){
             isAddedThisUser = true;
         }
 
@@ -302,11 +302,11 @@ export class HomeComponent {
         let name = $('#memberName').val();
         let isAddedThisUser:any = false;
 
-        if(this.union.manager.username === name){
+        if(this.union.manager != undefined && this.union.manager.username === name){
             isAddedThisUser = true;
         }
 
-        if(this.union.cashier.username === name){
+        if(this.union.cashier != undefined && this.union.cashier.username === name){
             isAddedThisUser = true;
         }
 
