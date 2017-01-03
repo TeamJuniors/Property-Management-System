@@ -453,11 +453,10 @@ export class HomeComponent {
             .subscribe(
             (newUser: User) => {
                 console.log('Upload Image')
-                console.log(newUser)
                 localStorage.setItem('currentUser', JSON.stringify(newUser));
                 this.user.imgUrl = newUser.imgUrl;
                 this.newImgUrl = '';
-                this.chatService.getOnlineUsers(newUser);
+                this.chatService.getOnlineUsers(newUser.username, newUser.imgUrl);
             },
             error => {
                 console.log("Upload error");

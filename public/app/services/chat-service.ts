@@ -112,7 +112,7 @@ export class ChatService {
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    getOnlineUsers(user: User) {
-        this.socket.emit('get-online-users', user);
+    getOnlineUsers(username: string, imgUrl: string) {
+        this.socket.emit('get-online-users', username, imgUrl);
     }
 }

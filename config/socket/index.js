@@ -77,15 +77,19 @@ module.exports = function (io, data) {
         socket.on('disconnect', () => {
             var index = clients.indexOf(socket);
             if (index != -1) {
-                console.log('a user left ' + onlineUsers[index].username);
                 clients.splice(index, 1);
                 onlineUsers.splice(index, 1);
             }
             io.emit('send-online-users', onlineUsers);
         });
 
-        socket.on('get-online-users', (user) => {
-            onlineUsers.splice(onlineUsers.map(x => x.username).indexOf(user.username), 1, user);
+        socket.on('get-online-users', (username, imgUrl) => {
+            for (let i = 0; i < onlineUsers.length; i += 1) {
+                if (onlineUsers[i].username === username) {
+                    onlineUsers[i].imgUrl = imgUrl;
+                }
+            }
+
             io.emit('send-online-users', onlineUsers);
         });
     });

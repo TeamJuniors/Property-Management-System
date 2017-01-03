@@ -92,8 +92,8 @@ var ChatService = (function () {
     ChatService.prototype.getCurrentUser = function () {
         return JSON.parse(localStorage.getItem('currentUser'));
     };
-    ChatService.prototype.getOnlineUsers = function (user) {
-        this.socket.emit('get-online-users', user);
+    ChatService.prototype.getOnlineUsers = function (username, imgUrl) {
+        this.socket.emit('get-online-users', username, imgUrl);
     };
     return ChatService;
 }());

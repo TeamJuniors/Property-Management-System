@@ -386,11 +386,10 @@ var HomeComponent = (function () {
         this.userService.changeImage(this.user, this.newImgUrl)
             .subscribe(function (newUser) {
             console.log('Upload Image');
-            console.log(newUser);
             localStorage.setItem('currentUser', JSON.stringify(newUser));
             _this.user.imgUrl = newUser.imgUrl;
             _this.newImgUrl = '';
-            _this.chatService.getOnlineUsers(newUser);
+            _this.chatService.getOnlineUsers(newUser.username, newUser.imgUrl);
         }, function (error) {
             console.log("Upload error");
             console.log(error);
